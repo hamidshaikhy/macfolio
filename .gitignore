@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.sites-runtime/
+*.tsbuildinfo
+.DS_Store
+coverage/
+artifacts/
+test-results/
+playwright-report/

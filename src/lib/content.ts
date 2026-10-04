@@ -1,0 +1,78 @@
+export const profile = {
+  name: "Hamid Shaikhy",
+  nameFa: "حمید شیخی",
+  title: "Front-End Developer",
+  github: "https://github.com/hamidshaikhy",
+  linkedin: "https://www.linkedin.com/in/hamid-shaikhy/",
+  email: "hamidshaikhy1382@gmail.com",
+  phone: "+989373891553",
+  phoneDisplay: "+98 937 389 1553",
+  location: "Tehran, Iran",
+  timezone: "Asia/Tehran",
+  bio: "توسعه‌دهندهٔ فرانت‌اند با تمرکز بر React و ساخت رابط‌های کاربردی، سریع و دقیق. تجربهٔ من از وب‌سایت شرکتی تا داشبوردهای مالی و ابزارهای تعاملی، حول تبدیل نیاز واقعی به تجربه‌ای قابل استفاده شکل گرفته است.",
+  skills: [
+    "React",
+    "TypeScript",
+    "JavaScript",
+    "Next.js",
+    "Tailwind CSS",
+    "Vite",
+    "Three.js",
+    "REST APIs",
+    "Git",
+    "Figma",
+  ],
+};
+export const projects = [
+  {
+    id: "dika",
+    title: "Dika Asia",
+    category: "Production website",
+    monogram: "DA",
+    color: "#be7734",
+    summary: "وب‌سایت رسمی دیکا آسیا",
+    description:
+      "وب‌سایت کامل شرکت دیکا آسیا به پایان رسیده و در اختیار مجموعه است. طراحی و پیاده‌سازی رابط معرفی محصولات، پروژه‌ها، مطالب و گالری با پشتیبانی از فارسی و کردی سورانی.",
+    role: "توسعهٔ فرانت‌اند، کامپوننت‌های قابل استفادهٔ مجدد، رابط واکنش‌گرا و اتصال به APIهای Django.",
+    challenge:
+      "مدیریت محتوای متنوع در یک رابط چندزبانه، حفظ خوانایی RTL و هماهنگی تجربه در موبایل و دسکتاپ.",
+    result:
+      "نسخهٔ اصلی آنلاین است و معرفی محصولات، پروژه‌ها و مطالب شرکت را با پشتیبانی چندزبانه ارائه می‌کند.",
+    tags: ["React", "REST APIs", "RTL", "Three.js"],
+    website: "https://dikaasia.com/",
+    repo: "https://github.com/hamidshaikhy",
+  },
+  {
+    id: "finance",
+    title: "Financial Panel",
+    category: "Financial workspace",
+    monogram: "FP",
+    color: "#4179cf",
+    summary: "پنل مدیریت مالی و عملیات",
+    description:
+      "داشبوردی برای مرور وضعیت مالی و عملیات؛ حساب‌ها، هزینه‌ها، گزارش سود و زیان، پروژه‌ها، تأمین‌کنندگان و موجودی در یک محیط RTL.",
+    role: "ساخت رابط با React و Vite، جدول‌های داده، گزارش‌گیری، خروجی اکسل و تم روشن و تاریک.",
+    challenge:
+      "نمایش اطلاعات متراکم و فرم‌های مختلف بدون از دست رفتن مسیر کار کاربر.",
+    result:
+      "ساختار رابط برای توسعهٔ بخش‌های مختلف و اتصال به API طراحی شده است.",
+    tags: ["React", "Vite", "Data tables", "RTL"],
+    repo: "https://github.com/hamidshaikhy/financial-management-panel",
+  },
+  {
+    id: "flow",
+    title: "Flow Studio",
+    category: "Workflow builder",
+    monogram: "FS",
+    color: "#8555c5",
+    summary: "سازندهٔ جریان‌های کاری",
+    description:
+      "نمونه‌کار تعاملی ساخت و ویرایش جریان‌های کاری با الهام از ابزارهایی مثل n8n؛ تمرکز بر تجربهٔ کار با گراف و اتصال مرحله‌ها.",
+    role: "طراحی و پیاده‌سازی تجربهٔ بصری و تعاملی جریان‌های کاری.",
+    challenge: "قابل فهم نگه داشتن رابطهٔ مرحله‌ها هنگام کار با یک بوم تعاملی.",
+    result: "کد پروژه در گیت‌هاب برای بررسی و اجرای محلی در دسترس است.",
+    tags: ["React", "Workflow", "Interactive UI"],
+    repo: "https://github.com/hamidshaikhy/flow-studio",
+  },
+];
+export type Project = (typeof projects)[number];
