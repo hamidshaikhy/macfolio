@@ -2,6 +2,10 @@
 
 # macfolio
 
+<a href="https://macfolio-delta-one.vercel.app/"><img src="https://img.shields.io/badge/دمو_آنلاین-مشاهدهٔ_سایت-32875e?style=for-the-badge&logo=vercel&logoColor=white" alt="دمو آنلاین — مشاهدهٔ سایت macfolio"></a>
+
+**[🌐 دمو آنلاین — مشاهدهٔ macfolio](https://macfolio-delta-one.vercel.app/)**
+
 **پورتفولیویی که می‌شود با آن کار کرد.**
 
 دنیای شخصی حمید شیخی؛ یک دسکتاپ در مرورگر، با پنجره‌های تعاملی، شیشه‌های محو و تجربهٔ جداگانهٔ گوشی.
