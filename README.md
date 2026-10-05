@@ -1,6 +1,6 @@
 <div align="center">
 
-# HamidOS
+# macfolio
 
 **پورتفولیویی که می‌شود با آن کار کرد.**
 
@@ -16,11 +16,11 @@
 
 </div>
 
-[![HamidOS؛ صفحهٔ معرفی و دسکتاپ در حالت روشن](docs/screenshots/desktop-light.png)](docs/screenshots/desktop-light.png)
+[![macfolio؛ صفحهٔ معرفی و دسکتاپ در حالت روشن](docs/screenshots/desktop-light.png)](docs/screenshots/desktop-light.png)
 
 ## یک فضای شخصی، چند راه برای کشف کردن
 
-HamidOS پورتفولیوی **Hamid Shaikhy / حمید شیخی**، توسعه‌دهندهٔ فرانت‌اند است. معرفی، پروژه‌ها، ابزارها، رزومه و راه‌های تماس در قالب برنامه‌های یک محیط الهام‌گرفته از macOS و iOS کنار هم قرار گرفته‌اند. می‌توانید پنجره‌ها را جابه‌جا کنید، نام برنامه‌ای را جست‌وجو کنید، یادداشت بنویسید، در تقویم برنامه بچینید یا کمی شطرنج بازی کنید.
+macfolio پورتفولیوی **Hamid Shaikhy / حمید شیخی**، توسعه‌دهندهٔ فرانت‌اند است. معرفی، پروژه‌ها، ابزارها، رزومه و راه‌های تماس در قالب برنامه‌های یک محیط الهام‌گرفته از macOS و iOS کنار هم قرار گرفته‌اند. می‌توانید پنجره‌ها را جابه‌جا کنید، نام برنامه‌ای را جست‌وجو کنید، یادداشت بنویسید، در تقویم برنامه بچینید یا کمی شطرنج بازی کنید.
 
 متن‌های شخصی فارسی‌اند و کنترل‌های برنامه‌ها عمدتاً انگلیسی. اجرای پروژه به بک‌اند، حساب کاربری یا کلید API نیاز ندارد.
 
@@ -38,13 +38,13 @@ HamidOS پورتفولیوی **Hamid Shaikhy / حمید شیخی**، توسعه�
 
 صفحهٔ معرفی با تصویر شخصی، متن کوتاه و کارت‌های منتخب باز می‌شود. ویجت‌های سمت چپ دسترسی مستقیم به معرفی، پروژه‌ها، رزومه و تقویم می‌دهند؛ Dock برنامه‌های روزمره را کنار هم نگه می‌دارد.
 
-[![صفحهٔ معرفی HamidOS در حالت تیره](docs/screenshots/desktop-dark.png)](docs/screenshots/desktop-dark.png)
+[![صفحهٔ معرفی macfolio در حالت تیره](docs/screenshots/desktop-dark.png)](docs/screenshots/desktop-dark.png)
 
 ### پروژه‌ها و پروفایل
 
 GitHub یک صفحهٔ داخلی با معرفی، لوگوی ابزارها و پروژه‌های منتخب است. از آن می‌توان وارد جزئیات پروژه شد و نقش، چالش و نتیجهٔ هر کار را دید.
 
-| GitHub داخل HamidOS | مجموعهٔ پروژه‌ها |
+| GitHub داخل macfolio | مجموعهٔ پروژه‌ها |
 | :---: | :---: |
 | [<img src="docs/screenshots/github-desktop.png" alt="پروفایل داخلی GitHub، ابزارها و پروژه‌های منتخب" width="700">](docs/screenshots/github-desktop.png) | [<img src="docs/screenshots/projects-desktop.png" alt="صفحهٔ Dika Asia با پیش‌نمایش رابط و توضیحات پروژه" width="700">](docs/screenshots/projects-desktop.png) |
 | معرفی و ابزارها، در یک پنجرهٔ مستقل | پیش‌نمایش رابط، انتخاب پروژه و شرح کار |
@@ -71,7 +71,7 @@ GitHub یک صفحهٔ داخلی با معرفی، لوگوی ابزارها و
 
 | شطرنج | انتخاب والپیپر |
 | :---: | :---: |
-| [<img src="docs/screenshots/chess-desktop.png" alt="بازی شطرنج پس از حرکت پیاده با کنترل‌های بازی و موسیقی" width="700">](docs/screenshots/chess-desktop.png) | [<img src="docs/screenshots/settings-desktop.png" alt="گالری والپیپرها در تنظیمات HamidOS" width="700">](docs/screenshots/settings-desktop.png) |
+| [<img src="docs/screenshots/chess-desktop.png" alt="بازی شطرنج پس از حرکت پیاده با کنترل‌های بازی و موسیقی" width="700">](docs/screenshots/chess-desktop.png) | [<img src="docs/screenshots/settings-desktop.png" alt="گالری والپیپرها در تنظیمات macfolio" width="700">](docs/screenshots/settings-desktop.png) |
 | بازی با رایانه یا دو نفر روی یک دستگاه | پس‌زمینه‌های محلی و انتخاب مستقل از تم |
 
 ### گوشی؛ همان برنامه‌ها، چیدمانی برای لمس
@@ -125,10 +125,10 @@ npm run build
 npm run preview
 ```
 
-خروجی `dist/` برای میزبانی استاتیک آماده است. آن را از یک سرور HTTP ارائه کنید. برای مسیر فرعی، مانند `/hamidos/`:
+خروجی `dist/` برای میزبانی استاتیک آماده است. آن را از یک سرور HTTP ارائه کنید. برای مسیر فرعی، مانند `/macfolio/`:
 
 ```bash
-npm run build -- --base /hamidos/
+npm run build -- --base /macfolio/
 ```
 
 <a id="architecture"></a>
@@ -211,4 +211,4 @@ npm run screenshots
 
 ساخته‌شده برای **حمید شیخی** · [GitHub](https://github.com/hamidshaikhy) · [LinkedIn](https://www.linkedin.com/in/hamid-shaikhy/) · [Email](mailto:hamidshaikhy1382@gmail.com)
 
-الهام بصری از [ThanasOS](https://thanasos.thanas.dev/) و [playground-macos](https://portfolio.zxh.me/). کد برنامه با مجوز [MIT](LICENSE) ارائه شده؛ مجوز دارایی‌های شخصی، موسیقی، برندها و آثار دیگر جداست. منابع و متن مجوزها در [ATTRIBUTIONS.md](ATTRIBUTIONS.md) و [`licenses/`](licenses/) نگهداری می‌شوند.
+کد برنامه با مجوز [MIT](LICENSE) ارائه شده؛ مجوز دارایی‌های شخصی، موسیقی، برندها و آثار دیگر جداست. منابع و متن مجوزها در [ATTRIBUTIONS.md](ATTRIBUTIONS.md) و [`licenses/`](licenses/) نگهداری می‌شوند.

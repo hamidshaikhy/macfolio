@@ -6,7 +6,7 @@ afterAll(() => cleanup());
 it("loads metadata without starting playback", () => {
   expect(HTMLMediaElement.prototype.play).not.toHaveBeenCalled();
   expect(useMusic.getState().playing).toBe(false);
-  expect(document.querySelectorAll("#hamidos-audio")).toHaveLength(1);
+  expect(document.querySelectorAll("#macfolio-audio")).toHaveLength(1);
 });
 it("reports a rejected user playback request without a false playing state", async () => {
   vi.mocked(HTMLMediaElement.prototype.play).mockRejectedValueOnce(new DOMException("Gesture required", "NotAllowedError"));
@@ -19,7 +19,7 @@ it("reports a rejected user playback request without a false playing state", asy
   useMusic.getState().pause();
 });
 it("falls back to the original served MP3 and handles a final decode failure", async () => {
-  const audio = document.querySelector<HTMLAudioElement>("#hamidos-audio")!;
+  const audio = document.querySelector<HTMLAudioElement>("#macfolio-audio")!;
   Object.defineProperty(audio, "error", { configurable: true, value: { code: 4 } });
   audio.dispatchEvent(new Event("error"));
   expect(audio.src).toContain("assets/audio/drowning-in-vertigo.mp3");

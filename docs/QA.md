@@ -1,4 +1,4 @@
-﻿# QA — HamidOS upgrade
+﻿# QA — macfolio upgrade
 
 Verification date: 2026-10-04. Local Windows environment, Node 24.18.0, installed Google Chrome 154.0.8037.97 and Playwright WebKit 26.6. Fresh browser contexts begin without local files or saved preferences.
 
@@ -40,9 +40,9 @@ Rendered desktop, phone, Light/Dark, app interiors and reference app screenshots
 A separate build was created with:
 
 ```bash
-npx vite build --base /hamidos/ --outDir artifacts/base-build
-npx vite preview --base /hamidos/ --outDir artifacts/base-build --port 5182
-node scripts/verify-base.mjs http://127.0.0.1:5182/hamidos/
+npx vite build --base /macfolio/ --outDir artifacts/base-build
+npx vite preview --base /macfolio/ --outDir artifacts/base-build --port 5182
+node scripts/verify-base.mjs http://127.0.0.1:5182/macfolio/
 ```
 
 Both Chrome and WebKit passed direct opening/reload, avatar/assets, both PDF pages, local PDF worker URL, actual MP3 playback, appearance changes without pausing, a computer chess reply through the correctly based worker, and loading the Code editor. No page exceptions or failed first-party responses were observed in these base-path checks.
@@ -96,3 +96,9 @@ npm run screenshots
 The shell regression checks the 320×510 Calculator window, visible last keypad row, arithmetic, informational notification cards with no action targets, the green battery and charging bolt, a white Calendar in Light mode, a light event form and the preserved dark Calendar. Mobile checks assert that all 13 home/Dock app buttons fit without scrolling at 390×844, 375×667, 320×568 and 667×375. Projects/Preview icons are absent; the Selected work/My résumé links still open the correct apps and both PDF pages. The wider regression verifies window restoration, rotation, files, music, search and saved preferences.
 
 The README is rewritten and its **17 real screenshots** are stored in the non-ignored `docs/screenshots/` directory. All 45 local image/document references resolve. Screenshot capture was rerun against the final build, and the compact Calculator, light Calendar, notifications, desktop welcome and small-phone layouts were inspected visually. Device-testing limits from the earlier baseline still apply; WebKit on Windows is not physical iPhone Safari.
+
+## macfolio rename — 2026-10-05
+
+The production build, unused-symbol TypeScript check and **42 unit tests** pass. The 18 Chrome regression cases pass after rebranding; the additional branding browser test also passes, confirming that saved preferences, a note, an event and a local chess position from the previous namespace load correctly. Old saved values remain available while the new keys are populated.
+
+All 17 README screenshots were recaptured from the renamed production build. Local README references resolve; the previous product name and the requested visual-inspiration sentence are absent from the README. The older storage prefix remains only in compatibility code and migration fixtures.

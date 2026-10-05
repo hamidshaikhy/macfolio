@@ -188,7 +188,7 @@ it("edits a note, reads it in Code and recovers it from Trash", async () => {
 describe("chess interaction", () => {
   beforeEach(() =>
     localStorage.setItem(
-      "hamidos.chess.v1",
+      "macfolio.chess.v1",
       JSON.stringify({ pgn: "", mode: "local" }),
     ),
   );
@@ -215,7 +215,7 @@ describe("chess interaction", () => {
   });
   it("asks for a promotion piece and persists the choice", async () => {
     localStorage.setItem(
-      "hamidos.chess.v1",
+      "macfolio.chess.v1",
       JSON.stringify({
         mode: "local",
         pgn: '[SetUp "1"]\n[FEN "7k/P7/6K1/8/8/8/8/8 w - - 0 1"]\n\n*',
@@ -232,7 +232,7 @@ describe("chess interaction", () => {
     expect(
       screen.getByRole("button", { name: "a8 white rook" }),
     ).toBeInTheDocument();
-    expect(localStorage.getItem("hamidos.chess.v1")).toContain("a8=R");
+    expect(localStorage.getItem("macfolio.chess.v1")).toContain("a8=R");
   });
 });
 

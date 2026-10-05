@@ -37,7 +37,7 @@ export function LockScreen({ mobile }: { mobile: boolean }) {
       <button className="login-profile" onClick={() => os.setLocked(false)}>
         <img src={asset("assets/avatar.png")} alt="Hamid Shaikhy" />
         <strong>Hamid Shaikhy</strong>
-        <span>{mobile ? "Tap to unlock" : "Enter HamidOS"}</span>
+        <span>{mobile ? "Tap to unlock" : "Enter macfolio"}</span>
       </button>
       {mobile && (
         <button className="unlock-hint" onClick={() => os.setLocked(false)}>

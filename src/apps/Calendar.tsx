@@ -13,7 +13,7 @@ export const useCalendar = create<{
   events: [],
   add: event => set(s => ({ events: [...s.events, event] })),
   remove: id => set(s => ({ events: s.events.filter(e => e.id !== id) })),
-}), { name: "hamidos.calendar.v1", storage: createJSONStorage(() => preferenceStorage) }));
+}), { name: "macfolio.calendar.v1", storage: createJSONStorage(() => preferenceStorage) }));
 
 const dateKey = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 

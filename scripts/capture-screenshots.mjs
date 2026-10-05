@@ -7,8 +7,8 @@ import { fileURLToPath } from 'node:url';
 // Real application screenshots, kept outside ignored test artifacts for GitHub.
 const directory = fileURLToPath(new URL('../docs/screenshots/', import.meta.url));
 const chrome = process.env.PLAYWRIGHT_CHROME_EXECUTABLE || (process.platform === 'win32' && existsSync('C:/Program Files/Google/Chrome/Application/chrome.exe') ? 'C:/Program Files/Google/Chrome/Application/chrome.exe' : undefined);
-const server = process.env.HAMIDOS_SCREENSHOT_URL ? null : await preview({ preview: { host: '127.0.0.1', port: 5183, strictPort: true, open: false } });
-const url = process.env.HAMIDOS_SCREENSHOT_URL || 'http://127.0.0.1:5183/';
+const server = process.env.MACFOLIO_SCREENSHOT_URL ? null : await preview({ preview: { host: '127.0.0.1', port: 5183, strictPort: true, open: false } });
+const url = process.env.MACFOLIO_SCREENSHOT_URL || 'http://127.0.0.1:5183/';
 let browser;
 const problems = [];
 

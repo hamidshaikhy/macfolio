@@ -10,13 +10,14 @@ import {
 } from "lucide-react";
 import { downloadText } from "../lib/download";
 import { asset } from "../lib/assets";
+import { readStoredValue } from "../lib/storage";
 import { useMusic } from "../state/music";
 import { Play, Pause } from "lucide-react";
 type Mode = "computer" | "local";
 function loadGame() {
   const game = new Game();
   try {
-    const saved = localStorage.getItem("hamidos.chess.v1");
+    const saved = readStoredValue("macfolio.chess.v1");
     if (saved) game.loadPgn(JSON.parse(saved).pgn);
   } catch {
     /* invalid or old session: start with a legal initial board */
@@ -25,7 +26,7 @@ function loadGame() {
 }
 function initialMode(): Mode {
   try {
-    return JSON.parse(localStorage.getItem("hamidos.chess.v1") || "{}").mode ===
+    return JSON.parse(readStoredValue("macfolio.chess.v1") || "{}").mode ===
       "local"
       ? "local"
       : "computer";
@@ -74,7 +75,7 @@ export default function Chess() {
   useEffect(() => {
     try {
       localStorage.setItem(
-        "hamidos.chess.v1",
+        "macfolio.chess.v1",
         JSON.stringify({ pgn: game.current.pgn(), mode }),
       );
     } catch {
@@ -345,7 +346,7 @@ export default function Chess() {
           <button
             title="Export PGN"
             aria-label="Export chess game"
-            onClick={() => downloadText(g.pgn(), "hamidos-game.pgn")}
+            onClick={() => downloadText(g.pgn(), "macfolio-game.pgn")}
           >
             <Download size={18} />
           </button>

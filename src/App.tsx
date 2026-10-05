@@ -117,7 +117,7 @@ export default function App() {
           ) : (
             <main
               className="desktop-surface"
-              aria-label="HamidOS desktop"
+              aria-label="macfolio desktop"
               onContextMenu={(e) => {
                 if (!(e.target as HTMLElement).closest(".os-window")) {
                   e.preventDefault();
@@ -157,7 +157,7 @@ export default function App() {
         <div className="apple-menu menu-popover" role="menu">
           <button role="menuitem" onClick={() => open("settings")}>
             <Info size={16} />
-            About HamidOS
+            About macfolio
           </button>
           <hr />
           <button role="menuitem" onClick={() => open("settings")}>
@@ -252,7 +252,7 @@ export default function App() {
         <div className="notification" role="status">
           <AppIcon id="about" size={34} />
           <div>
-            <strong>HamidOS</strong>
+            <strong>macfolio</strong>
             <span>{os.notification}</span>
           </div>
           <button

@@ -23,7 +23,7 @@ export function registerOSTools() {
   const tools: Tool[] = [
     {
       name: "read_desktop_state",
-      description: "Read the current appearance and open HamidOS applications.",
+      description: "Read the current appearance and open macfolio applications.",
       inputSchema: {
         type: "object",
         properties: {},

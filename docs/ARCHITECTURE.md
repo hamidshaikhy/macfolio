@@ -60,7 +60,7 @@ Vitest exercises logic and component behavior. Playwright uses production assets
 - Wi-Fi, Bluetooth and AirDrop are independent, persisted interface switches; they do not access device connectivity.
 - Spotlight offers Apps, Files, Web and Settings filters and a blurred desktop. GitHub is a searchable internal application.
 - GitHub and Contacts render the portfolio data in `src/lib/content.ts`; no GitHub API or embedded external profile is required.
-- Calendar opens from its desktop widget or app icon. Month navigation, a list view, event creation and deletion use browser-local persistence (`hamidos.calendar.v1`).
+- Calendar opens from its desktop widget or app icon. Month navigation, a list view, event creation and deletion use browser-local persistence (`macfolio.calendar.v1`).
 - Wallpaper selection is independent of appearance and persists with preferences. Five additional landscape images are bundled locally.
 - Maximized windows cover the browser viewport and restore their previous rectangle using the green control.
 - `src/refinement.css` supplies the translucent surfaces and updated application styles.
@@ -69,7 +69,7 @@ Vitest exercises logic and component behavior. Playwright uses production assets
 
 Contacts includes Hamid’s supplied mobile number as `+98 937 389 1553`, with a `tel:+989373891553` action and a copy control. Contact values remain centralized in `src/lib/content.ts`.
 
-The GitHub profile uses `src/github.css`, local toolkit logos in `public/assets/toolkit/`, and native CSS illustrations for project previews. Devicon’s MIT license is included alongside the SVG assets. Section navigation opens the toolkit or project cards; profile actions open Contacts and Preview within HamidOS.
+The GitHub profile uses `src/github.css`, local toolkit logos in `public/assets/toolkit/`, and native CSS illustrations for project previews. Devicon’s MIT license is included alongside the SVG assets. Section navigation opens the toolkit or project cards; profile actions open Contacts and Preview within macfolio.
 
 Projects and Preview are excluded from the Dock, and their desktop shortcuts are removed. Both applications remain available through Launchpad, Spotlight, Finder and the existing portfolio links.
 
@@ -96,3 +96,9 @@ The menu-bar date now toggles the `notifications` panel. `NotificationCenter.tsx
 Calendar now uses white/light surfaces by default and explicit dark overrides. Toolbar, adjacent-month cells, borders, list, event form and date/time inputs follow the same appearance. The old Calendar widget popover and its 11 unused CSS rules are removed.
 
 The rewritten README embeds 17 real browser screenshots from `docs/screenshots/`. `npm run screenshots` starts a temporary production preview and captures fresh, isolated browser contexts at a fixed time; it closes the browser and preview afterward. Screenshot files stay outside the ignored QA artifacts so GitHub can display them.
+
+## macfolio branding and saved-data compatibility
+
+The product name, npm package, browser title, system menus, Terminal, internal Safari URLs, audio element id, export names, scripts and documentation use `macfolio`. The README's visual-inspiration sentence is removed. Personal identity and third-party license notices are preserved.
+
+Storage now uses the `macfolio.*.v1` namespace. `readStoredValue` reads the current key first; when absent, it reads and copies the corresponding legacy key without removing the original. It still returns the original data if copying fails. The previous prefix remains only in this compatibility reader and its migration tests. Zustand stores and Chess share the reader, preserving existing preferences, files, events and games on the same browser origin.

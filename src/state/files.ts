@@ -107,7 +107,7 @@ export const useFiles = create<FileState>()(
       setTitle: (path, title) => set(s => ({ files: s.files.map(f => f.path === path && !f.deleted ? { ...f, title, modified: new Date().toISOString() } : f) })),
     }),
     {
-      name: "hamidos.files.v1",
+      name: "macfolio.files.v1",
       storage: createJSONStorage(() => preferenceStorage),
     },
   ),

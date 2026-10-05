@@ -20,7 +20,7 @@ function loadNativeTrack() {
 function player() {
   if (!audio) {
     audio = new Audio();
-    audio.id = "hamidos-audio"; audio.preload = "metadata"; audio.hidden = true;
+    audio.id = "macfolio-audio"; audio.preload = "metadata"; audio.hidden = true;
     audio.volume = desiredVolume; audio.muted = desiredVolume === 0;
     document.body.append(audio);
   }

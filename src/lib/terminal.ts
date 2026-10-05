@@ -60,7 +60,7 @@ export function command(
   if (cmd === "help")
     return {
       output:
-        "HamidOS Terminal\n\nhelp       Show commands\nabout      About Hamid\nprojects   Selected projects\nls [path]  List local files\ncd [path]  Change directory\npwd        Current directory\ncat FILE   Read a file\ntouch FILE Create an empty file\necho TEXT > FILE  Write a file\nrm FILE    Move a file to Trash\nopen APP   Open an application\ntheme light|dark\ndate       Tehran time\nwhoami     Current user\nclear      Clear the screen\n\nThis shell operates on local portfolio files only.",
+        "macfolio Terminal\n\nhelp       Show commands\nabout      About Hamid\nprojects   Selected projects\nls [path]  List local files\ncd [path]  Change directory\npwd        Current directory\ncat FILE   Read a file\ntouch FILE Create an empty file\necho TEXT > FILE  Write a file\nrm FILE    Move a file to Trash\nopen APP   Open an application\ntheme light|dark\ndate       Tehran time\nwhoami     Current user\nclear      Clear the screen\n\nThis shell operates on local portfolio files only.",
     };
   if (cmd === "clear") return { output: "", clear: true };
   if (cmd === "pwd") return { output: ctx.cwd };

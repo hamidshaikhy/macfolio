@@ -1,4 +1,4 @@
-﻿/* HamidOS 2: shared materials and application anatomy. */
+﻿/* macfolio 2: shared materials and application anatomy. */
 :root { --sidebar: rgba(237,239,243,.86); --surface: #fcfcfd; --muted: #686d76; --titlebar: #f2f3f5; --shadow: 0 28px 70px #17243b40, 0 4px 16px #0002; }
 :root[data-theme="dark"] { --surface: #232428; --surface-soft: #2b2c31; --sidebar: rgba(34,36,42,.9); --titlebar: #2d2e34; --muted: #a6abb8; --shadow: 0 28px 70px #0008, 0 4px 16px #0004; }
 .os-window { border-radius: 13px; border-color: #ffffff5a; }

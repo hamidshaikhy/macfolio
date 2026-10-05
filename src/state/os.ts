@@ -160,7 +160,7 @@ export const useOS = create<OSState>()(
       notify: (notification) => set({ notification }),
     }),
     {
-      name: "hamidos.preferences.v1",
+      name: "macfolio.preferences.v1",
       storage: createJSONStorage(() => preferenceStorage),
       partialize: (s) => ({
         wifi: s.wifi, bluetooth: s.bluetooth, airdrop: s.airdrop, wallpaper: s.wallpaper,

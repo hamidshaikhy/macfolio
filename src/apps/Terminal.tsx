@@ -11,7 +11,7 @@ export default function Terminal() {
   const [lines, setLines] = useState([
     {
       prompt: "",
-      out: "HamidOS shell · local workspace\nType help to explore.\n",
+      out: "macfolio shell · local workspace\nType help to explore.\n",
     },
   ]);
   const [history, setHistory] = useState<string[]>([]);
@@ -28,7 +28,7 @@ export default function Terminal() {
           <div key={i}>
             {l.prompt && (
               <div>
-                <span className="terminal-user">hamid@HamidOS</span>{" "}
+                <span className="terminal-user">hamid@macfolio</span>{" "}
                 <span className="terminal-path">
                   {l.prompt.split(" $ ")[0]}
                 </span>{" "}
@@ -70,7 +70,7 @@ export default function Terminal() {
           }}
         >
           <label htmlFor="terminal-input">
-            <span className="terminal-user">hamid@HamidOS</span>{" "}
+            <span className="terminal-user">hamid@macfolio</span>{" "}
             <span className="terminal-path">
               {cwd.replace("/Users/hamid", "~")}
             </span>{" "}

@@ -137,7 +137,7 @@ test('PDF renders every supplied page, text layers, zoom, fit, thumbnails and do
 });
 
 test('supplied audio decodes after manual Play and remains shared across apps and lock', async ({ page }, info) => {
-  await cleanStart(page); const audio=page.locator('#hamidos-audio'); await expect(audio).toHaveJSProperty('paused', true);
+  await cleanStart(page); const audio=page.locator('#macfolio-audio'); await expect(audio).toHaveJSProperty('paused', true);
   const original=await page.request.get('./assets/audio/drowning-in-vertigo.mp3'); const data=await page.request.get('./assets/audio/track-data.txt');
   expect(createHash('sha256').update(await original.body()).digest('hex')).toBe(createHash('sha256').update(await data.body()).digest('hex'));
   await page.getByRole('button', { name: 'Control Center', exact: true }).click(); await page.getByRole('button', { name: 'Play music', exact: true }).click();
@@ -151,7 +151,7 @@ test('supplied audio decodes after manual Play and remains shared across apps an
   await expect.poll(() => audio.evaluate(a=>a.currentTime)).toBeGreaterThan(89);
   await page.keyboard.press('Escape'); await open(page,'chess'); await expect(page.getByRole('button',{name:'Pause game music'})).toBeVisible();
   await page.getByRole('button',{name:'Apple menu',exact:true}).click(); await page.getByRole('menuitem',{name:/Lock Screen/}).click(); await expect(audio).toHaveJSProperty('paused',false);
-  await page.getByRole('button',{name:/Enter HamidOS/}).click();
+  await page.getByRole('button',{name:/Enter macfolio/}).click();
   await page.getByRole('button', { name: 'Control Center', exact: true }).click(); await page.getByRole('button',{name:'Stop music'}).click(); await expect(audio).toHaveJSProperty('paused',true); await expect.poll(() => audio.evaluate(a=>a.currentTime)).toBeLessThan(.1);
   await screenshot(page,info,'music');
 });
@@ -209,7 +209,7 @@ test('Safari history, Spotlight, Launchpad and saved Settings actions', async ({
 });
 
 test('touch phone preserves the phone shell when rotated to 844×390', async ({ browser }, info) => {
-  const context=await browser.newContext({baseURL:info.project.use.baseURL || process.env.HAMIDOS_TEST_URL || 'http://127.0.0.1:5180/',hasTouch:true,isMobile:true,viewport:{width:390,height:844}});
+  const context=await browser.newContext({baseURL:info.project.use.baseURL || process.env.MACFOLIO_TEST_URL || 'http://127.0.0.1:5180/',hasTouch:true,isMobile:true,viewport:{width:390,height:844}});
   const page=await context.newPage();
   await page.goto('./');await expect(page.locator('.ios-home')).toBeVisible();await page.setViewportSize({width:844,height:390});
   await expect(page.getByTestId('os-root')).toHaveClass(/mobile/);await expect(page.locator('.ios-dock button')).toHaveCount(4);
