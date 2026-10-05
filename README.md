@@ -2,7 +2,7 @@
 
 # macfolio
 
-<a href="https://macfolio-delta-one.vercel.app/"><img src="https://img.shields.io/badge/دمو_آنلاین-مشاهدهٔ_سایت-32875e?style=for-the-badge&logo=vercel&logoColor=white" alt="دمو آنلاین — مشاهدهٔ سایت macfolio"></a>
+<a href="https://macfolio-delta-one.vercel.app/"><img src="https://img.shields.io/badge/LIVE_DEMO-OPEN_MACFOLIO-32875e?style=for-the-badge&logo=vercel&logoColor=white" alt="دمو آنلاین — مشاهدهٔ سایت macfolio"></a>
 
 **[🌐 دمو آنلاین — مشاهدهٔ macfolio](https://macfolio-delta-one.vercel.app/)**
 
