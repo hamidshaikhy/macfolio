@@ -15,8 +15,11 @@ const problems = [];
 async function screenshot(page, name) {
   await page.evaluate(() => document.fonts.ready);
   await page.locator('.app-loading:visible').waitFor({ state: 'hidden' });
-  await page.waitForFunction(() => [...document.images].every(image => image.complete));
+  await page.evaluate(() => { for (const image of document.images) image.loading = 'eager'; });
+  await page.waitForFunction(() => [...document.images].every(image => image.complete && image.naturalWidth > 0));
+  await page.evaluate(() => Promise.all([...document.images].map(image => image.decode())));
   await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); });
+  await page.evaluate(() => window.getSelection()?.removeAllRanges());
   await page.mouse.move(0, 0);
   await page.waitForTimeout(300);
   await page.screenshot({ path: `${directory}/${name}.png`, animations: 'disabled' });
@@ -39,6 +42,15 @@ async function closeWindows(page) {
 async function open(page, name) {
   await page.getByRole('navigation', { name: 'Dock', exact: true }).getByRole('button', { name, exact: true }).click();
 }
+async function resizeWindow(page, width = 1040, height = 730) {
+  const window = page.locator('.os-window:not([hidden])').last();
+  const box = await window.boundingBox();
+  const handle = await window.locator('.resize-handle').boundingBox();
+  await page.mouse.move(handle.x + handle.width / 2, handle.y + handle.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(handle.x + handle.width / 2 + width - box.width, handle.y + handle.height / 2 + height - box.height, { steps: 8 });
+  await page.mouse.up();
+}
 async function theme(page, value) {
   if (await page.locator('html').getAttribute('data-theme') === value) return;
   await page.getByRole('button', { name: 'Control Center', exact: true }).click();
@@ -52,18 +64,33 @@ try {
   const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   const page = await setup(desktop);
   await page.locator('.welcome-hero').waitFor();
+  await resizeWindow(page);
   await screenshot(page, 'desktop-light');
   await theme(page, 'dark');
   await screenshot(page, 'desktop-dark');
+  await page.locator('.welcome-work').scrollIntoViewIfNeeded();
+  await screenshot(page, 'about-projects-desktop');
   await closeWindows(page);
   await open(page, 'GitHub');
   await page.locator('.gh-hero').waitFor();
+  await resizeWindow(page);
   await screenshot(page, 'github-desktop');
+  await page.locator('.gh-work').scrollIntoViewIfNeeded();
+  await screenshot(page, 'github-projects-desktop');
   await closeWindows(page);
   await theme(page, 'light');
   await page.getByRole('button', { name: /Selected work 3 projects/ }).click();
   await page.locator('.project-hero').waitFor();
+  await resizeWindow(page);
   await screenshot(page, 'projects-desktop');
+  await resizeWindow(page, 920, 750);
+  await page.locator('.project-real-gallery').scrollIntoViewIfNeeded();
+  await screenshot(page, 'projects-gallery-desktop');
+  for (const [index, name] of [[1, 'finance-project-desktop'], [2, 'flow-project-desktop']]) {
+    await page.locator('.project-sidebar > button').nth(index).click();
+    await page.locator('.project-real-gallery').scrollIntoViewIfNeeded();
+    await screenshot(page, name);
+  }
   await closeWindows(page);
   await open(page, 'Calendar');
   await page.getByRole('button', { name: 'New Event', exact: true }).click();

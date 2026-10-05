@@ -36,7 +36,7 @@ macfolio پورتفولیوی **Hamid Shaikhy / حمید شیخی**، توسعه
 
 ## گالری تصاویر
 
-تصاویر زیر با مرورگر از **خود برنامه** ثبت شده‌اند. روی هر تصویر بزنید تا نسخهٔ کامل را ببینید. پیش‌نمایش‌های کوچکِ داخل کارت پروژه‌ها، تصویرسازی رابط هستند.
+تصاویر زیر با مرورگر از **خود برنامه** ثبت شده‌اند. روی هر تصویر بزنید تا نسخهٔ کامل را ببینید. کارت‌ها و گالری پروژه‌ها از اسکرین‌شات‌های واقعی محصولات استفاده می‌کنند.
 
 ### دسکتاپ؛ روشن و تیره
 
@@ -52,6 +52,16 @@ GitHub یک صفحهٔ داخلی با معرفی، لوگوی ابزارها و
 | :---: | :---: |
 | [<img src="docs/screenshots/github-desktop.png" alt="پروفایل داخلی GitHub، ابزارها و پروژه‌های منتخب" width="700">](docs/screenshots/github-desktop.png) | [<img src="docs/screenshots/projects-desktop.png" alt="صفحهٔ Dika Asia با پیش‌نمایش رابط و توضیحات پروژه" width="700">](docs/screenshots/projects-desktop.png) |
 | معرفی و ابزارها، در یک پنجرهٔ مستقل | پیش‌نمایش رابط، انتخاب پروژه و شرح کار |
+
+پیش‌نمایش‌های About و GitHub و گالری پروژه‌ها همگی تصویر واقعی محصول را نشان می‌دهند. هر پروژه چهار نما دارد؛ تصاویر دیکا از سایت آنلاین و تصاویر پنل مالی و Flow Studio از مستندات همان پروژه‌ها ثبت شده‌اند.
+
+| پروژه‌ها در About | پروژه‌ها در GitHub |
+| :---: | :---: |
+| [<img src="docs/screenshots/about-projects-desktop.png" alt="کارت‌های پروژه با اسکرین‌شات واقعی در About" width="700">](docs/screenshots/about-projects-desktop.png) | [<img src="docs/screenshots/github-projects-desktop.png" alt="پروژه‌های منتخب GitHub با تصاویر واقعی" width="700">](docs/screenshots/github-projects-desktop.png) |
+
+| Dika Asia | Financial Panel | Flow Studio |
+| :---: | :---: | :---: |
+| [<img src="docs/screenshots/projects-gallery-desktop.png" alt="گالری واقعی دیکا، سازهٔ سه‌بعدی و صفحات محصولات و پروژه‌ها" width="460">](docs/screenshots/projects-gallery-desktop.png) | [<img src="docs/screenshots/finance-project-desktop.png" alt="گالری رابط واقعی پنل مدیریت مالی" width="460">](docs/screenshots/finance-project-desktop.png) | [<img src="docs/screenshots/flow-project-desktop.png" alt="گالری بوم واقعی ساخت گردش‌کار Flow Studio" width="460">](docs/screenshots/flow-project-desktop.png) |
 
 ### ابزارهای کوچک، جزئیات کاربردی
 
