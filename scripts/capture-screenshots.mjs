@@ -79,14 +79,14 @@ try {
   await screenshot(page, 'github-projects-desktop');
   await closeWindows(page);
   await theme(page, 'light');
-  await page.getByRole('button', { name: /Selected work 3 projects/ }).click();
+  await page.getByRole('button', { name: /Selected work \d+ projects/ }).click();
   await page.locator('.project-hero').waitFor();
   await resizeWindow(page);
   await screenshot(page, 'projects-desktop');
   await resizeWindow(page, 920, 750);
   await page.locator('.project-real-gallery').scrollIntoViewIfNeeded();
   await screenshot(page, 'projects-gallery-desktop');
-  for (const [index, name] of [[1, 'finance-project-desktop'], [2, 'flow-project-desktop']]) {
+  for (const [index, name] of [[1, 'finance-project-desktop'], [2, 'flow-project-desktop'], [3, 'barg-project-desktop']]) {
     await page.locator('.project-sidebar > button').nth(index).click();
     await page.locator('.project-real-gallery').scrollIntoViewIfNeeded();
     await screenshot(page, name);

@@ -16,7 +16,7 @@ export const initialFiles: LocalFile[] = [
     path: "/Users/hamid/README.md",
     modified: "2026-10-04",
     content:
-      "# حمید شیخی\n\nتوسعه‌دهندهٔ فرانت‌اند در تهران.\n\nتمرکز من روی React، TypeScript و تجربهٔ کاربری است.\n\n## پروژه‌ها\n- Dika Asia — سایت رسمی شرکت\n- Financial Panel — داشبورد مالی و عملیات\n- Flow Studio — سازندهٔ جریان کاری\n\nGitHub: https://github.com/hamidshaikhy",
+      "# حمید شیخی\n\nتوسعه‌دهندهٔ فرانت‌اند در تهران.\n\nتمرکز من روی React، TypeScript و تجربهٔ کاربری است.\n\n## پروژه‌ها\n- Dika Asia — سایت رسمی شرکت\n- Financial Panel — داشبورد مالی و عملیات\n- Flow Studio — سازندهٔ جریان کاری\n- Barg — رزومه‌ساز فارسی\n\nGitHub: https://github.com/hamidshaikhy",
   },
   {
     path: "/Users/hamid/Notes/welcome.md",

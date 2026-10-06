@@ -35,7 +35,7 @@ export const apps: {
     id: "projects",
     name: "Projects",
     icon: "folder",
-    keywords: "dika asia finance flow studio پروژه",
+    keywords: "dika asia finance flow studio barg resume builder رزومه پروژه",
   },
   { id: "notes", name: "Notes", icon: "notes", keywords: "write یادداشت" },
   {

@@ -34,7 +34,9 @@
 .welcome-section-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-bottom:17px; }
 .welcome-section-heading > span { font-size:8px; color:var(--muted); letter-spacing:1px; }
 .welcome-section-heading h3 { font-size:14px; margin:0; }
-.welcome-projects { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.welcome-work { container-type:inline-size; }
+.welcome-projects { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+@container (max-width:720px) { .welcome-projects { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .welcome-projects > button { text-align:left; min-width:0; border:1px solid var(--border); border-radius:13px; padding:10px; background:var(--surface-soft); transition:transform .15s,border-color .15s; }
 .welcome-projects > button:hover { transform:translateY(-3px); border-color:#7caa92; }
 .welcome-projects .gh-project-preview { margin:0; height:120px; }

@@ -2,6 +2,7 @@ import { MapPin, Github, FileText } from "lucide-react";
 import { useClock, tehranDate } from "../lib/hooks";
 import { useOS } from "../state/os";
 import { asset } from "../lib/assets";
+import { projects } from "../lib/content";
 export function Widgets() {
   const now = useClock();
   const openApp = useOS(s => s.openApp);
@@ -64,7 +65,7 @@ export function Widgets() {
           <Github size={19} />
           <span>
             <strong>Selected work</strong>
-            <small>3 projects</small>
+            <small>{projects.length} projects</small>
           </span>
         </button>
         <button onClick={() => openApp("resume")}>
