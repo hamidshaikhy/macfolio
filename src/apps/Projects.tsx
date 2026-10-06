@@ -50,7 +50,7 @@ export default function Projects() {
   ];
   return <div className={`projects-app portfolio-projects project-case-studies ${detail ? "show-detail" : ""}`} style={{ "--project-accent": project.color } as CSSProperties}>
     <aside className="project-sidebar">
-      <div className="project-sidebar-title"><Layers size={20} /><div><strong>Selected work</strong><span>3 projects · real interfaces</span></div></div>
+      <div className="project-sidebar-title"><Layers size={20} /><div><strong>Selected work</strong><span>{projects.length} projects · real interfaces</span></div></div>
       <span className="project-sidebar-label">EXPLORE THE COLLECTION</span>
       {projects.map((item, index) => <button className={selected === item.id ? "selected" : ""} aria-pressed={selected === item.id} key={item.id} onClick={() => selectProject(item.id)}><span className="project-monogram" style={{ background: item.color }}>{item.monogram}</span><span><strong>{item.title}</strong><small>{item.category}</small></span><span className="project-number">0{index + 1}</span></button>)}
       <div className="project-sidebar-note"><Camera size={20} /><p className="persian" dir="rtl">از خود محصول ببینید.<br />جزئیات هر تصویر را با یک کلیک بررسی کنید.</p></div>
@@ -58,7 +58,7 @@ export default function Projects() {
     </aside>
     <article className="project-detail" key={project.id}>
       <button className="mobile-project-back" onClick={() => setDetail(false)}><ChevronLeft size={18} /> Projects</button>
-      <header className="project-page-top"><span>SELECTED WORK / CASE STUDY</span><span>0{projects.indexOf(project) + 1} / 03</span></header>
+      <header className="project-page-top"><span>SELECTED WORK / CASE STUDY</span><span>0{projects.indexOf(project) + 1} / 0{projects.length}</span></header>
       <section className="project-hero">
         <span className="project-category"><i />{study.status}</span>
         <div className="project-heading-row"><h2>{project.title}</h2><h3 className="project-headline persian" dir="rtl">{study.headline}</h3></div>

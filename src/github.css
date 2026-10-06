@@ -84,7 +84,9 @@
 .gh-tech-mono img { filter: invert(1); }
 .gh-tech strong { font-weight: 550; font-size: 11px; white-space: nowrap; }
 .gh-tech small { margin-top: 5px; font-size: 8px; color: var(--gh-muted); }
-.gh-project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; }
+.gh-work { container-type: inline-size; }
+.gh-project-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 11px; }
+@container (max-width: 720px) { .gh-project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .gh-project { text-align: left; border: 1px solid #ffffff10; border-radius: 12px; overflow: hidden; background: #131f21; transition: border-color .2s, transform .2s; min-width: 0; }
 .gh-project:hover { border-color: #a6efc360; transform: translateY(-3px); }
 .gh-project-body { padding: 16px 14px; }

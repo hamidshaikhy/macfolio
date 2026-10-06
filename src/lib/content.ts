@@ -74,5 +74,22 @@ export const projects = [
     tags: ["React", "Workflow", "Interactive UI"],
     repo: "https://github.com/hamidshaikhy/flow-studio",
   },
+  {
+    id: "barg",
+    title: "Barg",
+    category: "Résumé builder",
+    monogram: "BG",
+    color: "#3d8a5a",
+    summary: "رزومه‌ساز فارسی برگ",
+    description:
+      "رزومه‌ساز فارسی و راست‌به‌چپ که کاملاً در مرورگر اجرا می‌شود؛ نوشتن با پیش‌نمایش زنده، ده قالب رسمی و خروجی PDF و Word، بدون ثبت‌نام و بدون سرور.",
+    role: "طراحی و توسعهٔ کامل با React، TypeScript و Tailwind CSS؛ موتور صفحه‌بندی A4، قالب‌ها، خروجی‌ها و صفحهٔ معرفی اسکرولی.",
+    challenge:
+      "صفحه‌بندی دقیق روی برگهٔ A4 و درست نگه‌داشتن ترتیب متن فارسی و لاتین در پیش‌نمایش، PDF و Word.",
+    result:
+      "کد پروژه در گیت‌هاب برای بررسی و اجرای محلی در دسترس است.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "RTL"],
+    repo: "https://github.com/hamidshaikhy/barg-resume-builder",
+  },
 ];
 export type Project = (typeof projects)[number];
