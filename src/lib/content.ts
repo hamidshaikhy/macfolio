@@ -91,5 +91,22 @@ export const projects = [
     tags: ["React", "TypeScript", "Tailwind CSS", "RTL"],
     repo: "https://github.com/hamidshaikhy/barg-resume-builder",
   },
+  {
+    id: "tanpoosh",
+    title: "Tanpoosh",
+    category: "Menswear store & style studio",
+    monogram: "TP",
+    color: "#8b7355",
+    summary: "فروشگاه پوشاک مردانه و استودیوی استایل تن‌پوش",
+    description:
+      "فروشگاه کامل پوشاک مردانه با رابط فارسی و راست‌چین؛ کاتالوگ و انتخاب رنگ و سایز، سبد خرید و سفارش، استودیوی ساخت استایل و پنل اختصاصی مدیریت فروشگاه.",
+    role: "طراحی و توسعهٔ فروشگاه و استودیوی استایل با Next.js، React و TypeScript، پنل مدیریت و APIهای Django.",
+    challenge:
+      "هماهنگی انتخاب محصول، رنگ، سایز و موجودی با پیش‌نمایش استایل و مسیر خرید، در یک تجربهٔ واکنش‌گرا و فارسی.",
+    result:
+      "کد و تصاویر اجرای واقعی پروژه در گیت‌هاب در دسترس‌اند؛ نسخهٔ محلی با داده‌های نمایشی و پرداخت آزمایشی اجرا می‌شود.",
+    tags: ["Next.js", "TypeScript", "Django", "PostgreSQL", "RTL"],
+    repo: "https://github.com/hamidshaikhy/tanpoosh",
+  },
 ];
 export type Project = (typeof projects)[number];
