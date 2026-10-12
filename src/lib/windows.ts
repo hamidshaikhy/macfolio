@@ -24,13 +24,13 @@ export function clampRect(rect: Rect, size: { w: number; h: number }, app?: AppI
 }
 export function initialRect(app: AppId, index = 0): Rect {
   const v = viewport();
-  const w = app === "about" ? 960 : app === "github" ? 1080 : app === "calculator" ? 320 : app === "chess" ? 840 : app === "terminal" ? 740 : 860;
+  const w = app === "safari" || app === "about" ? Math.min(1180, v.w - 100) : app === "github" ? 1080 : app === "calculator" ? 320 : app === "chess" ? 840 : app === "terminal" ? 740 : 860;
   return clampRect(
     {
-      x: app === "calculator" ? (v.w - w) / 2 : Math.max(280, (v.w - w) / 2 + 60) + index * 24,
-      y: app === "calculator" ? (v.h - 510) / 2 - 20 : 88 + index * 24,
+      x: app === "safari" || app === "about" ? (v.w - w) / 2 : app === "calculator" ? (v.w - w) / 2 : Math.max(280, (v.w - w) / 2 + 60) + index * 24,
+      y: app === "safari" || app === "about" ? 48 : app === "calculator" ? (v.h - 510) / 2 - 20 : 88 + index * 24,
       w,
-      h: app === "about" ? 660 : app === "github" ? 690 : app === "calculator" ? 510 : app === "chess" ? 600 : 580,
+      h: app === "safari" || app === "about" ? Math.min(820, v.h - 150) : app === "github" ? 690 : app === "calculator" ? 510 : app === "chess" ? 600 : 580,
     },
     v,
     app,

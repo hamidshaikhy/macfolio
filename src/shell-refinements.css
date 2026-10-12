@@ -2,6 +2,13 @@
 .os-window.app-calculator { min-width:280px; background:#1c1c1e; }
 .os-window.app-calculator .window-titlebar { height:36px; border:0; background:#1c1c1e; color:white; padding:0 14px; }
 .os-window.app-calculator .window-content { background:#1c1c1e; }
+.app-about .window-titlebar { position:relative; }
+.app-about .window-titlebar > span:not(.window-title-spacer) { position:absolute; left:50%; transform:translateX(-50%); pointer-events:none; }
+.window-portfolio-link { display:inline-flex; align-items:center; justify-content:center; min-height:29px; padding:7px 12px; border-radius:6px; background:#caff18; color:#162410; font:700 10px/1.2 Arial,sans-serif; white-space:nowrap; text-decoration:none; }
+.window-portfolio-link:hover { background:#dcff67; }
+.window-portfolio-link:focus-visible { outline:2px solid #62f5b7; outline-offset:3px; }
+.ios-app-header .window-portfolio-link { min-height:30px; padding:8px 10px; font-size:9px; }
+.ios-app.app-about .ios-app-header > strong { min-width:0; font-size:12px; }
 .calculator-app { width:100%; max-width:360px; height:100%; margin:0 auto; padding:0 12px 12px; display:flex; flex-direction:column; justify-content:flex-end; background:#1c1c1e; color:white; }
 .calculator-display { flex:1; min-height:66px; display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-end; padding:5px 6px 12px; overflow:hidden; }
 .calculator-display > span { min-height:16px; font-size:11px; color:#a8a8ad; font-variant-numeric:tabular-nums; }

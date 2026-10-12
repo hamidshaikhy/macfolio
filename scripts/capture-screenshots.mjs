@@ -63,12 +63,13 @@ try {
   browser = await chromium.launch({ executablePath: chrome });
   const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   const page = await setup(desktop);
-  await page.locator('.welcome-hero').waitFor();
-  await resizeWindow(page);
+  await page.locator('.app-about .pf-experience[data-measured="true"]').waitFor();
+  await resizeWindow(page,1180,730);
   await screenshot(page, 'desktop-light');
   await theme(page, 'dark');
   await screenshot(page, 'desktop-dark');
-  await page.locator('.welcome-work').scrollIntoViewIfNeeded();
+  await page.locator('.pf-nav > nav').getByRole('link', { name: 'Work', exact: true }).click();
+  await page.waitForTimeout(1000);
   await screenshot(page, 'about-projects-desktop');
   await closeWindows(page);
   await open(page, 'GitHub');
@@ -135,6 +136,7 @@ try {
 
   const mobile = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 1 });
   const phone = await setup(mobile);
+  await phone.getByRole('button', { name: 'Back to home', exact: true }).click();
   await screenshot(phone, 'mobile-home');
   await phone.locator('.ios-home').getByRole('button', { name: 'Calculator', exact: true }).click();
   await phone.getByLabel('Calculator display').waitFor();

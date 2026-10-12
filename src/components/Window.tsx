@@ -2,6 +2,7 @@
 import { X, Minus, Maximize2 } from "lucide-react";
 import { useOS } from "../state/os";
 import { appById } from "../lib/apps";
+import {asset} from '../lib/assets';
 import type { OSWindow } from "../lib/windows";
 export const Window = memo(function Window({
   win,
@@ -79,7 +80,7 @@ export const Window = memo(function Window({
         className="window-titlebar"
         onPointerDown={gesture}
         onDoubleClick={(e) => {
-          if (!(e.target as HTMLElement).closest("button"))
+          if (!(e.target as HTMLElement).closest("button,a"))
             os.maximize(win.app);
         }}
       >
@@ -107,7 +108,7 @@ export const Window = memo(function Window({
           </button>
         </div>
         {win.app !== "calculator" && <span>{appById(win.app).name}</span>}
-        <span className="window-title-spacer" />
+        {win.app==='about'?<a className="window-portfolio-link" href={asset('portfolio')} target="_blank" rel="noopener noreferrer">OPEN FULL PORTFOLIO</a>:<span className="window-title-spacer"/>}
       </header>
       <div className="window-content">{children}</div>
       {!win.maximized && (

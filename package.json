@@ -12,7 +12,8 @@
     "prebuild": "node scripts/prepare-assets.mjs",
     "test:browser": "playwright test",
     "test:browser:install": "playwright install chromium webkit",
-    "screenshots": "node scripts/capture-screenshots.mjs"
+    "screenshots": "node scripts/capture-screenshots.mjs",
+    "screenshots:portfolio": "node scripts/capture-portfolio-screenshots.mjs"
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.5",

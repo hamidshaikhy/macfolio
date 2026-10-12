@@ -39,7 +39,7 @@ export default function App() {
   useEffect(() => {
     if (!initialized.current) {
       initialized.current = true;
-      if (!mobile) os.openApp("about");
+      if (new URLSearchParams(window.location.search).get('view') !== 'desktop') os.openApp("about");
     }
     const fit = () => useOS.getState().fitWindows();
     window.addEventListener("resize", fit);

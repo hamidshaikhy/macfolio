@@ -44,6 +44,7 @@ test('compact calculator, informational notifications and a themed calendar', as
 for (const size of [{width:390,height:844},{width:375,height:667},{width:320,height:568},{width:667,height:375}]) {
   test(`mobile home ${size.width}×${size.height} shows every desktop app without hidden pages`, async ({ page }) => {
     await page.setViewportSize(size); await page.goto('/');
+    await page.getByRole('button',{name:'Back to home',exact:true}).click();
     const home=page.locator('.ios-home');
     await expect(home).toBeVisible();
     for(const name of ['Finder','Terminal','Code','Notes','Calendar','Safari','GitHub','LinkedIn','Contacts','Chess','Calculator','Settings','Trash']) {

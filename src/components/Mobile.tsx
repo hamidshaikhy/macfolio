@@ -61,12 +61,12 @@ export function Mobile() {
               <ChevronLeft size={21} /> Home
             </button>
             <strong>{appById(os.mobileApp).name}</strong>
-            <button
+            {os.mobileApp==='about'?<a className="window-portfolio-link" aria-label="OPEN FULL PORTFOLIO" href={asset('portfolio')} target="_blank" rel="noopener noreferrer">FULL PORTFOLIO</a>:<button
               aria-label="Open Control Center"
               onClick={() => os.setPanel("control")}
             >
               <SlidersHorizontal size={19} />
-            </button>
+            </button>}
           </header>
           <div className="ios-app-content">
             <AppView id={os.mobileApp} />

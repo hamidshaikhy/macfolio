@@ -102,3 +102,13 @@ The README is rewritten and its **17 real screenshots** are stored in the non-ig
 The production build, unused-symbol TypeScript check and **42 unit tests** pass. The 18 Chrome regression cases pass after rebranding; the additional branding browser test also passes, confirming that saved preferences, a note, an event and a local chess position from the previous namespace load correctly. Old saved values remain available while the new keys are populated.
 
 All 17 README screenshots were recaptured from the renamed production build. Local README references resolve; the previous product name and the requested visual-inspiration sentence are absent from the README. The older storage prefix remains only in compatibility code and migration fixtures.
+
+## Interactive portfolio and README gallery — 2026-10-13
+
+The production build, TypeScript unused-symbol checks and all **42 unit tests** pass. The final desktop framing and related regressions pass **12/12 Chrome and WebKit browser checks**: viewport-sized hero, head clearance, visible Claude/Cursor arm chips, reachable inspection controls, embedded About startup, manually opened Safari Favorites/history, touch layouts, graphics fallback, independent hero signals and early profile arrival.
+
+Desktop framing was measured at 1366×768, 1900×900, 1920×600 and 2560×1440, plus a 1440×1000 desktop containing About. Before/after computed geometry is identical for the approved phone/tablet layouts at 390×844, 768×1024 and 1024×768. The previous stylesheet, screenshots and measurements are retained in `output/rollback/hero-desktop-2026-10-13/`.
+
+The portfolio's broader earlier regression runs covered scroll-driven project/career transitions across twelve viewport sizes in Chrome and WebKit and native Chrome touch input. These are browser emulations; physical iPad/iPhone Safari and Safari on a Mac have not been tested.
+
+`npm run screenshots:portfolio` captures 17 real production screenshots for the current About integration, natural/electronic hero, profile, tools, projects, journey, footer, Safari Favorites, phone and tablet. The README uses the new portfolio gallery and explains the standalone route, scroll interaction and new-tab links. Screenshot clocks are fixed and personal browser storage is not used.

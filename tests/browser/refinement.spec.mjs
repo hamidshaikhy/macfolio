@@ -8,7 +8,7 @@ test('desktop controls, spotlight, internal profiles, calendar persistence and f
  await expect(dock.getByRole('button',{name:'Projects',exact:true})).toHaveCount(0);
  await expect(dock.getByRole('button',{name:'Preview',exact:true})).toHaveCount(0);
  await expect(dock.getByRole('button',{name:'About Hamid',exact:true})).toHaveCount(0);
- await expect(page.locator('.welcome-hero')).toBeVisible();
+ await expect(page.locator('.about-portfolio .pf-hero')).toBeVisible();
  const clockMaterial = await page.locator('.clock-widget').first().evaluate(el=>getComputedStyle(el).backgroundColor);
  expect(clockMaterial).toBe(await page.locator('.calendar-widget').first().evaluate(el=>getComputedStyle(el).backgroundColor));
  await page.getByRole('button',{name:'Control Center',exact:true}).click();
@@ -88,6 +88,7 @@ test('desktop controls, spotlight, internal profiles, calendar persistence and f
  await page.screenshot({path:'artifacts/qa/refinement-calculator.png'});
  await page.setViewportSize({width:390,height:844});
  await page.reload();
+ await page.getByRole('button',{name:'Back to home',exact:true}).click();
  await page.locator('.ios-home').getByRole('button',{name:'GitHub',exact:true}).click();
  await expect(page.locator('.gh-hero')).toBeVisible();
  expect(await page.locator('.github-app').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);

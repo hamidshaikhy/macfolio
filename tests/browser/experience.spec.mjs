@@ -6,7 +6,11 @@ const labels = { about: 'About Hamid', projects: 'Projects', notes: 'Notes', edi
 async function open(page, id, mobile = false) {
   if (mobile) {
     const back = page.getByRole('button', { name: 'Back to home', exact: true });
+    // About opens during startup; wait for the mobile shell to mount
+    // before choosing between its app view and home screen.
+    await expect(page.locator('.ios-home').or(back)).toBeVisible();
     if (await back.isVisible()) await back.click();
+    await expect(page.locator('.ios-home')).toBeVisible();
     const name = id === 'projects' ? 'Selected work' : id === 'resume' ? 'My résumé' : labels[id];
     const button = page.locator('.ios-home').getByRole('button', { name, exact: true });
     if (await button.isVisible()) await button.click();
@@ -22,7 +26,7 @@ async function open(page, id, mobile = false) {
   await expect(page.locator('.app-loading:visible')).toHaveCount(0);
 }
 async function screenshot(page, testInfo, name) { await fs.mkdir('artifacts/qa', { recursive: true }); await page.screenshot({ path: `artifacts/qa/${testInfo.project.name}-${name}.png` }); }
-async function cleanStart(page) { await page.goto('./'); await expect(page.getByRole('heading', { name: /ایده‌های خوب/ })).toBeVisible(); }
+async function cleanStart(page) { await page.goto('./'); await expect(page.locator('.about-portfolio .pf-hero h1')).toBeVisible(); }
 const runtimeProblems = new WeakMap();
 test.beforeEach(async ({ page }) => {
   const problems=[]; runtimeProblems.set(page,problems);
@@ -158,7 +162,7 @@ test('supplied audio decodes after manual Play and remains shared across apps an
 
 for (const size of [{ width:390,height:844 }, { width:375,height:667 }, { width:320,height:568 }, { width:667,height:375 }]) {
   test(`phone ${size.width}×${size.height}: every app fits, PDF and controls remain usable`, async ({ page }, info) => {
-    await page.setViewportSize(size); await page.goto('./'); await expect(page.locator('.ios-home')).toBeVisible();
+    await page.setViewportSize(size); await page.goto('./'); await page.getByRole('button',{name:'Back to home',exact:true}).click(); await expect(page.locator('.ios-home')).toBeVisible();
     expect(await page.locator('.ios-dock button').count()).toBe(4);
     await screenshot(page,info,`phone-${size.width}-home`);
     const errors=[]; page.on('pageerror',e=>errors.push(e.message));
@@ -187,7 +191,7 @@ test('Safari history, Spotlight, Launchpad and saved Settings actions', async ({
   await dock.getByRole('button',{name:'Safari',exact:true}).click();
   const safari=page.getByRole('dialog',{name:'Safari',exact:true});
   await safari.getByRole('navigation',{name:'Safari bookmarks'}).getByRole('button',{name:'About',exact:true}).click();
-  await expect(safari.getByRole('heading',{name:/ایده‌های خوب/})).toBeVisible();
+  await expect(safari.locator('.about-portfolio .pf-hero h1')).toBeVisible();
   await safari.getByRole('button',{name:'Go back',exact:true}).click();await expect(safari.getByRole('heading',{name:'Favorites',exact:true})).toBeVisible();
   await safari.getByRole('button',{name:'Go forward',exact:true}).click();
   const address=safari.getByRole('textbox',{name:'Website address'});
@@ -211,7 +215,7 @@ test('Safari history, Spotlight, Launchpad and saved Settings actions', async ({
 test('touch phone preserves the phone shell when rotated to 844×390', async ({ browser }, info) => {
   const context=await browser.newContext({baseURL:info.project.use.baseURL || process.env.MACFOLIO_TEST_URL || 'http://127.0.0.1:5180/',hasTouch:true,isMobile:true,viewport:{width:390,height:844}});
   const page=await context.newPage();
-  await page.goto('./');await expect(page.locator('.ios-home')).toBeVisible();await page.setViewportSize({width:844,height:390});
+  await page.goto('./');await page.getByRole('button',{name:'Back to home',exact:true}).click();await expect(page.locator('.ios-home')).toBeVisible();await page.setViewportSize({width:844,height:390});
   await expect(page.getByTestId('os-root')).toHaveClass(/mobile/);await expect(page.locator('.ios-dock button')).toHaveCount(4);
   const dock=await page.locator('.ios-dock').boundingBox();expect(dock.y+dock.height).toBeLessThanOrEqual(390);
   await screenshot(page,info,'phone-844-home');await open(page,'calculator',true);await page.keyboard.type('2+3=');await expect(page.getByLabel('Calculator display')).toHaveText('5');await screenshot(page,info,'phone-844-calculator');
@@ -223,7 +227,7 @@ test('phone Safari navigation, addresses and resume actions in all target sizes'
   for(const size of [{width:390,height:844},{width:375,height:667},{width:320,height:568},{width:667,height:375}]) {
     await page.setViewportSize(size);await page.goto('./');await open(page,'safari',true);
     const safari=page.locator('.safari-app');
-    await safari.getByRole('navigation',{name:'Safari bookmarks'}).getByRole('button',{name:'About',exact:true}).click();await expect(safari.getByRole('heading',{name:/ایده‌های خوب/})).toBeVisible();
+    await safari.getByRole('navigation',{name:'Safari bookmarks'}).getByRole('button',{name:'About',exact:true}).click();await expect(safari.locator('.about-portfolio .pf-hero h1')).toBeVisible();
     await safari.getByRole('button',{name:'Go back',exact:true}).click();await expect(safari.getByRole('heading',{name:'Favorites',exact:true})).toBeVisible();
     const address=safari.getByRole('textbox',{name:'Website address'});await address.fill('https://dikaasia.com/');await address.press('Enter');await expect(safari.getByRole('link',{name:'Open Website',exact:true})).toHaveAttribute('href','https://dikaasia.com/');
     const bounds=await page.locator('.ios-app-content').evaluate(el=>({width:el.clientWidth,scroll:el.scrollWidth}));expect(bounds.scroll).toBeLessThanOrEqual(bounds.width+1);
