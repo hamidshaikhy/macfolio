@@ -6,7 +6,7 @@
 
 <a href="https://macfolio-delta-one.vercel.app/"><img src="https://img.shields.io/badge/LIVE_DEMO-OPEN_MACFOLIO-32875e?style=for-the-badge&logo=vercel&logoColor=white" alt="مشاهدهٔ دمو آنلاین macfolio"></a>
 
-[پورتفولیوی مستقل](https://macfolio-delta-one.vercel.app/portfolio) · [اجرای محلی](#start) · [مستندات](#docs)
+[پورتفولیوی مستقل](https://macfolio-delta-one.vercel.app/portfolio) · [گالری تصاویر](#gallery) · [اجرای محلی](#start) · [مستندات](#docs)
 
 ![React](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)
@@ -19,20 +19,48 @@
 
 پورتفولیو در **About Hamid** باز می‌شود؛ با **Open full portfolio** می‌توانید نسخهٔ مستقل را در تب جدید ببینید.
 
-| پرترهٔ تعاملی | محیط گوشی |
+macfolio معرفی، پروژه‌ها و ابزارهای روزمره را در محیطی الهام‌گرفته از macOS و iOS کنار هم می‌گذارد. پنجره‌ها را جابه‌جا کنید، برنامه‌ای را جست‌وجو کنید یا در گوشی از چیدمان مخصوص لمس استفاده کنید. Safari از Dock باز می‌شود و پورتفولیو را در Favorites دارد.
+
+<a id="gallery"></a>
+
+## گالری تصاویر
+
+تصاویر از خود برنامه ثبت شده‌اند؛ با کلیک روی هرکدام، نسخهٔ کامل را ببینید.
+
+### پورتفولیوی تعاملی
+
+پرتره با حرکت نشانگر آشکار می‌شود و پروژه‌ها و سابقه با اسکرول تغییر می‌کنند. نسخهٔ گوشی و تبلت هم این حرکت‌ها را دارند.
+
+| پرترهٔ الکترونیکی | نمونه‌کارها |
 | :---: | :---: |
-| [<img src="docs/screenshots/portfolio-electronic.png" alt="پرترهٔ الکترونیکی پورتفولیو" width="700">](docs/screenshots/portfolio-electronic.png) | [<img src="docs/screenshots/mobile-home.png" alt="صفحهٔ خانهٔ macfolio در گوشی" width="220">](docs/screenshots/mobile-home.png) |
+| [<img src="docs/screenshots/portfolio-electronic.png" alt="پرترهٔ الکترونیکی پورتفولیو" width="700">](docs/screenshots/portfolio-electronic.png) | [<img src="docs/screenshots/portfolio-work.png" alt="نمونه‌کار Flow Studio در پورتفولیو" width="700">](docs/screenshots/portfolio-work.png) |
+
+### پروژه‌ها و فضای کار
+
+GitHub داخلی و گالری پروژه‌ها، تصاویر واقعی محصولات را همراه توضیح نقش و نتیجهٔ کار نمایش می‌دهند.
+
+| GitHub داخلی | گالری پروژه‌ها |
+| :---: | :---: |
+| [<img src="docs/screenshots/github-desktop.png" alt="GitHub داخلی macfolio" width="700">](docs/screenshots/github-desktop.png) | [<img src="docs/screenshots/projects-desktop.png" alt="پیش‌نمایش پروژهٔ Dika Asia" width="700">](docs/screenshots/projects-desktop.png) |
+
+| تقویم | ویرایشگر کد | شطرنج |
+| :---: | :---: | :---: |
+| [<img src="docs/screenshots/calendar-light.png" alt="تقویم macfolio" width="440">](docs/screenshots/calendar-light.png) | [<img src="docs/screenshots/workspace-desktop.png" alt="ویرایشگر کد و فایل‌های محلی" width="440">](docs/screenshots/workspace-desktop.png) | [<img src="docs/screenshots/chess-desktop.png" alt="شطرنج داخل macfolio" width="440">](docs/screenshots/chess-desktop.png) |
+
+### گوشی
+
+| صفحهٔ خانه | پورتفولیو در About | تماس و فوتر |
+| :---: | :---: | :---: |
+| [<img src="docs/screenshots/mobile-home.png" alt="صفحهٔ خانهٔ macfolio در گوشی" width="220">](docs/screenshots/mobile-home.png) | [<img src="docs/screenshots/portfolio-about-mobile.png" alt="پورتفولیوی About در گوشی" width="220">](docs/screenshots/portfolio-about-mobile.png) | [<img src="docs/screenshots/portfolio-mobile-contact.png" alt="فوتر پورتفولیو در گوشی" width="220">](docs/screenshots/portfolio-mobile-contact.png) |
 
 ## امکانات
 
-- پنجره‌های قابل جابه‌جایی و تغییر اندازه، Dock، Spotlight و تم روشن و تیره.
-- پورتفولیوی تعاملی، پروژه‌ها، رزومه و تماس؛ چیدمان جداگانه برای گوشی و تبلت.
-- GitHub داخلی، نمایش PDF، یادداشت، ویرایشگر کد و فایل‌های محلی.
-- تقویم، ماشین‌حساب، شطرنج و پخش موسیقی.
-
-| GitHub داخلی | تقویم |
-| :---: | :---: |
-| [<img src="docs/screenshots/github-desktop.png" alt="GitHub داخلی macfolio" width="700">](docs/screenshots/github-desktop.png) | [<img src="docs/screenshots/calendar-light.png" alt="تقویم macfolio" width="700">](docs/screenshots/calendar-light.png) |
+- **محیط دسکتاپ:** جابه‌جایی، تغییر اندازه و کوچک‌کردن پنجره‌ها؛ Dock، Spotlight، تم روشن و تیره و انتخاب والپیپر.
+- **پورتفولیو:** پرترهٔ تعاملی، معرفی، ابزارها، شش پروژه با مطالعهٔ موردی، سابقه و راه‌های تماس.
+- **رزومه:** نمایش PDF در Preview با بندانگشتی، زوم و دریافت اصل فایل.
+- **فضای کار:** Finder، یادداشت با پیش‌نمایش Markdown، ویرایشگر کد، Terminal و Trash.
+- **ابزارها:** تقویم با رویدادهای ذخیره‌شده، ماشین‌حساب با ورودی کیبورد، شطرنج و پخش موسیقی.
+- **گوشی و تبلت:** برنامه‌های قابل لمس، منوی همبرگری پورتفولیو و صحنه‌های متحرک با اسکرول.
 
 <a id="start"></a>
 
@@ -50,10 +78,33 @@ npm run dev
 ```bash
 npm run build    # خروجی در dist/
 npm run preview
+```
+
+### بررسی و تست
+
+```bash
 npm test
+npx tsc --noEmit --noUnusedLocals --noUnusedParameters
 npm run test:browser:install
 npm run test:browser
 ```
+
+تست‌های مرورگر، پوسته و پورتفولیو را در Chrome و WebKit بررسی می‌کنند. جزئیات اندازه‌های بررسی‌شده و محدودیت تست روی دستگاه واقعی در [QA](docs/QA.md) آمده است.
+
+## ساختار پروژه
+
+```text
+src/apps/          برنامه‌های محیط
+src/components/    پنجره‌ها، Dock و کنترل‌های پوسته
+src/portfolio/     پورتفولیو و صحنه‌های تعاملی
+src/lib/           محتوا و منطق مشترک
+src/state/         وضعیت محیط با Zustand
+public/assets/     تصاویر، لوگوها، قلم‌ها و رزومه
+src/test/          تست‌های واحد
+tests/browser/     تست‌های مرورگر
+```
+
+React و TypeScript رابط را می‌سازند؛ Vite بسته‌بندی، PDF.js نمایش رزومه و CodeMirror ویرایش کد را انجام می‌دهند.
 
 <a id="docs"></a>
 
