@@ -20,13 +20,15 @@
 
 </div>
 
-[![macfolio؛ صفحهٔ معرفی و دسکتاپ در حالت روشن](docs/screenshots/desktop-light.png)](docs/screenshots/desktop-light.png)
+[![پورتفولیوی انگلیسی حمید شیخی داخل About Hamid در macfolio](docs/screenshots/portfolio-about.png)](docs/screenshots/portfolio-about.png)
+
+با ورود به سایت، **About Hamid** خودکار باز می‌شود و پورتفولیوی انگلیسی را نمایش می‌دهد. دکمهٔ **Open full portfolio** در نوار عنوان، همان تجربه را در مسیر مستقل [`/portfolio`](https://macfolio-delta-one.vercel.app/portfolio) و یک تب جدید باز می‌کند. Safari از Dock در دسترس است و با صفحهٔ Favorites، شامل میان‌بر پورتفولیو، شروع می‌شود. [راهنمای پورتفولیو، فایل‌ها و تنظیم Vercel](docs/PORTFOLIO.md).
 
 ## یک فضای شخصی، چند راه برای کشف کردن
 
 macfolio پورتفولیوی **Hamid Shaikhy / حمید شیخی**، توسعه‌دهندهٔ فرانت‌اند است. معرفی، پروژه‌ها، ابزارها، رزومه و راه‌های تماس در قالب برنامه‌های یک محیط الهام‌گرفته از macOS و iOS کنار هم قرار گرفته‌اند. می‌توانید پنجره‌ها را جابه‌جا کنید، نام برنامه‌ای را جست‌وجو کنید، یادداشت بنویسید، در تقویم برنامه بچینید یا کمی شطرنج بازی کنید.
 
-متن‌های شخصی فارسی‌اند و کنترل‌های برنامه‌ها عمدتاً انگلیسی. اجرای پروژه به بک‌اند، حساب کاربری یا کلید API نیاز ندارد.
+پورتفولیوی جدید کاملاً انگلیسی است؛ متن‌های شخصی برنامه‌های قبلی فارسی‌اند و کنترل‌های برنامه‌ها عمدتاً انگلیسی. اجرای پروژه به بک‌اند، حساب کاربری یا کلید API نیاز ندارد.
 
 | کشف | کار کردن | شخصی‌سازی |
 | :--- | :--- | :--- |
@@ -38,11 +40,35 @@ macfolio پورتفولیوی **Hamid Shaikhy / حمید شیخی**، توسعه
 
 تصاویر زیر با مرورگر از **خود برنامه** ثبت شده‌اند. روی هر تصویر بزنید تا نسخهٔ کامل را ببینید. کارت‌ها و گالری پروژه‌ها از اسکرین‌شات‌های واقعی محصولات استفاده می‌کنند.
 
+### پورتفولیوی تعاملی
+
+هیرو روی دسکتاپ هم‌ارتفاع صفحه است. حرکت نشانگر، تصویر طبیعی را به پرترهٔ الکترونیکی با مدارهای آبی و چیپ‌های ابزارهای توسعه تبدیل می‌کند؛ با **Inspect portrait** تصویر از بالا به پایین کامل آشکار می‌شود. کارت‌های معرفی با اسکرول وارد می‌شوند، شمارنده‌ها افزایش پیدا می‌کنند و ماتریس ابزارها لوگوی هر فناوری را نشان می‌دهد.
+
+| هیرو و تصویر طبیعی | پرترهٔ الکترونیکی |
+| :---: | :---: |
+| [<img src="docs/screenshots/portfolio-hero.png" alt="هیروی مستقل پورتفولیو با تصویر طبیعی حمید و عنوان توسعه‌دهندهٔ فرانت‌اند" width="700">](docs/screenshots/portfolio-hero.png) | [<img src="docs/screenshots/portfolio-electronic.png" alt="پرترهٔ الکترونیکی نهایی با عینک کدنویسی و چیپ‌های ChatGPT، Codex، Claude و Cursor" width="700">](docs/screenshots/portfolio-electronic.png) |
+
+| معرفی و دریافت رزومه | ماتریس ابزارها |
+| :---: | :---: |
+| [<img src="docs/screenshots/portfolio-profile.png" alt="کارت معرفی، دریافت رزومه و آمار پورتفولیو" width="700">](docs/screenshots/portfolio-profile.png) | [<img src="docs/screenshots/portfolio-stack.png" alt="جدول ابزارهای فرانت‌اند با لوگوی هر فناوری" width="700">](docs/screenshots/portfolio-stack.png) |
+
+شش پروژه با تصاویر واقعی، شرح مسئله و لینک‌های مرتبط ارائه می‌شوند. **اسکرول** پروژهٔ فعال و مرحلهٔ سابقه را عوض می‌کند؛ کلیک روی کارت پروژه، مطالعهٔ موردی و گالری آن را باز می‌کند. این حرکت‌ها در چیدمان گوشی و تبلت هم فعال‌اند. فوتر، راه‌های تماس را کنار دکمهٔ **Explore Macfolio** قرار می‌دهد که محیط دسکتاپ را در تب جدید باز می‌کند.
+
+| نمونه‌کارها | مسیر حرفه‌ای |
+| :---: | :---: |
+| [<img src="docs/screenshots/portfolio-work.png" alt="نمونه‌کار Flow Studio در بخش پروژه‌های پورتفولیو" width="700">](docs/screenshots/portfolio-work.png) | [<img src="docs/screenshots/portfolio-journey.png" alt="نمای مرحله‌ای سابقه با خط زمانی و کارت فعال" width="700">](docs/screenshots/portfolio-journey.png) |
+
+[![فوتر نهایی با تصویر حمید، راه‌های تماس و دکمهٔ Explore Macfolio](docs/screenshots/portfolio-contact.png)](docs/screenshots/portfolio-contact.png)
+
+| پورتفولیو در گوشی | پروژه‌ها با اسکرول | سابقه با اسکرول | فوتر گوشی |
+| :---: | :---: | :---: | :---: |
+| [<img src="docs/screenshots/portfolio-about-mobile.png" alt="پورتفولیو داخل About گوشی با منوی همبرگری و لینک نسخهٔ مستقل" width="220">](docs/screenshots/portfolio-about-mobile.png) | [<img src="docs/screenshots/portfolio-mobile-work.png" alt="نمای عمودی پروژه‌ها در گوشی" width="220">](docs/screenshots/portfolio-mobile-work.png) | [<img src="docs/screenshots/portfolio-mobile-journey.png" alt="کارت فعال سابقه در گوشی" width="220">](docs/screenshots/portfolio-mobile-journey.png) | [<img src="docs/screenshots/portfolio-mobile-contact.png" alt="فوتر گوشی با تلگرام، واتس‌اپ و Explore Macfolio" width="220">](docs/screenshots/portfolio-mobile-contact.png) |
+
 ### دسکتاپ؛ روشن و تیره
 
-صفحهٔ معرفی با تصویر شخصی، متن کوتاه و کارت‌های منتخب باز می‌شود. ویجت‌های سمت چپ دسترسی مستقیم به معرفی، پروژه‌ها، رزومه و تقویم می‌دهند؛ Dock برنامه‌های روزمره را کنار هم نگه می‌دارد.
+About Hamid با پورتفولیوی انگلیسی باز می‌شود و Safari از Dock در دسترس است. ویجت‌های سمت چپ دسترسی مستقیم به معرفی، پروژه‌ها، رزومه و تقویم می‌دهند؛ Dock برنامه‌های روزمره را کنار هم نگه می‌دارد.
 
-[![صفحهٔ معرفی macfolio در حالت تیره](docs/screenshots/desktop-dark.png)](docs/screenshots/desktop-dark.png)
+[![پورتفولیو داخل About Hamid در حالت تیرهٔ macfolio](docs/screenshots/portfolio-about-dark.png)](docs/screenshots/portfolio-about-dark.png)
 
 ### پروژه‌ها و پروفایل
 
@@ -53,11 +79,11 @@ GitHub یک صفحهٔ داخلی با معرفی، لوگوی ابزارها و
 | [<img src="docs/screenshots/github-desktop.png" alt="پروفایل داخلی GitHub، ابزارها و پروژه‌های منتخب" width="700">](docs/screenshots/github-desktop.png) | [<img src="docs/screenshots/projects-desktop.png" alt="صفحهٔ Dika Asia با پیش‌نمایش رابط و توضیحات پروژه" width="700">](docs/screenshots/projects-desktop.png) |
 | معرفی و ابزارها، در یک پنجرهٔ مستقل | پیش‌نمایش رابط، انتخاب پروژه و شرح کار |
 
-پیش‌نمایش‌های About و GitHub و گالری پروژه‌ها همگی تصویر واقعی محصول را نشان می‌دهند. هر پروژه چهار نما دارد؛ تصاویر دیکا از سایت آنلاین و تصاویر پنل مالی، Flow Studio و برگ از مستندات همان پروژه‌ها ثبت شده‌اند.
+پورتفولیوی About و GitHub و گالری پروژه‌ها همگی تصویر واقعی محصول را نشان می‌دهند. تصاویر دیکا از سایت آنلاین و تصاویر پنل مالی، Flow Studio و برگ از مستندات همان پروژه‌ها ثبت شده‌اند.
 
-| پروژه‌ها در About | پروژه‌ها در GitHub |
+| پورتفولیو در About | پروژه‌ها در GitHub |
 | :---: | :---: |
-| [<img src="docs/screenshots/about-projects-desktop.png" alt="کارت‌های پروژه با اسکرین‌شات واقعی در About" width="700">](docs/screenshots/about-projects-desktop.png) | [<img src="docs/screenshots/github-projects-desktop.png" alt="پروژه‌های منتخب GitHub با تصاویر واقعی" width="700">](docs/screenshots/github-projects-desktop.png) |
+| [<img src="docs/screenshots/portfolio-about.png" alt="پورتفولیوی تعاملی در About" width="700">](docs/screenshots/portfolio-about.png) | [<img src="docs/screenshots/github-projects-desktop.png" alt="پروژه‌های منتخب GitHub با تصاویر واقعی" width="700">](docs/screenshots/github-projects-desktop.png) |
 
 | Dika Asia | Financial Panel | Flow Studio | Barg |
 | :---: | :---: | :---: | :---: |
@@ -101,7 +127,8 @@ GitHub یک صفحهٔ داخلی با معرفی، لوگوی ابزارها و
 ## امکانات
 
 - **محیط دسکتاپ:** جابه‌جایی، تغییر اندازه، بستن و کوچک‌کردن پنجره‌ها؛ دکمهٔ سبز کل فضای مرورگر را می‌گیرد و با کلیک دوباره اندازهٔ قبلی برمی‌گردد.
-- **پورتفولیو:** معرفی شخصی، سه پروژهٔ منتخب، GitHub داخلی با لوگوی ابزارها، پروفایل LinkedIn و کارت مخاطبین با لینک تماس و کپی اطلاعات.
+- **پورتفولیوی تعاملی:** نسخهٔ مستقل `/portfolio` و نمایش داخل About، پرترهٔ طبیعی و الکترونیکی، معرفی و رزومه، ماتریس ابزارها، شش پروژه با مطالعهٔ موردی و گالری، سابقهٔ متحرک و تماس؛ تغییر پروژه و سابقه با اسکرول روی دسکتاپ، گوشی و تبلت.
+- **پروفایل‌ها:** GitHub داخلی با لوگوی ابزارها، پروفایل LinkedIn و کارت مخاطبین با لینک تماس و کپی اطلاعات.
 - **رزومه:** PDF دوصفحه‌ای در Preview، با لایهٔ متن، بندانگشتی، زوم، اندازهٔ مناسب صفحه و دریافت اصل فایل.
 - **فضای کار محلی:** Finder، Notes با پیش‌نمایش Markdown، ویرایشگر CodeMirror، Terminal با دستورهای فایل و Trash برای بازگردانی فایل حذف‌شده.
 - **تقویم و محاسبه:** نمای ماه و فهرست رویدادها، افزودن و حذف رویداد، محاسبات اعشاری، درصد، تغییر علامت و ورودی کیبورد.
@@ -154,6 +181,7 @@ src/
 ├─ apps/             برنامه‌های مستقل و قابل بارگیری جداگانه
 ├─ components/       پوسته، پنجره‌ها، Dock، ویجت‌ها و پنل‌ها
 ├─ lib/              محتوای شخصی، فایل‌ها، محاسبات و موتور شطرنج
+├─ portfolio/        پورتفولیوی انگلیسی، صحنه‌های اسکرول و پرترهٔ تعاملی
 ├─ state/            وضعیت محیط، فایل‌ها و موسیقی
 └─ test/             تست‌های واحد و تعاملات React
 public/assets/       تصاویر، آیکون‌ها، قلم، رزومه و موسیقی
@@ -172,6 +200,8 @@ React و TypeScript رابط را می‌سازند، Zustand وضعیت را م
 | برنامه‌ها و ترتیب Dock | [`src/lib/apps.ts`](src/lib/apps.ts) |
 | اندازهٔ اولیهٔ پنجره‌ها | [`src/lib/windows.ts`](src/lib/windows.ts) |
 | فهرست و آیکون ابزارها | [`src/lib/toolkit.ts`](src/lib/toolkit.ts) |
+| متن، پروژه‌ها و سابقهٔ پورتفولیو | [`src/portfolio/content.ts`](src/portfolio/content.ts) |
+| چیدمان و حرکت‌های پورتفولیو | [`src/portfolio/experience.css`](src/portfolio/experience.css) و [`src/portfolio/PortfolioExperience.tsx`](src/portfolio/PortfolioExperience.tsx) |
 | والپیپرها | [`src/lib/wallpapers.ts`](src/lib/wallpapers.ts) |
 | اعلان‌های نمونه | [`src/components/NotificationCenter.tsx`](src/components/NotificationCenter.tsx) |
 | رزومه و تصویر شخصی | `public/assets/resume.pdf` و `public/assets/avatar.png` |
@@ -203,9 +233,10 @@ npm run test:browser
 ```bash
 npm run build
 npm run screenshots
+npm run screenshots:portfolio
 ```
 
-تصاویر در `docs/screenshots/` قرار می‌گیرند و همراه README وارد مخزن می‌شوند. اسکریپت با ساعت ثابت، مرورگر تازه و دادهٔ نمایشی اجرا می‌شود؛ ذخیرهٔ مرورگر شخصی را تغییر نمی‌دهد. روی Windows از Chrome نصب‌شده استفاده می‌کند؛ در محیط‌های دیگر می‌توان Chromium را با `npx playwright install chromium` آماده کرد. گزارش‌های موقت تست در `artifacts/` ذخیره می‌شوند.
+تصاویر در `docs/screenshots/` قرار می‌گیرند و همراه README وارد مخزن می‌شوند. دستور `screenshots:portfolio` تصاویر بخش جدید را می‌سازد: About، دو حالت پرتره، معرفی، ابزارها، پروژه‌ها، سابقه، فوتر، گوشی و تبلت. اسکریپت‌ها با ساعت ثابت، مرورگر تازه و دادهٔ نمایشی اجرا می‌شوند؛ ذخیرهٔ مرورگر شخصی را تغییر نمی‌دهند. روی Windows از Chrome نصب‌شده استفاده می‌کنند؛ در محیط‌های دیگر می‌توان Chromium را با `npx playwright install chromium` آماده کرد. گزارش‌های موقت تست در `artifacts/` ذخیره می‌شوند.
 
 ## میان‌برها
 

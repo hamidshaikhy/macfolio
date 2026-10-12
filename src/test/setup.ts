@@ -17,6 +17,8 @@ Object.defineProperty(window, "matchMedia", {
 });
 window.PointerEvent = MouseEvent as typeof PointerEvent;
 Element.prototype.scrollIntoView = vi.fn();
+Element.prototype.scrollTo = vi.fn();
+HTMLCanvasElement.prototype.getContext = vi.fn(() => null);
 Element.prototype.setPointerCapture = vi.fn();
 Element.prototype.releasePointerCapture = vi.fn();
 Range.prototype.getClientRects = vi.fn(() => [] as unknown as DOMRectList);

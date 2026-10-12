@@ -53,7 +53,7 @@ describe("desktop shell", () => {
   it("starts light, changes the whole appearance and never autoplays music", async () => {
     const user = userEvent.setup();
     render(<App />);
-    await screen.findByRole("heading", { name: /ایده‌های خوب/ });
+    await screen.findByRole("heading", { name: /HAMID/ });
     expect(document.documentElement.dataset.theme).toBe("light");
     expect(HTMLMediaElement.prototype.play).not.toHaveBeenCalled();
     await user.click(screen.getByRole("button", { name: "Control Center" }));
@@ -68,7 +68,7 @@ describe("desktop shell", () => {
   it("opens, minimizes, restores and closes Projects with its widget and traffic lights", async () => {
     const user = userEvent.setup();
     render(<App />);
-    await screen.findByRole("heading", { name: /ایده‌های خوب/ });
+    await screen.findByRole("heading", { name: /HAMID/ });
     await user.click(screen.getByRole("button", { name: /Selected work/ }));
     const project = await screen.findByRole("dialog", { name: "Projects" });
     expect(
@@ -99,19 +99,19 @@ describe("desktop shell", () => {
   });
   it("drags and resizes a desktop window within bounds", async () => {
     render(<App />);
-    await screen.findByRole("heading", { name: /ایده‌های خوب/ });
+    await screen.findByRole("heading", { name: /HAMID/ });
     const title = document.querySelector(".window-titlebar")!;
     const before = { ...useOS.getState().windows[0].rect };
     fireEvent.pointerDown(title, { clientX: 500, clientY: 100, button: 0 });
     fireEvent.pointerMove(title, { clientX: 580, clientY: 160 });
     fireEvent.pointerUp(title);
-    expect(useOS.getState().windows[0].rect.x).toBe(before.x + 80);
-    expect(useOS.getState().windows[0].rect.y).toBe(before.y + 60);
-    const resize = screen.getByRole("separator", { name: "Resize window" });
+    expect(useOS.getState().windows.find(w => w.app === 'about')!.rect.x).toBe(before.x + 80);
+    expect(useOS.getState().windows.find(w => w.app === 'about')!.rect.y).toBe(Math.min(before.y + 60,window.innerHeight-before.h-90));
+    const resize = within(screen.getByRole('dialog', { name: 'About Hamid' })).getByRole("separator", { name: "Resize window" });
     fireEvent.pointerDown(resize, { clientX: 900, clientY: 500, button: 0 });
     fireEvent.pointerMove(resize, { clientX: 980, clientY: 560 });
     fireEvent.pointerUp(resize);
-    expect(useOS.getState().windows[0].rect.w).toBe(before.w + 80);
+    expect(useOS.getState().windows.find(w => w.app === 'about')!.rect.w).toBe(before.w + 80);
   });
   it("prioritizes an exact app name in Spotlight and keeps it closed after Enter", async () => {
     const user = userEvent.setup(); render(<App />);
@@ -130,6 +130,8 @@ describe("iPhone shell", () => {
     render(<App />);
     expect(document.querySelector(".ios-shell")).toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Dock" })).toBeNull();
+    expect(useOS.getState().mobileApp).toBe('about');
+    await user.click(screen.getByRole('button', { name: 'Back to home' }));
     await user.click(screen.getByRole("button", { name: "Selected work" }));
     expect(
       screen.getByRole("button", { name: "Back to home" }),
@@ -149,14 +151,14 @@ describe("iPhone shell", () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(
-      screen.getByRole("button", { name: "Open Control Center" }),
+      screen.getAllByRole("button", { name: "Open Control Center" })[0],
     );
     expect(screen.getByRole("dialog", { name: "Control Center" })).toHaveClass(
       "ios-control",
     );
     await user.click(screen.getByRole("button", { name: "Toggle dark mode" }));
     expect(document.documentElement.dataset.theme).toBe("dark");
-    await user.click(screen.getByRole("button", { name: "Résumé" }));
+    await user.click(within(screen.getByRole('dialog', { name: 'Control Center' })).getByRole("button", { name: "Résumé" }));
     expect(useOS.getState().mobileApp).toBe("resume");
     expect(useOS.getState().panel).toBeNull();
   });

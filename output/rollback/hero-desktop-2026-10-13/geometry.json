@@ -1,0 +1,850 @@
+[
+  {
+    "name": "1900x900-standalone",
+    "compact": false,
+    "port": {
+      "x": 0,
+      "y": 0,
+      "width": 1900,
+      "height": 900,
+      "top": 0,
+      "right": 1900,
+      "bottom": 900,
+      "left": 0
+    },
+    "hero": {
+      "x": 0,
+      "y": 0,
+      "width": 1900,
+      "height": 1008,
+      "top": 0,
+      "right": 1900,
+      "bottom": 1008,
+      "left": 0
+    },
+    "nav": {
+      "x": 57,
+      "y": 26,
+      "width": 1786,
+      "height": 68,
+      "top": 26,
+      "right": 1843,
+      "bottom": 94,
+      "left": 57
+    },
+    "portrait": {
+      "x": 418,
+      "y": 117,
+      "width": 1007,
+      "height": 1510.5,
+      "top": 117,
+      "right": 1425,
+      "bottom": 1627.5,
+      "left": 418
+    },
+    "caption": {
+      "x": 418,
+      "y": 801,
+      "width": 1007,
+      "height": 33,
+      "top": 801,
+      "right": 1425,
+      "bottom": 834,
+      "left": 418
+    },
+    "profile": {
+      "x": 0,
+      "y": 1008,
+      "width": 1900,
+      "height": 1620,
+      "top": 1008,
+      "right": 1900,
+      "bottom": 2628,
+      "left": 0
+    },
+    "styles": {
+      ".pf-hero": {
+        "width": "1900px",
+        "height": "1008px",
+        "top": "0px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "600px"
+      },
+      ".pf-portrait-wrap": {
+        "width": "1007px",
+        "height": "1510.5px",
+        "top": "117px",
+        "left": "418px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-portrait-caption": {
+        "width": "1007px",
+        "height": "33px",
+        "top": "684px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-hero-copy": {
+        "width": "636.344px",
+        "height": "397.453px",
+        "top": "301.5px",
+        "left": "95px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "minHeight": "0px"
+      },
+      ".pf-hero-systems": {
+        "width": "323px",
+        "height": "492.062px",
+        "top": "225px",
+        "left": "1406px",
+        "transform": "none",
+        "minHeight": "0px"
+      }
+    }
+  },
+  {
+    "name": "1366x768-standalone",
+    "compact": false,
+    "port": {
+      "x": 0,
+      "y": 0,
+      "width": 1366,
+      "height": 768,
+      "top": 0,
+      "right": 1366,
+      "bottom": 768,
+      "left": 0
+    },
+    "hero": {
+      "x": 0,
+      "y": 0,
+      "width": 1366,
+      "height": 860.15625,
+      "top": 0,
+      "right": 1366,
+      "bottom": 860.15625,
+      "left": 0
+    },
+    "nav": {
+      "x": 40.96875,
+      "y": 26,
+      "width": 1284.03125,
+      "height": 68,
+      "top": 26,
+      "right": 1325,
+      "bottom": 94,
+      "left": 40.96875
+    },
+    "portrait": {
+      "x": 300.515625,
+      "y": 99.828125,
+      "width": 723.96875,
+      "height": 1085.953125,
+      "top": 99.828125,
+      "right": 1024.484375,
+      "bottom": 1185.78125,
+      "left": 300.515625
+    },
+    "caption": {
+      "x": 300.515625,
+      "y": 683.5,
+      "width": 723.96875,
+      "height": 33,
+      "top": 683.5,
+      "right": 1024.484375,
+      "bottom": 716.5,
+      "left": 300.515625
+    },
+    "profile": {
+      "x": 0,
+      "y": 860.15625,
+      "width": 1366,
+      "height": 1382.390625,
+      "top": 860.15625,
+      "right": 1366,
+      "bottom": 2242.546875,
+      "left": 0
+    },
+    "styles": {
+      ".pf-hero": {
+        "width": "1366px",
+        "height": "860.156px",
+        "top": "0px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "600px"
+      },
+      ".pf-portrait-wrap": {
+        "width": "723.969px",
+        "height": "1085.95px",
+        "top": "99.84px",
+        "left": "300.516px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-portrait-caption": {
+        "width": "723.969px",
+        "height": "33px",
+        "top": "583.68px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-hero-copy": {
+        "width": "457.5px",
+        "height": "300.453px",
+        "top": "257.28px",
+        "left": "68.2969px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "minHeight": "0px"
+      },
+      ".pf-hero-systems": {
+        "width": "232.219px",
+        "height": "384.688px",
+        "top": "192px",
+        "left": "1010.84px",
+        "transform": "none",
+        "minHeight": "0px"
+      }
+    }
+  },
+  {
+    "name": "1440x900-standalone",
+    "compact": false,
+    "port": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900,
+      "top": 0,
+      "right": 1440,
+      "bottom": 900,
+      "left": 0
+    },
+    "hero": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1008,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1008,
+      "left": 0
+    },
+    "nav": {
+      "x": 43.1875,
+      "y": 26,
+      "width": 1353.59375,
+      "height": 68,
+      "top": 26,
+      "right": 1396.78125,
+      "bottom": 94,
+      "left": 43.1875
+    },
+    "portrait": {
+      "x": 316.796875,
+      "y": 117,
+      "width": 763.1875,
+      "height": 1144.78125,
+      "top": 117,
+      "right": 1079.984375,
+      "bottom": 1261.78125,
+      "left": 316.796875
+    },
+    "caption": {
+      "x": 316.796875,
+      "y": 801,
+      "width": 763.1875,
+      "height": 33,
+      "top": 801,
+      "right": 1079.984375,
+      "bottom": 834,
+      "left": 316.796875
+    },
+    "profile": {
+      "x": 0,
+      "y": 1008,
+      "width": 1440,
+      "height": 1620,
+      "top": 1008,
+      "right": 1440,
+      "bottom": 2628,
+      "left": 0
+    },
+    "styles": {
+      ".pf-hero": {
+        "width": "1440px",
+        "height": "1008px",
+        "top": "0px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "600px"
+      },
+      ".pf-portrait-wrap": {
+        "width": "763.188px",
+        "height": "1144.78px",
+        "top": "117px",
+        "left": "316.797px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-portrait-caption": {
+        "width": "763.188px",
+        "height": "33px",
+        "top": "684px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-hero-copy": {
+        "width": "482.266px",
+        "height": "313.875px",
+        "top": "301.5px",
+        "left": "72px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "minHeight": "0px"
+      },
+      ".pf-hero-systems": {
+        "width": "244.797px",
+        "height": "390.938px",
+        "top": "225px",
+        "left": "1065.61px",
+        "transform": "none",
+        "minHeight": "0px"
+      }
+    }
+  },
+  {
+    "name": "2560x1440-standalone",
+    "compact": false,
+    "port": {
+      "x": 0,
+      "y": 0,
+      "width": 2560,
+      "height": 1440,
+      "top": 0,
+      "right": 2560,
+      "bottom": 1440,
+      "left": 0
+    },
+    "hero": {
+      "x": 0,
+      "y": 0,
+      "width": 2560,
+      "height": 1612.796875,
+      "top": 0,
+      "right": 2560,
+      "bottom": 1612.796875,
+      "left": 0
+    },
+    "nav": {
+      "x": 76.796875,
+      "y": 26,
+      "width": 2406.390625,
+      "height": 68,
+      "top": 26,
+      "right": 2483.1875,
+      "bottom": 94,
+      "left": 76.796875
+    },
+    "portrait": {
+      "x": 563.1875,
+      "y": 187.1875,
+      "width": 1356.796875,
+      "height": 2035.1875,
+      "top": 187.1875,
+      "right": 1919.984375,
+      "bottom": 2222.375,
+      "left": 563.1875
+    },
+    "caption": {
+      "x": 563.1875,
+      "y": 1281.578125,
+      "width": 1356.796875,
+      "height": 33,
+      "top": 1281.578125,
+      "right": 1919.984375,
+      "bottom": 1314.578125,
+      "left": 563.1875
+    },
+    "profile": {
+      "x": 0,
+      "y": 1612.796875,
+      "width": 2560,
+      "height": 2592,
+      "top": 1612.796875,
+      "right": 2560,
+      "bottom": 4204.796875,
+      "left": 0
+    },
+    "styles": {
+      ".pf-hero": {
+        "width": "2560px",
+        "height": "1612.8px",
+        "top": "0px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "600px"
+      },
+      ".pf-portrait-wrap": {
+        "width": "1356.8px",
+        "height": "2035.19px",
+        "top": "187.2px",
+        "left": "563.188px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-portrait-caption": {
+        "width": "1356.8px",
+        "height": "33px",
+        "top": "1094.4px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-hero-copy": {
+        "width": "857.375px",
+        "height": "502.859px",
+        "top": "482.4px",
+        "left": "128px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "minHeight": "0px"
+      },
+      ".pf-hero-systems": {
+        "width": "435.188px",
+        "height": "540px",
+        "top": "360px",
+        "left": "1894.42px",
+        "transform": "none",
+        "minHeight": "0px"
+      }
+    }
+  },
+  {
+    "name": "1440x1000-about",
+    "compact": false,
+    "port": {
+      "x": 131,
+      "y": 91,
+      "width": 1178,
+      "height": 776,
+      "top": 91,
+      "right": 1309,
+      "bottom": 867,
+      "left": 131
+    },
+    "hero": {
+      "x": 131,
+      "y": 91,
+      "width": 1178,
+      "height": 869.109375,
+      "top": 91,
+      "right": 1309,
+      "bottom": 960.109375,
+      "left": 131
+    },
+    "nav": {
+      "x": 166.328125,
+      "y": 117,
+      "width": 1107.3125,
+      "height": 68,
+      "top": 117,
+      "right": 1273.640625,
+      "bottom": 185,
+      "left": 166.328125
+    },
+    "portrait": {
+      "x": 390.15625,
+      "y": 191.875,
+      "width": 624.328125,
+      "height": 936.484375,
+      "top": 191.875,
+      "right": 1014.484375,
+      "bottom": 1128.359375,
+      "left": 390.15625
+    },
+    "caption": {
+      "x": 390.15625,
+      "y": 781.625,
+      "width": 624.328125,
+      "height": 33,
+      "top": 781.625,
+      "right": 1014.484375,
+      "bottom": 814.625,
+      "left": 390.15625
+    },
+    "profile": {
+      "x": 131,
+      "y": 960.109375,
+      "width": 1178,
+      "height": 1396.796875,
+      "top": 960.109375,
+      "right": 1309,
+      "bottom": 2356.90625,
+      "left": 131
+    },
+    "styles": {
+      ".pf-hero": {
+        "width": "1178px",
+        "height": "869.109px",
+        "top": "0px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "600px"
+      },
+      ".pf-portrait-wrap": {
+        "width": "624.328px",
+        "height": "936.484px",
+        "top": "100.88px",
+        "left": "259.156px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-portrait-caption": {
+        "width": "624.328px",
+        "height": "33px",
+        "top": "589.76px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-hero-copy": {
+        "width": "394.5px",
+        "height": "266.297px",
+        "top": "259.96px",
+        "left": "58.8906px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "minHeight": "0px"
+      },
+      ".pf-hero-systems": {
+        "width": "200.25px",
+        "height": "368.938px",
+        "top": "194px",
+        "left": "871.734px",
+        "transform": "none",
+        "minHeight": "0px"
+      }
+    }
+  },
+  {
+    "name": "390x844-standalone",
+    "compact": true,
+    "port": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "top": 0,
+      "right": 390,
+      "bottom": 844,
+      "left": 0
+    },
+    "hero": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "top": 0,
+      "right": 390,
+      "bottom": 844,
+      "left": 0
+    },
+    "nav": {
+      "x": 11.6875,
+      "y": 16,
+      "width": 366.59375,
+      "height": 56,
+      "top": 16,
+      "right": 378.28125,
+      "bottom": 72,
+      "left": 11.6875
+    },
+    "portrait": {
+      "x": -23.390625,
+      "y": 329.15625,
+      "width": 436.796875,
+      "height": 655.1875,
+      "top": 329.15625,
+      "right": 413.40625,
+      "bottom": 984.34375,
+      "left": -23.390625
+    },
+    "caption": {
+      "x": -23.390625,
+      "y": 734.265625,
+      "width": 436.796875,
+      "height": 33,
+      "top": 734.265625,
+      "right": 413.40625,
+      "bottom": 767.265625,
+      "left": -23.390625
+    },
+    "profile": {
+      "x": 0,
+      "y": 844,
+      "width": 390,
+      "height": 1708,
+      "top": 844,
+      "right": 390,
+      "bottom": 2552,
+      "left": 0
+    },
+    "styles": {
+      ".pf-hero": {
+        "width": "390px",
+        "height": "844px",
+        "top": "0px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "690px"
+      },
+      ".pf-portrait-wrap": {
+        "width": "436.797px",
+        "height": "655.188px",
+        "top": "329.156px",
+        "left": "-23.3906px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-portrait-caption": {
+        "width": "436.797px",
+        "height": "33px",
+        "top": "405.12px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-hero-copy": {
+        "width": "229.859px",
+        "height": "169.062px",
+        "top": "135.031px",
+        "left": "23.3906px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "minHeight": "0px"
+      },
+      ".pf-hero-systems": {
+        "width": "17%",
+        "height": "auto",
+        "top": "211px",
+        "left": "auto",
+        "transform": "none",
+        "minHeight": "0px"
+      }
+    }
+  },
+  {
+    "name": "768x1024-standalone",
+    "compact": true,
+    "port": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1024,
+      "top": 0,
+      "right": 768,
+      "bottom": 1024,
+      "left": 0
+    },
+    "hero": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1024,
+      "top": 0,
+      "right": 768,
+      "bottom": 1024,
+      "left": 0
+    },
+    "nav": {
+      "x": 23.03125,
+      "y": 16,
+      "width": 721.90625,
+      "height": 56,
+      "top": 16,
+      "right": 744.9375,
+      "bottom": 72,
+      "left": 23.03125
+    },
+    "portrait": {
+      "x": 207.359375,
+      "y": 184.3125,
+      "width": 514.546875,
+      "height": 771.8125,
+      "top": 184.3125,
+      "right": 721.90625,
+      "bottom": 956.125,
+      "left": 207.359375
+    },
+    "caption": {
+      "x": 207.359375,
+      "y": 860.140625,
+      "width": 514.546875,
+      "height": 33,
+      "top": 860.140625,
+      "right": 721.90625,
+      "bottom": 893.140625,
+      "left": 207.359375
+    },
+    "profile": {
+      "x": 0,
+      "y": 1024,
+      "width": 768,
+      "height": 1064,
+      "top": 1024,
+      "right": 768,
+      "bottom": 2088,
+      "left": 0
+    },
+    "styles": {
+      ".pf-hero": {
+        "width": "768px",
+        "height": "1024px",
+        "top": "0px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "650px"
+      },
+      ".pf-portrait-wrap": {
+        "width": "514.547px",
+        "height": "771.812px",
+        "top": "184.312px",
+        "left": "207.359px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-portrait-caption": {
+        "width": "514.547px",
+        "height": "33px",
+        "top": "675.84px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-hero-copy": {
+        "width": "274.688px",
+        "height": "206.969px",
+        "top": "317.438px",
+        "left": "46.0781px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "minHeight": "0px"
+      },
+      ".pf-hero-systems": {
+        "width": "17%",
+        "height": "auto",
+        "top": "256px",
+        "left": "auto",
+        "transform": "none",
+        "minHeight": "0px"
+      }
+    }
+  },
+  {
+    "name": "1024x768-standalone",
+    "compact": true,
+    "port": {
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 768,
+      "top": 0,
+      "right": 1024,
+      "bottom": 768,
+      "left": 0
+    },
+    "hero": {
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 768,
+      "top": 0,
+      "right": 1024,
+      "bottom": 768,
+      "left": 0
+    },
+    "nav": {
+      "x": 30.71875,
+      "y": 16,
+      "width": 962.546875,
+      "height": 56,
+      "top": 16,
+      "right": 993.265625,
+      "bottom": 72,
+      "left": 30.71875
+    },
+    "portrait": {
+      "x": 276.46875,
+      "y": 138.234375,
+      "width": 686.078125,
+      "height": 1029.109375,
+      "top": 138.234375,
+      "right": 962.546875,
+      "bottom": 1167.34375,
+      "left": 276.46875
+    },
+    "caption": {
+      "x": 276.46875,
+      "y": 721.90625,
+      "width": 686.078125,
+      "height": 33,
+      "top": 721.90625,
+      "right": 962.546875,
+      "bottom": 754.90625,
+      "left": 276.46875
+    },
+    "profile": {
+      "x": 0,
+      "y": 768,
+      "width": 1024,
+      "height": 1064,
+      "top": 768,
+      "right": 1024,
+      "bottom": 1832,
+      "left": 0
+    },
+    "styles": {
+      ".pf-hero": {
+        "width": "1024px",
+        "height": "768px",
+        "top": "0px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "650px"
+      },
+      ".pf-portrait-wrap": {
+        "width": "686.078px",
+        "height": "1029.11px",
+        "top": "138.234px",
+        "left": "276.469px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-portrait-caption": {
+        "width": "686.078px",
+        "height": "33px",
+        "top": "583.68px",
+        "left": "0px",
+        "transform": "none",
+        "minHeight": "0px"
+      },
+      ".pf-hero-copy": {
+        "width": "366.266px",
+        "height": "250.531px",
+        "top": "238.078px",
+        "left": "61.4375px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "minHeight": "0px"
+      },
+      ".pf-hero-systems": {
+        "width": "17%",
+        "height": "auto",
+        "top": "192px",
+        "left": "auto",
+        "transform": "none",
+        "minHeight": "0px"
+      }
+    }
+  }
+]
