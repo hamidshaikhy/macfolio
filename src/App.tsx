@@ -10,6 +10,7 @@ import {
   Plus,
   FileText,
 } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react";
 import { useOS } from "./state/os";
 import { useFiles } from "./state/files";
 import { useMobile, useReducedMotion } from "./lib/hooks";
@@ -263,6 +264,7 @@ export default function App() {
           </button>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
