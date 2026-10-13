@@ -27,6 +27,9 @@ test('compact calculator, informational notifications and a themed calendar', as
   await expect(page.locator('.battery-fill')).toHaveAttribute('fill','#34c759');
   await expect(page.locator('.battery-bolt')).toBeVisible();
   await page.keyboard.press('Escape');
+  await page.getByRole('button',{name:'Control Center',exact:true}).click();
+  await page.getByRole('button',{name:'Toggle dark mode',exact:true}).click();
+  await page.keyboard.press('Escape');
   await dock.getByRole('button',{name:'Calendar',exact:true}).click();
   expect(await page.locator('.calendar-app').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(255, 255, 255)');
   await page.getByRole('button',{name:'New Event',exact:true}).click();

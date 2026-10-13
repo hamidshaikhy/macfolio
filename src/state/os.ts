@@ -71,7 +71,7 @@ export const useOS = create<OSState>()(
       wifi: true, bluetooth: false, airdrop: true, wallpaper: "dynamic",
       toggleConnection: key => set(s => ({ [key]: !s[key] })),
       setWallpaper: wallpaper => set({ wallpaper }),
-      theme: "light",
+      theme: "dark",
       brightness: 1,
       volume: 0.55,
       focusMode: false,
