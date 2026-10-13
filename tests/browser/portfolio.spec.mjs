@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 const names = ['Flow Studio', 'Barg', 'Tanpoosh', 'Dika Asia', 'Financial Panel', 'Macfolio'];
 const problems = new WeakMap();
 test.beforeEach(async ({ page }) => {
+  await page.context().route('**/_vercel/insights/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
   const found = []; problems.set(page, found);
   page.on('pageerror', error => found.push(error.message));
   page.on('response', response => { if (response.url().includes('127.0.0.1') && response.status() >= 400) found.push(`${response.status()} ${response.url()}`); });

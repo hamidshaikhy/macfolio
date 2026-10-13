@@ -8,7 +8,11 @@ const smallHardware = asset('assets/portfolio/hamid-hardware-512-v6.webp');
 
 // Both textures share a canvas and pose. HTML layers survive context loss.
 const vertex = `attribute vec2 position; varying vec2 uv; void main(){uv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`;
-const fragment = `precision mediump float;
+const fragment = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
 uniform sampler2D human; uniform sampler2D hardware;
 uniform vec2 pointer; uniform float aspect; uniform float reveal; uniform float locked; uniform float automatic;
 uniform vec2 parallax; varying vec2 uv;
@@ -24,7 +28,7 @@ void main(){
  float wipe=(1.-smoothstep(locked-.015,locked+.015,1.-uv.y))*step(.001,locked);
  if(locked>.999)wipe=1.;
  float mask=max(wipe,max(mix(roundMask,band,automatic)*reveal*(1.-liquidActive*.8),liquid*liquidActive));
- gl_FragColor=vec4(mix(base.rgb,tech.rgb,mask),base.a);
+ gl_FragColor=mix(base,tech,mask);
 }`;
 
 export default function Portrait({ reducedMotion }: { reducedMotion: boolean }) {
@@ -76,6 +80,9 @@ export default function Portrait({ reducedMotion }: { reducedMotion: boolean }) 
   useEffect(() => {
     const element=canvas.current, host=frame.current;
     if(!element||!host) return;
+    // Native image compositing avoids device-specific transparent WebGL texture
+    // artifacts on touch GPUs. The image layers keep the same reveal and wipe.
+    if(window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     let disposed=false;
     let gl: WebGLRenderingContext | null=null;
     let observer: ResizeObserver | undefined;
@@ -85,7 +92,9 @@ export default function Portrait({ reducedMotion }: { reducedMotion: boolean }) 
     const shaders: WebGLShader[]=[];
     const fallback=()=>{setWebglReady(false);delete element.dataset.ready;render.current=null;};
     try {
-      gl=element.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false,preserveDrawingBuffer:false});
+      // Keep the upload, shader output and browser compositor in premultiplied
+      // alpha throughout; straight-alpha conversion damages soft edges on iOS.
+      gl=element.getContext('webgl',{alpha:true,premultipliedAlpha:true,antialias:false,preserveDrawingBuffer:true});
       if(gl) {
         const context=gl;
         const compile=(type:number,source:string)=>{
@@ -103,13 +112,15 @@ export default function Portrait({ reducedMotion }: { reducedMotion: boolean }) 
         const uniforms=Object.fromEntries(['pointer','aspect','reveal','locked','parallax','automatic','liquidActive'].map(name=>[name,context.getUniformLocation(program!,name)]));
         const fieldUniform=context.getUniformLocation(program!,'field[0]');
         const images=[new Image(),new Image()];
+        const useSmall=host.clientWidth*(window.devicePixelRatio||1)<=512;
         Promise.all(images.map((image,index)=>new Promise<void>((resolve,reject)=>{
-          image.onload=()=>resolve();image.onerror=reject;image.src=window.innerWidth<850?[smallNatural,smallHardware][index]:[naturalPortrait,hardwarePortrait][index];
+          image.onload=()=>resolve();image.onerror=reject;image.src=useSmall?[smallNatural,smallHardware][index]:[naturalPortrait,hardwarePortrait][index];
         }))).then(()=>{
           if(disposed||context.isContextLost()) return;
           images.forEach((image,index)=>{
             const texture=context.createTexture()!;textures.push(texture);context.activeTexture(context.TEXTURE0+index);context.bindTexture(context.TEXTURE_2D,texture);
             context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL,true);
+            context.pixelStorei(context.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);
             context.texParameteri(context.TEXTURE_2D,context.TEXTURE_MIN_FILTER,context.LINEAR);context.texParameteri(context.TEXTURE_2D,context.TEXTURE_MAG_FILTER,context.LINEAR);
             context.texParameteri(context.TEXTURE_2D,context.TEXTURE_WRAP_S,context.CLAMP_TO_EDGE);context.texParameteri(context.TEXTURE_2D,context.TEXTURE_WRAP_T,context.CLAMP_TO_EDGE);
             context.texImage2D(context.TEXTURE_2D,0,context.RGBA,context.RGBA,context.UNSIGNED_BYTE,image);
@@ -127,7 +138,7 @@ export default function Portrait({ reducedMotion }: { reducedMotion: boolean }) 
           };
           const resize=()=>{
             const width=host.clientWidth;if(!width)return;
-            const pixelWidth=Math.round(Math.min(1200,width*Math.min(window.devicePixelRatio||1,1.5)));
+            const pixelWidth=Math.round(Math.min(1440,width*Math.min(window.devicePixelRatio||1,2)));
             element.width=pixelWidth;element.height=Math.round(pixelWidth*1.5);context.viewport(0,0,element.width,element.height);
             render.current?.();
           };
@@ -172,7 +183,7 @@ export default function Portrait({ reducedMotion }: { reducedMotion: boolean }) 
     target.current={x:(event.clientX-box.left)/box.width,y:(event.clientY-box.top)/(box.width*1.5),reveal:1};animate();
   }
   return <div className="pf-portrait-wrap">
-    <div className={`pf-portrait ${webglReady?'is-webgl':''} ${locked?'is-inspected':''}`} ref={frame} onPointerMove={follow}
+    <div className={`pf-portrait ${webglReady?'is-webgl':''} ${locked?'is-inspected':''}`} data-renderer={webglReady?'webgl':'image'} ref={frame} onPointerMove={follow}
       onPointerLeave={()=>{target.current.reveal=0;animate();}} onClick={()=>setLocked(!locked)}>
       <img className="pf-photo" src={naturalPortrait} srcSet={`${smallNatural} 512w, ${naturalPortrait} 1024w`} sizes="(max-width: 700px) 90vw, 53vw" width="1024" height="1536" alt="Hamid Shaikhy, full upper-body portrait" fetchPriority="high" />
       <div className="pf-circuit" aria-hidden="true"><img src={hardwarePortrait} srcSet={`${smallHardware} 512w, ${hardwarePortrait} 1024w`} sizes="(max-width: 700px) 90vw, 53vw" width="1024" height="1536" alt="" /></div>

@@ -65,6 +65,7 @@ try {
   const page = await setup(desktop);
   await page.locator('.app-about .pf-experience[data-measured="true"]').waitFor();
   await resizeWindow(page,1180,730);
+  await theme(page, 'light');
   await screenshot(page, 'desktop-light');
   await theme(page, 'dark');
   await screenshot(page, 'desktop-dark');

@@ -29,6 +29,7 @@ async function screenshot(page, testInfo, name) { await fs.mkdir('artifacts/qa',
 async function cleanStart(page) { await page.goto('./'); await expect(page.locator('.about-portfolio .pf-hero h1')).toBeVisible(); }
 const runtimeProblems = new WeakMap();
 test.beforeEach(async ({ page }) => {
+  await page.context().route('**/_vercel/insights/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
   const problems=[]; runtimeProblems.set(page,problems);
   page.on('pageerror',error=>problems.push(error.message));
   page.on('response',response=>{if(response.status()>=400 && response.url().startsWith(new URL(page.url()).origin)) problems.push(`${response.status()} ${response.url()}`);});
@@ -44,7 +45,7 @@ test.afterEach(async ({ page }) => { expect(runtimeProblems.get(page) || [], 'pa
 
 test('desktop appearance, window lifecycle, magnification and viewport bounds', async ({ page }, info) => {
   await cleanStart(page);
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   const dock = page.getByRole('navigation', { name: 'Dock', exact: true });
   await dock.getByRole('button', { name: 'Calculator', exact: true }).hover();
   await page.waitForTimeout(350);
@@ -67,9 +68,9 @@ test('desktop appearance, window lifecycle, magnification and viewport bounds', 
   expect((await win.boundingBox()).y).toBeGreaterThan(before.y);
   await page.getByRole('button', { name: 'Close Calculator', exact: true }).click();
   await page.getByRole('button', { name: 'Control Center', exact: true }).click();
-  await page.getByRole('button', { name: 'Toggle dark mode', exact: true }).click(); await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await screenshot(page, info, 'desktop-dark'); await page.keyboard.press('Escape');
-  await page.reload(); await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.getByRole('button', { name: 'Toggle dark mode', exact: true }).click(); await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await screenshot(page, info, 'desktop-light'); await page.keyboard.press('Escape');
+  await page.reload(); await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.setViewportSize({ width: 800, height: 650 });
   const narrowDock = await dock.boundingBox(); expect(narrowDock.x).toBeGreaterThanOrEqual(0); expect(narrowDock.x + narrowDock.width).toBeLessThanOrEqual(800);
   await dock.getByRole('button', { name: 'Calculator', exact: true }).hover(); await page.waitForTimeout(250);

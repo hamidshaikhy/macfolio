@@ -13,7 +13,7 @@ let browser;
 async function ready(page){
   await page.locator('.pf-experience[data-measured="true"]').waitFor();
   await page.evaluate(()=>document.fonts.ready);
-  await page.locator('.pf-portrait-canvas[data-ready="true"]').waitFor();
+  await page.waitForFunction(()=>{const image=document.querySelector('.pf-photo');return image?.complete&&image.naturalWidth>0;});
   await page.waitForTimeout(1000);
 }
 async function capture(page,name){
@@ -41,6 +41,9 @@ try{
   page.on('pageerror',error=>errors.push(error.message));
   await page.clock.setFixedTime(new Date('2026-10-13T09:00:00Z'));
   await page.goto(url);await ready(page);
+  await page.getByRole('button',{name:'Control Center',exact:true}).click();
+  await page.getByRole('button',{name:'Toggle dark mode',exact:true}).click();
+  await page.getByRole('button',{name:'Control Center',exact:true}).click();
   await capture(page,'portfolio-about');
   await page.getByRole('button',{name:'Control Center',exact:true}).click();
   await page.getByRole('button',{name:'Toggle dark mode',exact:true}).click();
