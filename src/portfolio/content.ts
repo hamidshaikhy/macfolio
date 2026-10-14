@@ -86,16 +86,63 @@ export const selectedWork: PortfolioProject[] = [
     shots: [shot('finance', 0, 'The financial picture', 'A dashboard of financial indicators, cash flow and projects using sample data.'), shot('finance', 1, 'From account to transaction', 'Search and pagination support detailed account inspection.'), shot('finance', 3, 'Reports that travel', 'Review summaries and download a multi-sheet Excel report.')],
   },
   {
+    id: 'todo-list', title: 'To Do List', category: 'Android app & daily planner PWA', status: 'ANDROID APK + PWA', accent: '#e5bba9',
+    headline: 'A clearer day, on web and Android.',
+    summary: 'A Persian daily planner with tasks, a Jalali calendar and focus timers. Available as a web PWA and a native Android app.',
+    role: 'Product design, web & native app development',
+    problem: 'Task and timer behavior must stay dependable across web and Android while each platform uses its own interface and local storage.',
+    contribution: 'I built the React web app and a native React Native / Expo Android interface, sharing TypeScript task, date and timer logic between them.',
+    decisions: ['IndexedDB stores web tasks; SQLite stores Android tasks. Both work locally without an account or server.', 'Timers recover from stored deadlines when the app resumes; background alarms are not guaranteed.', 'The installable web app caches its interface offline. A standalone Android demo APK bundles the app runtime.'],
+    features: ['Task editing, notes, due dates and completion', 'Persian weekly calendar and overdue tasks', 'Customizable focus timer with pause and resume', 'Installable PWA, Android APK and web JSON backup'],
+    stack: ['React Native', 'Expo', 'React', 'TypeScript', 'PWA', 'SQLite', 'IndexedDB'], repo: original('todo-list').repo,
+    shots: [shot('todo-list', 0, 'Plan the day', 'The actual web app, with sample tasks, a Persian calendar, focus timer and Android APK download entry.'), shot('todo-list', 1, 'A quieter workspace', 'The web planner in dark mode, with the same task and timer controls.'), shot('todo-list', 2, 'The web app on your phone', 'Responsive PWA layout. This screenshot shows the web app, not the native Android interface.')],
+  },
+  {
+    id: 'hamnava', title: 'Hamnava', category: 'Music streaming PWA', status: 'INSTALLABLE MUSIC PWA', accent: '#c5dd54',
+    headline: 'Music that stays with you.',
+    summary: 'A Persian music PWA with real Audius tracks, playlists and a personal library, in a charcoal-and-lime interface.',
+    role: 'Product design & PWA development',
+    problem: 'Playback must continue across pages while search, queues and saved collections stay coherent in a touch-friendly RTL interface.',
+    contribution: 'I built the React and TypeScript interface, Audius integration, audio queue, Media Session controls and browser-local accounts and collections.',
+    decisions: ['Audius track and playlist names, artwork and creator attribution are preserved.', 'IndexedDB keeps accounts and libraries on the device; there is no server login or cross-device sync.', 'The service worker caches the app shell. Streaming needs internet; tracks are not downloaded or cached.'],
+    features: ['Track and artist search, public playlists', 'Continuous playback, queue, shuffle and repeat', 'Liked tracks and personal or saved playlists', 'Installable PWA and supported Media Session controls'],
+    stack: ['React', 'TypeScript', 'PWA', 'Audius API', 'IndexedDB', 'Media Session'], repo: original('hamnava').repo,
+    shots: [shot('hamnava', 0, 'A home for listening', 'Actual Audius music and artwork in the home view, with persistent playback controls.'), shot('hamnava', 1, 'Keep the playlist intact', 'Original playlist information, creator attribution, track list and save controls.'), shot('hamnava', 2, 'Your own collection', 'A demonstration library stored locally in the browser.'), shot('hamnava', 4, 'Listening on a smaller screen', 'Mobile navigation and playback controls in the installable PWA.')],
+  },
+  {
     id: 'macfolio', title: 'Macfolio', category: 'Interactive desktop portfolio', status: 'PERSONAL PROJECT', accent: '#b9d4b9',
     headline: 'A portfolio you can work inside.',
     summary: 'A familiar desktop, reimagined for the web. Working apps, a shared file system and a separate mobile experience.',
     role: 'Design, architecture & front-end development',
     problem: 'A desktop-inspired portfolio needs meaningful interactions and usable mobile behavior behind its familiar visual shell.',
-    contribution: 'I built the window manager, persistent virtual file system, app search, PDF viewer and touch-oriented mobile shell. This portfolio is also its Safari homepage.',
+    contribution: 'I built the window manager, persistent virtual file system, app search, PDF viewer and touch-oriented mobile shell. This portfolio runs inside About and as a standalone page.',
     decisions: ['Apps load on demand to keep the shell lightweight.', 'Shared browser-persisted state connects Finder, Notes, Code and Terminal.', 'Desktop windows and mobile full-screen apps use the same underlying app components.'],
     features: ['Drag, resize, minimize and maximize windows', 'Shared files, notes, code editor and terminal', 'PDF résumé viewer, search and chess', 'Persistent themes and mobile app navigation'],
     stack: ['React', 'TypeScript', 'Zustand', 'CodeMirror', 'PDF.js', 'Vite'], repo: 'https://github.com/hamidshaikhy/macfolio', live: asset(''),
     shots: [{ src: asset('assets/portfolio/macfolio.webp'), title: 'A personal workspace', caption: 'The actual Macfolio desktop, with working apps and familiar window controls.' }],
+  },
+];
+
+export type JourneyEntry = {
+  id: string; date: string; title: string; company: string; url?: string;
+  kind: string; points: string[];
+};
+export const journeyEntries: JourneyEntry[] = [
+  {
+    id: 'apps', date: 'INDEPENDENT PROJECTS', title: 'App Developer', company: 'To Do List · Hamnava', kind: 'ANDROID & PWA DEVELOPMENT',
+    points: ['Native React Native / Expo Android planner, delivered as an installable APK.', 'Installable PWAs for daily planning and Audius music streaming.', 'Local storage, offline app shells, shared task logic and media controls.'],
+  },
+  {
+    id: 'experience', date: 'JUL 2026 — OCT 2026', title: 'Front-End Developer', company: 'Dika Asia · Tehran · Contract', url: 'https://dikaasia.com/', kind: 'PROFESSIONAL EXPERIENCE',
+    points: ['Corporate websites and internal finance, project and operations interfaces.', 'Reusable React components, responsive layouts and RTL support.', 'Django REST API integration, data tables, filtering and Excel reporting.'],
+  },
+  {
+    id: 'education', date: '2022 — 2026', title: 'B.Sc. in Computer Engineering', company: 'Islamic Azad University · Tabriz', kind: 'EDUCATION',
+    points: ['Software Engineering', 'Learning through practical projects, from web interfaces to application architecture.'],
+  },
+  {
+    id: 'independent', date: 'INDEPENDENT PROJECTS', title: 'Building Personal Products', company: 'Flow Studio · Barg · Macfolio', kind: 'PERSONAL PRODUCT DEVELOPMENT',
+    points: ['A visual workflow editor with execution, validation and persistent state.', 'A Persian and English résumé builder with a live A4 preview.', 'An interactive desktop with working apps and a shared file system.'],
   },
 ];
 

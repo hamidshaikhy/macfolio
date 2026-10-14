@@ -35,7 +35,7 @@ export const apps: {
     id: "projects",
     name: "Projects",
     icon: "folder",
-    keywords: "dika asia finance flow studio barg resume builder tanpoosh menswear store تن‌پوش تن پوش فروشگاه استایل رزومه پروژه",
+    keywords: "dika asia finance flow studio barg resume builder tanpoosh menswear store to do list todo task planner android apk pwa hamnava music هم‌نوا همنوا هم نوا برنامه‌ریز کارها موسیقی اندروید تن‌پوش تن پوش فروشگاه استایل رزومه پروژه",
   },
   { id: "notes", name: "Notes", icon: "notes", keywords: "write یادداشت" },
   {

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
-const names = ['Flow Studio', 'Barg', 'Tanpoosh', 'Dika Asia', 'Financial Panel', 'Macfolio'];
+const names = ['Flow Studio', 'Barg', 'Tanpoosh', 'Dika Asia', 'Financial Panel', 'To Do List', 'Hamnava', 'Macfolio'];
 const problems = new WeakMap();
 test.beforeEach(async ({ page }) => {
   await page.context().route('**/_vercel/insights/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
@@ -262,19 +262,19 @@ test('profile assembles on scroll, counters count up and journey changes with sc
   const before=await page.locator('.pf-bio-card').evaluate(el=>getComputedStyle(el).transform);
   await navigate(page,'Profile');
   await expect.poll(()=>page.locator('.pf-bio-card').evaluate(el=>getComputedStyle(el).transform)).not.toBe(before);
-  for(const target of [6,12,2,99])await expect(page.locator(`[data-counter-target="${target}"]`)).toHaveText(String(target));
+  for(const target of [8,12,2,99])await expect(page.locator(`[data-counter-target="${target}"]`)).toHaveText(String(target));
   await screenshot(page,info,'assembled-profile');
   await navigate(page,'Journey');
-  await expect(page.locator('.pf-journey-card.is-active h3')).toHaveText('Front-End Developer');
+  await expect(page.locator('.pf-journey-card.is-active h3')).toHaveText('App Developer');
   await page.locator('.pf-scroll').evaluate(el=>{
     const scene=el.querySelector('#journey'),start=scene.getBoundingClientRect().top-el.getBoundingClientRect().top+el.scrollTop;
-    el.scrollTop=start-96+(scene.offsetHeight-el.clientHeight+96)*.45;
+    el.scrollTop=start-96+(scene.offsetHeight-el.clientHeight+96)*.625;
   });
   await expect(page.locator('.pf-journey-card.is-active h3')).toHaveText('B.Sc. in Computer Engineering');
   await expect(page.locator('.pf-journey-card.is-active')).not.toHaveAttribute('inert');
   await page.getByRole('button',{name:'Next journey entry'}).click();
   await expect(page.locator('.pf-journey-card.is-active h3')).toHaveText('Building Personal Products');
-  await expect(page.locator('.pf-node-in')).toHaveText('03');
+  await expect(page.locator('.pf-node-in')).toHaveText('04');
   await expect(page.locator('.pf-node-in')).toHaveCSS('animation-name','pf-node-in');
   await expect(page.locator('.pf-node-out')).toHaveCSS('animation-name','pf-node-out');
   await expect(page.locator('.pf-journey-card.is-active h3')).toHaveCSS('font-weight','700');

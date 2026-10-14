@@ -3,7 +3,7 @@ import { ArrowUpRight, Check, ChevronLeft, ChevronRight, Copy, Download, Github 
 import { profile } from '../lib/content';
 import { asset } from '../lib/assets';
 import { useReducedMotion } from '../lib/hooks';
-import { isSection, portfolioPath, resumePath, sections, selectedWork, skills, type SectionId } from './content';
+import { isSection, journeyEntries, portfolioPath, resumePath, sections, selectedWork, skills, type SectionId } from './content';
 import Portrait, { naturalPortrait } from './Portrait';
 import CountUp from './CountUp';
 import ExperienceCursor from './ExperienceCursor';
@@ -13,9 +13,9 @@ import './experience.css';
 const CaseStudy = lazy(() => import('./CaseStudy'));
 const number = (n:number) => String(n).padStart(2,'0');
 const clamp = (n:number) => Math.max(0,Math.min(1,n));
-const sceneColors = ['#dff9ee','#f3e8cb','#20204c','#eadbf4','#172e31','#e1f4ed'];
-const darkScenes = [false,false,true,false,true,false];
-const journeyCount=3;
+const sceneColors = ['#dff9ee','#f3e8cb','#20204c','#eadbf4','#172e31','#f5ece3','#172016','#e1f4ed'];
+const darkScenes = [false,false,true,false,true,false,true,false];
+const journeyCount=journeyEntries.length;
 type Props = { mode:'standalone'|'embedded'; section?:string; onNavigate?:(section:SectionId)=>void };
 
 export default function PortfolioExperience({mode,section='',onNavigate}:Props) {
@@ -201,7 +201,7 @@ export default function PortfolioExperience({mode,section='',onNavigate}:Props) 
   }
   const link=(id:SectionId,label:React.ReactNode=id)=><a href={`${portfolioPath}#${id}`} onClick={event=>navigate(event,id)}>{label}</a>;
   const statCards=[
-    {value:selectedWork.length,label:'projects',copy:'Workflow tools, websites and product interfaces. Real screenshots. Real decisions.'},
+    {value:selectedWork.length,label:'projects',copy:'Websites, product interfaces and installable apps. Real screenshots. Real decisions.'},
     {value:skills.length,label:'technologies',copy:'React, Next.js, TypeScript and a connected front-end toolkit.'},
     {value:2,label:'languages',copy:'Persian and English interfaces, with careful RTL and LTR support.'},
     {value:99,suffix:'%',label:'satisfaction',copy:'Quality-focused delivery, with care for the details and the people using the product.'},
@@ -227,7 +227,7 @@ export default function PortfolioExperience({mode,section='',onNavigate}:Props) 
 
         <section className="pf-profile pf-section" id="profile" data-section="profile"><div className="pf-profile-stage pf-stage">
           <div className="pf-profile-intro"><span className="pf-eyebrow">02 / DEVELOPER PROFILE</span><h2>Built for the space<br/><span>between idea and interface.</span></h2></div>
-          <div className="pf-profile-grid"><article className="pf-bio-card pf-assemble"><h3>I'm Hamid Shaikhy</h3><p>I'm a <strong>Front-End Developer</strong> building dependable interfaces with React, Next.js and TypeScript. I turn complex ideas into clear, responsive products.</p><p>My work spans workflow tools, résumé builders and data-driven panels. Based in Tehran, I bring design and engineering together.</p><a className="pf-download" href={resumePath} download="Hamid-Shaikhy-Resume.pdf" aria-label="Download résumé">Download résumé <Download size={19}/></a></article>
+          <div className="pf-profile-grid"><article className="pf-bio-card pf-assemble"><h3>I'm Hamid Shaikhy</h3><p>I'm a <strong>Front-End Developer</strong> building dependable interfaces with React, Next.js and TypeScript. I turn complex ideas into clear, responsive products.</p><p>My work spans workflow tools, résumé builders, data-driven panels and installable apps. Based in Tehran, I bring design and engineering together.</p><a className="pf-download" href={resumePath} download="Hamid-Shaikhy-Resume.pdf" aria-label="Download résumé">Download résumé <Download size={19}/></a></article>
             {statCards.map((stat,i)=><article key={stat.label} className="pf-stat-card pf-assemble" style={{'--card-index':i} as CSSProperties}><div className="pf-stat-value"><strong><CountUp value={stat.value} root={scroll} reducedMotion={reducedMotion}/><small>{stat.suffix||'+'}</small></strong><span>{stat.label}</span></div><p>{stat.copy}</p></article>)}
           </div>
         </div></section>
@@ -253,12 +253,10 @@ export default function PortfolioExperience({mode,section='',onNavigate}:Props) 
           </div></div>
         </section>
 
-        <section ref={journey} className="pf-journey pf-section" id="journey" data-section="journey"><div className="pf-journey-stage pf-stage"><div className="pf-journey-heading"><span className="pf-eyebrow">05 / CAREER CONSTELLATION</span><h2>Growth measured<br/><span className="pf-outline">in things built.</span></h2></div>
+        <section ref={journey} className="pf-journey pf-section" id="journey" data-section="journey" style={{'--journey-count':journeyCount} as CSSProperties}><div className="pf-journey-stage pf-stage"><div className="pf-journey-heading"><span className="pf-eyebrow">05 / CAREER CONSTELLATION</span><h2>Growth measured<br/><span className="pf-outline">in things built.</span></h2></div>
           <div className="pf-timeline" tabIndex={0} aria-label="Experience and education. Use up and down arrows to change entries." onKeyDown={event=>{if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();chooseJourney(activeJourney+(event.key==='ArrowDown'?1:-1));}}}>
             <div className="pf-timeline-line" aria-hidden="true"/><div className="pf-timeline-orbit" aria-hidden="true" key={`node-${activeJourney}`}><i className="pf-node-out"/><span className="pf-node-in">{number(activeJourney+1)}</span></div>
-            <article className={`pf-experience-card pf-journey-card ${activeJourney===0?'is-active':''}`} style={{'--node-offset':-activeJourney} as CSSProperties} inert={pinned&&activeJourney!==0} aria-hidden={pinned&&activeJourney!==0?true:undefined}><time>JUL 2026 — OCT 2026</time><h3>Front-End Developer</h3><a className="pf-company" href="https://dikaasia.com/" target="_blank" rel="noopener noreferrer">Dika Asia · Tehran · Contract <ArrowUpRight size={13}/></a><ul><li>Corporate websites and internal finance, project and operations interfaces.</li><li>Reusable React components, responsive layouts and RTL support.</li><li>Django REST API integration, data tables, filtering and Excel reporting.</li></ul><span className="pf-journey-kind">PROFESSIONAL EXPERIENCE</span></article>
-            <article className={`pf-education pf-journey-card ${activeJourney===1?'is-active':''}`} style={{'--node-offset':1-activeJourney} as CSSProperties} inert={pinned&&activeJourney!==1} aria-hidden={pinned&&activeJourney!==1?true:undefined}><time>2022 — 2026</time><h3>B.Sc. in Computer Engineering</h3><p className="pf-company">Islamic Azad University · Tabriz</p><ul><li>Software Engineering</li><li>Learning through practical projects, from web interfaces to application architecture.</li></ul><span className="pf-journey-kind">EDUCATION</span></article>
-            <article className={`pf-independent pf-journey-card ${activeJourney===2?'is-active':''}`} style={{'--node-offset':2-activeJourney} as CSSProperties} inert={pinned&&activeJourney!==2} aria-hidden={pinned&&activeJourney!==2?true:undefined}><span className="pf-journey-date">INDEPENDENT PROJECTS</span><h3>Building Personal Products</h3><p className="pf-company">Flow Studio · Barg · Macfolio</p><ul><li>A visual workflow editor with execution, validation and persistent state.</li><li>A Persian and English résumé builder with a live A4 preview.</li><li>An interactive desktop with working apps and a shared file system.</li></ul><span className="pf-journey-kind">PERSONAL PRODUCT DEVELOPMENT</span></article>
+            {journeyEntries.map((entry,i)=><article key={entry.id} className={`pf-journey-${entry.id} pf-journey-card ${activeJourney===i?'is-active':''}`} style={{'--node-offset':i-activeJourney} as CSSProperties} inert={pinned&&activeJourney!==i} aria-hidden={pinned&&activeJourney!==i?true:undefined}><span className="pf-journey-date">{entry.date}</span><h3>{entry.title}</h3>{entry.url?<a className="pf-company" href={entry.url} target="_blank" rel="noopener noreferrer">{entry.company} <ArrowUpRight size={13}/></a>:<p className="pf-company">{entry.company}</p>}<ul>{entry.points.map(point=><li key={point}>{point}</li>)}</ul><span className="pf-journey-kind">{entry.kind}</span></article>)}
           </div><div className="pf-journey-controls"><div><button aria-label="Previous journey entry" disabled={activeJourney===0} onClick={()=>chooseJourney(activeJourney-1)}>↑ PREVIOUS NODE</button><button aria-label="Next journey entry" disabled={activeJourney===journeyCount-1} onClick={()=>chooseJourney(activeJourney+1)}>NEXT NODE ↓</button></div><span>ACTIVE NODE <strong>{number(activeJourney+1)}</strong> / {number(journeyCount)}</span></div>
         </div></section>
 
