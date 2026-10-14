@@ -90,8 +90,8 @@
 .pf-scenes .pf-stage { position:sticky; top:0; height:var(--port-height); padding:calc(var(--port-height)*.18) 5% calc(var(--port-height)*.1); }
 .pf-scenes .pf-profile { height:calc(var(--port-height)*1.8); }
 .pf-scenes .pf-stack { height:calc(var(--port-height)*1.25); }
-.pf-scenes .pf-work { height:calc(var(--port-height)*1.7); }
-.pf-scenes .pf-journey { height:calc(var(--port-height)*2.7); }
+.pf-scenes .pf-work { height:calc(var(--port-height)*(1 + var(--project-count,6)*.1166667)); }
+.pf-scenes .pf-journey { height:calc(var(--port-height)*(1 + (var(--journey-count,3) - 1)*.85)); }
 .pf-profile { background:#f4f4f4; }
 .pf-profile-stage { perspective:1500px; }
 .pf-scenes .pf-profile-stage { overflow:hidden; }
@@ -211,7 +211,7 @@
 .pf-journey-card li { position:relative; padding-left:11px; color:#738e80; font-size:clamp(12px,1.15cqw,22px); line-height:1.6; }
 .pf-journey-card li::before { content:'\2022'; position:absolute; left:0; color:#508269; }
 .pf-journey-kind { font:6px var(--pf-mono); letter-spacing:.07em; color:#38604c; }
-.pf-education:not(.pf-scenes .pf-education) { margin-top:20px; }
+.pf-journey-education:not(.pf-scenes .pf-journey-education) { margin-top:20px; }
 .pf-journey-controls { display:flex; justify-content:space-between; color:#667e70; margin:30px 0 0 27%; font:7px var(--pf-mono); }
 .pf-scenes .pf-journey-controls { position:absolute; left:40%; right:8%; bottom:12%; margin:0; }
 .pf-journey-controls > div { display:flex; gap:20px; }
@@ -436,8 +436,8 @@
 .pf-compact .pf-stat-value { flex-direction:row; align-items:baseline; justify-content:space-between; }
 .pf-compact .pf-stat-value > span { margin-left:auto; text-align:right; }
 .pf-compact .pf-tech-grid { transform:rotateX(calc(var(--scene-progress)*12deg - 6deg)) rotateY(calc(var(--scene-progress)*10deg - 5deg)); }
-.pf-compact.pf-scenes .pf-work { height:calc(var(--scene-height)*4.2); }
-.pf-compact.pf-scenes .pf-journey { height:calc(var(--scene-height)*3.2); }
+.pf-compact.pf-scenes .pf-work { height:calc(var(--scene-height)*(1 + var(--project-count,6)*.5333333)); }
+.pf-compact.pf-scenes .pf-journey { height:calc(var(--scene-height)*(1 + (var(--journey-count,3) - 1)*1.1)); }
 .pf-compact.pf-scenes :is(.pf-work-sticky,.pf-journey-stage) { height:var(--scene-height); top:min(0px,calc(var(--port-height) - 620px)); padding:92px 6% 30px; }
 .pf-compact .pf-work-layout { height:100%; grid-template-columns:1fr; grid-template-rows:auto minmax(0,1fr); gap:24px; }
 .pf-compact .pf-work-heading h2 { font-size:clamp(27px,4.5cqw,38px); line-height:1.05; margin-top:12px; width:100%; }

@@ -1,13 +1,14 @@
 import {test,expect} from '@playwright/test';
 import fs from 'node:fs/promises';
 const sizes=[[320,568],[375,667],[390,844],[430,932],[600,960],[768,1024],[820,1180],[1024,1366],[1024,768],[844,390],[1366,768],[1440,1000]];
-const titles=['Flow Studio','Barg','Tanpoosh','Dika Asia','Financial Panel','Macfolio'];
+const titles=['Flow Studio','Barg','Tanpoosh','Dika Asia','Financial Panel','To Do List','Hamnava','Macfolio'];
+const journeyTitles=['App Developer','Front-End Developer','B.Sc. in Computer Engineering','Building Personal Products'];
 async function scene(page,id,fraction=0){
  await page.locator('.pf-scroll').evaluate((el,{id,fraction})=>{const section=el.querySelector(`#${id}`),start=section.offsetTop-96;el.scrollTop=start+(section.offsetHeight-el.clientHeight+96)*fraction;},{id,fraction});
 }
 for(const [width,height] of sizes)test.describe(`${width} × ${height}`,()=>{
  test.use({viewport:{width,height},hasTouch:width<=1100});
- test('menu, alternating arrivals, six scroll projects, three scroll nodes and footer fit',async({page},info)=>{
+ test('menu, alternating arrivals, all scroll projects and journey nodes, and footer fit',async({page},info)=>{
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.goto('/portfolio');await expect(page.locator('.pf-scenes')).toBeVisible();await page.evaluate(()=>document.fonts.ready);
   const compact=width<=1100||height<640;
@@ -35,18 +36,22 @@ for(const [width,height] of sizes)test.describe(`${width} × ${height}`,()=>{
    expect((await connect.boundingBox()).x).toBeLessThan((await macfolio.boundingBox()).x);
    await connect.click();await expect(page.locator('.pf-experience')).toHaveAttribute('data-scene','contact');
   }
-  for(let i=0;i<6;i++){
-   await scene(page,'work',(i+.25)/6);await expect(page.locator('.pf-project-copy h3')).toHaveText(titles[i]);
+  for(let i=0;i<titles.length;i++){
+   await scene(page,'work',(i+.25)/titles.length);await expect(page.locator('.pf-project-copy h3')).toHaveText(titles[i]);
    await page.waitForTimeout(100);
   }
   const work=await page.locator('.pf-project-scene').boundingBox();expect(work.x).toBeGreaterThanOrEqual(0);expect(work.x+work.width).toBeLessThanOrEqual(width+1);
-  await page.getByRole('button',{name:'Read case study',exact:true}).click();await expect(page.locator('.pf-case h2')).toContainText('Macfolio');await page.keyboard.press('Escape');
-  for(const [index,title] of ['Front-End Developer','B.Sc. in Computer Engineering','Building Personal Products'].entries()){
-   await scene(page,'journey',(index+.25)/3);await expect(page.locator('.pf-journey-card.is-active h3')).toHaveText(title);
-   await expect(page.locator('.pf-journey-card:not(.is-active)')).toHaveCount(2);
+  await page.getByRole('button',{name:'Read case study',exact:true}).click();await expect(page.locator('.pf-case h2')).toContainText('Macfolio');
+  await expect(page.getByRole('button',{name:'Close case study',exact:true})).toBeFocused();
+  await page.keyboard.press('Escape');await expect(page.locator('.pf-case')).toHaveCount(0);
+  for(const [index,title] of journeyTitles.entries()){
+   await scene(page,'journey',(index+.25)/journeyTitles.length);await expect(page.locator('.pf-journey-card.is-active h3')).toHaveText(title);
+   await expect(page.locator('.pf-journey-card:not(.is-active)')).toHaveCount(journeyTitles.length-1);
    expect(await page.locator('.pf-journey-card:not(.is-active)').evaluateAll(cards=>cards.every(card=>card.inert))).toBe(true);
    await expect(page.locator('.pf-node-in')).toHaveText(`0${index+1}`);
    await expect(page.locator('.pf-node-in')).toHaveCSS('animation-name','pf-node-in');
+   const entry=page.locator('.pf-journey-card.is-active');
+   expect(await entry.evaluate(el=>el.scrollHeight<=el.clientHeight+2),`${title} overflows at ${width} × ${height}`).toBe(true);
   }
   const card=page.locator('.pf-journey-card.is-active');
   expect(await card.evaluate(el=>el.scrollHeight<=el.clientHeight+2)).toBe(true);
