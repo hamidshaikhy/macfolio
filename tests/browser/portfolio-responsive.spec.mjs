@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import fs from 'node:fs/promises';
 const sizes=[[320,568],[375,667],[390,844],[430,932],[600,960],[768,1024],[820,1180],[1024,1366],[1024,768],[844,390],[1366,768],[1440,1000]];
-const titles=['Flow Studio','Barg','Tanpoosh','Dika Asia','Financial Panel','To Do List','Hamnava','Macfolio'];
+const titles=['Flow Studio','Barg','Tanpoosh','Dika Asia','Financial Panel','To Do List','Hamnava','Personal Finance','Macfolio'];
 const journeyTitles=['App Developer','Front-End Developer','B.Sc. in Computer Engineering','Building Personal Products'];
 async function scene(page,id,fraction=0){
  await page.locator('.pf-scroll').evaluate((el,{id,fraction})=>{const section=el.querySelector(`#${id}`),start=section.offsetTop-96;el.scrollTop=start+(section.offsetHeight-el.clientHeight+96)*fraction;},{id,fraction});

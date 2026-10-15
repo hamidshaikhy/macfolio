@@ -1,0 +1,26 @@
+[
+  {
+    "id": "barg",
+    "repository": "https://github.com/hamidshaikhy/barg-resume-builder",
+    "commit": "062a89867dbba22894d8675c2bfcaf94b1515f1c",
+    "path": "/apps/barg/"
+  },
+  {
+    "id": "hamnava",
+    "repository": "https://github.com/hamidshaikhy/hamnava",
+    "commit": "3226da9a2888c01057bb4c99cef436304ae4e222",
+    "path": "/apps/hamnava/"
+  },
+  {
+    "id": "personal-finance",
+    "repository": "https://github.com/hamidshaikhy/personal-finance",
+    "commit": "b565c84ae91867a15a85015683798751072f3e3e",
+    "path": "/apps/personal-finance/"
+  },
+  {
+    "id": "todo",
+    "repository": "https://github.com/hamidshaikhy/to-do-list",
+    "commit": "4e057da6294191f54024b1e0d62e32bea3fb6b07",
+    "path": "/apps/todo/"
+  }
+]

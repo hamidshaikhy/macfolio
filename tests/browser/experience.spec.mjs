@@ -2,7 +2,7 @@
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
-const labels = { about: 'About Hamid', projects: 'Projects', notes: 'Notes', editor: 'Code', terminal: 'Terminal', resume: 'Preview', chess: 'Chess', settings: 'Settings', trash: 'Trash', finder: 'Finder', calculator: 'Calculator', linkedin: 'LinkedIn', safari: 'Safari', github: 'GitHub', calendar: 'Calendar', contacts: 'Contacts' };
+const labels = { about: 'About Hamid', projects: 'Projects', editor: 'Code', terminal: 'Terminal', resume: 'Preview', chess: 'Chess', settings: 'Settings', trash: 'Trash', finder: 'Finder', calculator: 'Calculator', safari: 'Safari', github: 'GitHub', calendar: 'Calendar', contacts: 'Contacts' };
 async function open(page, id, mobile = false) {
   if (mobile) {
     const back = page.getByRole('button', { name: 'Back to home', exact: true });
@@ -22,7 +22,7 @@ async function open(page, id, mobile = false) {
   }
   else if (id === 'resume' || id === 'projects') { await page.getByRole('button', { name: 'Launchpad', exact: true }).click(); await page.locator('.launchpad-grid').getByRole('button', { name: labels[id], exact: true }).click(); }
   else await page.getByRole('navigation', { name: 'Dock', exact: true }).getByRole('button', { name: labels[id], exact: true }).click();
-  await expect(page.locator(`.${id === 'resume' ? 'preview' : id === 'editor' ? 'editor' : id === 'linkedin' ? 'linkedin' : id}-app`).last()).toBeVisible();
+  await expect(page.locator(`.${id === 'resume' ? 'preview' : id === 'editor' ? 'editor' : id}-app`).last()).toBeVisible();
   await expect(page.locator('.app-loading:visible')).toHaveCount(0);
 }
 async function screenshot(page, testInfo, name) { await fs.mkdir('artifacts/qa', { recursive: true }); await page.screenshot({ path: `artifacts/qa/${testInfo.project.name}-${name}.png` }); }
@@ -51,7 +51,7 @@ test('desktop appearance, window lifecycle, magnification and viewport bounds', 
   await page.waitForTimeout(350);
   const transform = await dock.getByRole('button', { name: 'Calculator', exact: true }).evaluate(el => getComputedStyle(el).transform);
   expect(transform).not.toBe('matrix(1, 0, 0, 1, 0, 0)');
-  expect(await dock.getByRole('button', { name: 'LinkedIn', exact: true }).evaluate(el => Number(getComputedStyle(el).transform.match(/matrix\(([^,]+)/)?.[1]))).toBeGreaterThan(1);
+  expect(await dock.getByRole('button', { name: 'Contacts', exact: true }).evaluate(el => Number(getComputedStyle(el).transform.match(/matrix\(([^,]+)/)?.[1]))).toBeGreaterThan(1);
   await screenshot(page, info, 'dock-hover');
   await page.mouse.move(100, 200); await page.waitForTimeout(250);
   await open(page, 'calculator');
@@ -72,13 +72,15 @@ test('desktop appearance, window lifecycle, magnification and viewport bounds', 
   await screenshot(page, info, 'desktop-light'); await page.keyboard.press('Escape');
   await page.reload(); await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.setViewportSize({ width: 800, height: 650 });
+  // Viewport resize updates React state and the Dock's width transition asynchronously.
+  await expect.poll(async()=>{const box=await dock.boundingBox();return box.x>=0&&box.x+box.width<=800;}).toBe(true);
   const narrowDock = await dock.boundingBox(); expect(narrowDock.x).toBeGreaterThanOrEqual(0); expect(narrowDock.x + narrowDock.width).toBeLessThanOrEqual(800);
   await dock.getByRole('button', { name: 'Calculator', exact: true }).hover(); await page.waitForTimeout(250);
   const large = await dock.boundingBox(); expect(large.x).toBeGreaterThanOrEqual(0); expect(large.x + large.width).toBeLessThanOrEqual(800);
   await screenshot(page, info, 'narrow-desktop');
 });
 
-test('Finder, Notes, Code, Terminal and Trash share file content', async ({ page }, info) => {
+test('Finder, Code, Terminal and Trash preserve and share text files', async ({ page }, info) => {
   await cleanStart(page); await open(page, 'finder');
   const finder = page.getByRole('dialog', { name: 'Finder', exact: true });
   await finder.getByRole('button', { name: 'Documents', exact: true }).click();
@@ -87,17 +89,11 @@ test('Finder, Notes, Code, Terminal and Trash share file content', async ({ page
   await finder.getByRole('button', { name: 'Back', exact: true }).click(); await finder.getByRole('button', { name: 'Forward', exact: true }).click();
   await finder.getByRole('button', { name: 'Notes', exact: true }).click();
   await finder.getByRole('button', { name: 'List view' }).click(); await finder.getByRole('combobox', { name: 'Sort files' }).selectOption('modified');
-  await finder.getByRole('button', { name: 'New Note', exact: true }).click();
-  const note = page.getByRole('textbox', { name: 'Note content' }); await expect(note).toHaveValue('');
-  await page.getByRole('textbox', { name: 'Note title' }).fill('یادداشت آزمایش'); await note.fill('متن مشترک');
-  await note.selectText(); await page.getByRole('button', { name: 'Bold text' }).click(); await expect(note).toHaveValue('**متن مشترک**');
-  await page.getByRole('button', { name: 'Preview formatted note' }).click(); await expect(page.locator('.note-preview strong')).toHaveText('متن مشترک');
-  await screenshot(page, info, 'notes');
-  await page.getByRole('button', { name: 'Open note in Code', exact: true }).click();
-  const code = page.getByRole('textbox', { name: 'Code editor' }); await expect(code).toContainText('**متن مشترک**');
+  await finder.getByRole('button', { name: 'New File', exact: true }).click();
+  const code = page.getByRole('textbox', { name: 'Code editor' }); await expect(code).toHaveText('');
   await code.fill('sharedCode = 42;'); await code.press('End'); await code.press('Tab'); await code.press('a'); await expect(code).toHaveText('  sharedCode = 42;a');
   await screenshot(page, info, 'code');
-  await open(page, 'finder'); await finder.getByRole('textbox', { name: 'Search files' }).fill('یادداشت آزمایش');
+  await open(page, 'finder'); await finder.getByRole('textbox', { name: 'Search files' }).fill('sharedCode');
   const entry = finder.locator('.finder-files [role="option"]').first(); await entry.click();
   const filePath = await entry.getAttribute('title');
   await open(page, 'terminal'); const input = page.getByRole('textbox', { name: 'Terminal command' });
@@ -108,15 +104,15 @@ test('Finder, Notes, Code, Terminal and Trash share file content', async ({ page
   await screenshot(page, info, 'finder');
 });
 
-test('Calculator keyboard arithmetic and personal LinkedIn actions', async ({ page }, info) => {
+test('Calculator keyboard arithmetic and external contact links', async ({ page }, info) => {
   await cleanStart(page); await open(page, 'calculator'); await page.keyboard.type('0.1+0.2=');
   await expect(page.getByLabel('Calculator display')).toHaveText('0.3'); await page.keyboard.press('Escape'); await page.keyboard.type('5*2=='); await expect(page.getByLabel('Calculator display')).toHaveText('20');
-  await screenshot(page, info, 'calculator'); await open(page, 'linkedin');
-  const profile = page.getByRole('dialog', { name: 'LinkedIn', exact: true });
+  await screenshot(page, info, 'calculator'); await open(page, 'contacts');
+  const profile = page.getByRole('dialog', { name: 'Contacts', exact: true });
   await expect(profile.getByRole('heading', { name: 'Hamid Shaikhy', exact: true })).toBeVisible();
-  await expect(profile.getByRole('link', { name: 'View on LinkedIn' })).toHaveAttribute('href', 'https://www.linkedin.com/in/hamid-shaikhy/');
-  await expect(profile.getByRole('link', { name: 'Contact', exact: true })).toHaveAttribute('href', 'mailto:hamidshaikhy1382@gmail.com');
-  await screenshot(page, info, 'linkedin');
+  await expect(profile.getByRole('link', { name: 'Open LinkedIn profile' })).toHaveAttribute('href', 'https://www.linkedin.com/in/hamid-shaikhy/');
+  await expect(profile.getByRole('link', { name: 'Email Hamid', exact: true })).toHaveAttribute('href', 'mailto:hamidshaikhy1382@gmail.com');
+  await screenshot(page, info, 'contacts');
 });
 
 test('PDF renders every supplied page, text layers, zoom, fit, thumbnails and download', async ({ page }, info) => {
@@ -200,10 +196,10 @@ test('Safari history, Spotlight, Launchpad and saved Settings actions', async ({
   await address.fill('https://dikaasia.com/');await address.press('Enter');await expect(safari.getByRole('link',{name:'Open Website',exact:true})).toHaveAttribute('href','https://dikaasia.com/');
   await screenshot(page,info,'safari');
   await page.getByRole('button',{name:'Spotlight',exact:true}).click();
-  await page.getByRole('textbox',{name:'Search apps'}).fill('LinkedIn');await page.keyboard.press('Enter');await expect(page.getByRole('dialog',{name:'LinkedIn',exact:true})).toBeVisible();
+  await page.getByRole('textbox',{name:'Search apps'}).fill('Contacts');await page.keyboard.press('Enter');await expect(page.getByRole('dialog',{name:'Contacts',exact:true})).toBeVisible();
   await dock.getByRole('button',{name:'Launchpad',exact:true}).click();await page.getByRole('textbox',{name:'Search Launchpad'}).fill('Calculator');await page.getByRole('dialog',{name:'Launchpad'}).getByRole('button',{name:'Calculator',exact:true}).click();
   await expect(page.getByRole('dialog',{name:'Calculator',exact:true})).toBeVisible();
-  await page.getByRole('button',{name:'File',exact:true}).click();await page.getByRole('menuitem',{name:/^New Note/}).click();await expect(page.getByRole('textbox',{name:'Note content'})).toHaveValue('');
+  await page.getByRole('button',{name:'File',exact:true}).click();await page.getByRole('menuitem',{name:/^New File/}).click();await expect(page.getByRole('textbox',{name:'Code editor'})).toHaveText('');
   await open(page,'settings');const settings=page.getByRole('dialog',{name:'Settings',exact:true});
   await settings.getByRole('button',{name:'Dark',exact:true}).click();await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
   await settings.getByRole('checkbox',{name:'Focus',exact:true}).check();

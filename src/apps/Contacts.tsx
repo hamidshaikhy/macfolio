@@ -11,7 +11,7 @@ export default function Contacts() {
     { label: "mobile", value: profile.phoneDisplay, copyValue: profile.phone, icon: Phone, href: "tel:" + profile.phone },
     { label: "email", value: profile.email, icon: Mail, href: "mailto:" + profile.email },
     { label: "github", value: "github.com/hamidshaikhy", icon: Github, app: "github" as const },
-    { label: "linkedin", value: "linkedin.com/in/hamid-shaikhy", icon: Linkedin, app: "linkedin" as const },
+    { label: "linkedin", value: "linkedin.com/in/hamid-shaikhy", icon: Linkedin, href: profile.linkedin },
     { label: "location", value: profile.location, icon: MapPin },
   ];
 
@@ -35,7 +35,7 @@ export default function Contacts() {
           <a href={"tel:" + profile.phone} aria-label="Call Hamid"><Phone /></a>
           <a href={"mailto:" + profile.email} aria-label="Email Hamid"><Mail /></a>
           <button aria-label="Open GitHub profile" onClick={() => os.openApp("github")}><Github /></button>
-          <button aria-label="Open LinkedIn profile" onClick={() => os.openApp("linkedin")}><Linkedin /></button>
+          <a aria-label="Open LinkedIn profile" href={profile.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin /></a>
         </div>
       </div>
       <div className="contact-details">
@@ -44,7 +44,7 @@ export default function Contacts() {
             <Icon size={21} />
             <div>
               <small>{label}</small>
-              {href ? <a dir="ltr" href={href}>{value}</a> : app ? <button onClick={() => os.openApp(app)}>{value}</button> : <span>{value}</span>}
+              {href ? <a dir="ltr" href={href} target={href.startsWith("https:")?"_blank":undefined} rel="noopener noreferrer">{value}</a> : app ? <button onClick={() => os.openApp(app)}>{value}</button> : <span>{value}</span>}
             </div>
             <button className="contact-copy" aria-label={"Copy " + label} onClick={() => void copy(copyValue || value)}>
               {copied === (copyValue || value) ? <Check size={18} /> : <Copy size={18} />}

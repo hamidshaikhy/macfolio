@@ -1,0 +1,32 @@
+{
+  "appDate": "2026-10-14T12:00:00+03:30",
+  "timezone": "Asia/Tehran",
+  "browser": "155.0.8059.40",
+  "desktop": {
+    "width": 1440,
+    "height": 1160,
+    "scale": 2
+  },
+  "mobile": {
+    "width": 390,
+    "height": 1000,
+    "scale": 2
+  },
+  "source": "Rendered application with isolated demo accounts; no real user records",
+  "captures": [
+    "login-desktop.png",
+    "overview-desktop.png",
+    "reports-desktop.png",
+    "accounts-desktop.png",
+    "budgets-desktop.png",
+    "scheduled-desktop.png",
+    "goals-desktop.png",
+    "transactions-desktop.png",
+    "transaction-editor-desktop.png",
+    "settings-desktop.png",
+    "overview-mobile.png",
+    "transactions-mobile.png",
+    "transaction-editor-mobile.png"
+  ],
+  "runtimeErrors": []
+}

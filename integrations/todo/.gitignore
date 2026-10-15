@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.build-tools/
+mobile/releases/
+.sites-runtime/
+*.zip
+*.tar.gz
+mobile/.expo/
+mobile/android/.gradle/
+mobile/android/build/
+mobile/android/app/build/
+mobile/android/local.properties
+mobile/android/.cxx/
+mobile/android/app/.cxx/
+mobile/android/.kotlin/

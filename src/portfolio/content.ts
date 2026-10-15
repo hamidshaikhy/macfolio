@@ -1,3 +1,4 @@
+import { projectDemo } from "../lib/integrated-apps";
 import { asset } from '../lib/assets';
 import { projects } from '../lib/content';
 import { projectStudies } from '../lib/project-studies';
@@ -46,7 +47,7 @@ export const selectedWork: PortfolioProject[] = [
     contribution: 'I designed and built the editor, ten customizable templates, automatic A4 pagination and export flows for PDF, Word and JSON.',
     decisions: ['Pagination keeps section headings together with their content in one- and two-column layouts.', 'RTL and LTR templates handle both Persian and English résumés.', 'Browser autosave and account-free editing keep the workflow local.'],
     features: ['Ten templates with customizable typography and colors', 'Live preview and automatic A4 pagination', 'Mouse, touch and keyboard section reordering', 'Text PDF, image PDF, editable Word and JSON backup'],
-    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'dnd-kit', 'Vite'], repo: original('barg').repo,
+    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'dnd-kit', 'Vite'], repo: original('barg').repo, live: projectDemo('barg'),
     shots: [shot('barg', 1, 'Write. See. Refine.', 'Changes in the editor appear directly on the A4 preview.'), shot('barg', 2, 'Find your format', 'A collection of templates with adjustable fonts, spacing and color.'), shot('barg', 3, 'Ready to share', 'Several export formats serve different application workflows.')],
   },
   {
@@ -94,7 +95,7 @@ export const selectedWork: PortfolioProject[] = [
     contribution: 'I built the React web app and a native React Native / Expo Android interface, sharing TypeScript task, date and timer logic between them.',
     decisions: ['IndexedDB stores web tasks; SQLite stores Android tasks. Both work locally without an account or server.', 'Timers recover from stored deadlines when the app resumes; background alarms are not guaranteed.', 'The installable web app caches its interface offline. A standalone Android demo APK bundles the app runtime.'],
     features: ['Task editing, notes, due dates and completion', 'Persian weekly calendar and overdue tasks', 'Customizable focus timer with pause and resume', 'Installable PWA, Android APK and web JSON backup'],
-    stack: ['React Native', 'Expo', 'React', 'TypeScript', 'PWA', 'SQLite', 'IndexedDB'], repo: original('todo-list').repo,
+    stack: ['React Native', 'Expo', 'React', 'TypeScript', 'PWA', 'SQLite', 'IndexedDB'], repo: original('todo-list').repo, live: projectDemo('todo-list'),
     shots: [shot('todo-list', 0, 'Plan the day', 'The actual web app, with sample tasks, a Persian calendar, focus timer and Android APK download entry.'), shot('todo-list', 1, 'A quieter workspace', 'The web planner in dark mode, with the same task and timer controls.'), shot('todo-list', 2, 'The web app on your phone', 'Responsive PWA layout. This screenshot shows the web app, not the native Android interface.')],
   },
   {
@@ -106,17 +107,27 @@ export const selectedWork: PortfolioProject[] = [
     contribution: 'I built the React and TypeScript interface, Audius integration, audio queue, Media Session controls and browser-local accounts and collections.',
     decisions: ['Audius track and playlist names, artwork and creator attribution are preserved.', 'IndexedDB keeps accounts and libraries on the device; there is no server login or cross-device sync.', 'The service worker caches the app shell. Streaming needs internet; tracks are not downloaded or cached.'],
     features: ['Track and artist search, public playlists', 'Continuous playback, queue, shuffle and repeat', 'Liked tracks and personal or saved playlists', 'Installable PWA and supported Media Session controls'],
-    stack: ['React', 'TypeScript', 'PWA', 'Audius API', 'IndexedDB', 'Media Session'], repo: original('hamnava').repo,
+    stack: ['React', 'TypeScript', 'PWA', 'Audius API', 'IndexedDB', 'Media Session'], repo: original('hamnava').repo, live: projectDemo('hamnava'),
     shots: [shot('hamnava', 0, 'A home for listening', 'Actual Audius music and artwork in the home view, with persistent playback controls.'), shot('hamnava', 1, 'Keep the playlist intact', 'Original playlist information, creator attribution, track list and save controls.'), shot('hamnava', 2, 'Your own collection', 'A demonstration library stored locally in the browser.'), shot('hamnava', 4, 'Listening on a smaller screen', 'Mobile navigation and playback controls in the installable PWA.')],
   },
   {
-    id: 'macfolio', title: 'Macfolio', category: 'Interactive desktop portfolio', status: 'PERSONAL PROJECT', accent: '#b9d4b9',
+    id:'personal-finance',title:'Personal Finance',category:'Personal finance PWA',status:'LIVE INSTALLABLE PWA',accent:'#c9b079',
+    headline:'Know where your money goes.',summary:'A Persian personal ledger with Jalali dates, budgets and cash-flow reports. Account data stays encrypted in your browser.',
+    role:'Product design & PWA development',problem:'Financial data must remain private to each local user, with clear reports and reliable edits across windows and tabs.',
+    contribution:'I built the React interface, encrypted account storage, transaction tools, budget views and responsive cash-flow charts.',
+    decisions:['Independent local accounts use encrypted IndexedDB storage.','Revision checks reject stale writes from another tab instead of overwriting newer data.','The PWA shell works offline; encrypted backups support manual transfer between devices.'],
+    features:['Income, expenses and account transfers','Jalali budgets, schedules and saving goals','Cash-flow charts and CSV reports','Encrypted local accounts and password-protected backups'],
+    stack:['React','TypeScript','PWA','IndexedDB','Web Crypto'],repo:original('personal-finance').repo,live:projectDemo('personal-finance'),
+    shots:[shot('personal-finance',0,'Your financial picture','The actual overview with local demonstration data.'),shot('personal-finance',1,'Follow the money','Monthly reports, categories and CSV export.'),shot('personal-finance',2,'A ledger in your pocket','The responsive transaction form with Jalali dates.')],
+  },
+  {
+    id: 'macfolio' , title: 'Macfolio', category: 'Interactive desktop portfolio', status: 'PERSONAL PROJECT', accent: '#b9d4b9',
     headline: 'A portfolio you can work inside.',
     summary: 'A familiar desktop, reimagined for the web. Working apps, a shared file system and a separate mobile experience.',
     role: 'Design, architecture & front-end development',
     problem: 'A desktop-inspired portfolio needs meaningful interactions and usable mobile behavior behind its familiar visual shell.',
     contribution: 'I built the window manager, persistent virtual file system, app search, PDF viewer and touch-oriented mobile shell. This portfolio runs inside About and as a standalone page.',
-    decisions: ['Apps load on demand to keep the shell lightweight.', 'Shared browser-persisted state connects Finder, Notes, Code and Terminal.', 'Desktop windows and mobile full-screen apps use the same underlying app components.'],
+    decisions: ['Apps load on demand to keep the shell lightweight.', 'Shared browser-persisted state connects Finder, Code and Terminal.', 'Desktop windows and mobile full-screen apps use the same underlying app components.'],
     features: ['Drag, resize, minimize and maximize windows', 'Shared files, notes, code editor and terminal', 'PDF résumé viewer, search and chess', 'Persistent themes and mobile app navigation'],
     stack: ['React', 'TypeScript', 'Zustand', 'CodeMirror', 'PDF.js', 'Vite'], repo: 'https://github.com/hamidshaikhy/macfolio', live: asset(''),
     shots: [{ src: asset('assets/portfolio/macfolio.webp'), title: 'A personal workspace', caption: 'The actual Macfolio desktop, with working apps and familiar window controls.' }],

@@ -81,7 +81,7 @@ export function Spotlight() {
           <><p>{category === "Web" ? "Open Safari to browse the web." : "No matching applications."}</p>{category === "Web" && <button onClick={() => os.openApp("safari")}>Open Safari</button>}</>
         )}
         {matchingProjects.map((p, i) => <button key={p.id} className={selected === result.length + i ? "current" : ""} onPointerEnter={() => setSelected(result.length + i)} onClick={() => actions[result.length + i]()}><AppIcon id="projects" size={32} /><span>{p.title}</span><small>Project</small></button>)}
-        {localFiles.map((f, i) => <button key={f.path} className={selected === result.length + matchingProjects.length + i ? "current" : ""} onPointerEnter={() => setSelected(result.length + matchingProjects.length + i)} onClick={() => openFile(f.path)}><AppIcon id={f.path.includes("/Notes/") ? "notes" : "editor"} size={32} /><span dir="auto">{fileTitle(f)}</span><small>{basename(f.path)}</small></button>)}
+        {localFiles.map((f, i) => <button key={f.path} className={selected === result.length + matchingProjects.length + i ? "current" : ""} onPointerEnter={() => setSelected(result.length + matchingProjects.length + i)} onClick={() => openFile(f.path)}><AppIcon id={"editor"} size={32} /><span dir="auto">{fileTitle(f)}</span><small>{basename(f.path)}</small></button>)}
       </div>}
       {search && <footer>
         ↑ ↓ to navigate <span>return to open</span>

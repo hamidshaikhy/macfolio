@@ -50,7 +50,7 @@ for (const size of [{width:390,height:844},{width:375,height:667},{width:320,hei
     await page.getByRole('button',{name:'Back to home',exact:true}).click();
     const home=page.locator('.ios-home');
     await expect(home).toBeVisible();
-    for(const name of ['Finder','Terminal','Code','Notes','Calendar','Safari','GitHub','LinkedIn','Contacts','Chess','Calculator','Settings','Trash']) {
+    for(const name of ['Finder','Terminal','Code','Calendar','Safari','GitHub','Barg','Hamnava','Personal Finance','To Do List','Contacts','Chess','Calculator','Settings','Trash']) {
       const button=home.getByRole('button',{name,exact:true});
       await expect(button).toHaveCount(1);
       const rect=await button.boundingBox();

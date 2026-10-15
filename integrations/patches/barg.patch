@@ -1,0 +1,119 @@
+diff --git a/index.html b/index.html
+index 1fceb8a..81b21b4 100644
+--- a/index.html
++++ b/index.html
+@@ -9,7 +9,7 @@
+       content="برگ یک رزومه‌ساز فارسی و راست‌به‌چپ است: ۲۲ بخش، ۱۰ قالب رسمی، ۶ رنگ‌بندی برای هر قالب و خروجی PDF و Word. رایگان و بدون ثبت‌نام."
+     />
+     <meta name="theme-color" content="#eceef2" />
+-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
++    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+   </head>
+   <body>
+     <div id="root"></div>
+diff --git a/src/index.css b/src/index.css
+index d2b9e34..9e2aeab 100644
+--- a/src/index.css
++++ b/src/index.css
+@@ -60,3 +60,6 @@ label[for] {
+   scrollbar-width: thin;
+   scrollbar-color: #c3c9d6 transparent;
+ }
++
++/* A minimized Mac window keeps its data and playback but pauses visual animation. */
++html[data-macfolio-hidden="true"] *, html[data-macfolio-hidden="true"] *::before, html[data-macfolio-hidden="true"] *::after { animation-play-state: paused !important; }
+diff --git a/src/macfolio-bridge.tsx b/src/macfolio-bridge.tsx
+new file mode 100644
+index 0000000..c441cb3
+--- /dev/null
++++ b/src/macfolio-bridge.tsx
+@@ -0,0 +1,39 @@
++import { useEffect, type ReactNode } from 'react';
++
++const query = new URLSearchParams(location.search);
++export const embedded = window.parent !== window && query.get('embed') === 'macfolio';
++const appId = import.meta.env.BASE_URL.split('/').filter(Boolean).slice(-1)[0];
++const instance = query.get('instance');
++type BridgeMessage = { channel: 'macfolio-app-v1'; appId: string; instance: string; type: 'ready' | 'focus' | 'visibility'; visible?: boolean };
++
++export function EmbeddedBridge({ children }: { children: ReactNode }) {
++  useEffect(() => {
++    if (!embedded || !appId || !instance) return;
++    const send = (type: 'ready' | 'focus') => {
++      const message: BridgeMessage = { channel: 'macfolio-app-v1', appId, instance, type };
++      window.parent.postMessage(message, location.origin);
++    };
++    const focus = () => send('focus');
++    const message = (event: MessageEvent) => {
++      const data = event.data as Partial<BridgeMessage> | null;
++      if (event.origin !== location.origin || event.source !== window.parent || !data || data.channel !== 'macfolio-app-v1' || data.appId !== appId || data.instance !== instance || data.type !== 'visibility' || typeof data.visible !== 'boolean') return;
++      document.documentElement.dataset.macfolioHidden = String(!data.visible);
++      document.dispatchEvent(new Event('macfolio-visibility'));
++    };
++    // Ready comes from a committed React UI, never the HTML load event.
++    send('ready');
++    document.addEventListener('pointerdown', focus, true);
++    document.addEventListener('focusin', focus, true);
++    window.addEventListener('message', message);
++    const install = (event: Event) => event.preventDefault();
++    window.addEventListener('beforeinstallprompt', install, true);
++    return () => {
++      document.removeEventListener('pointerdown', focus, true);
++      document.removeEventListener('focusin', focus, true);
++      window.removeEventListener('message', message);
++      window.removeEventListener('beforeinstallprompt', install, true);
++      delete document.documentElement.dataset.macfolioHidden;
++    };
++  }, []);
++  return children;
++}
+diff --git a/src/main.tsx b/src/main.tsx
+index 36c6b1a..28d4263 100644
+--- a/src/main.tsx
++++ b/src/main.tsx
+@@ -1,3 +1,4 @@
++import { EmbeddedBridge } from './macfolio-bridge';
+ import { StrictMode } from 'react'
+ import { createRoot } from 'react-dom/client'
+ import '@fontsource-variable/vazirmatn/wght.css'
+@@ -13,6 +14,6 @@ document.documentElement.dir = 'rtl'
+ 
+ createRoot(document.getElementById('root')!).render(
+   <StrictMode>
+-    <App />
++    <EmbeddedBridge><App /></EmbeddedBridge>
+   </StrictMode>,
+ )
+diff --git a/src/router.ts b/src/router.ts
+deleted file mode 100644
+index bbabf1f..0000000
+--- a/src/router.ts
++++ /dev/null
+@@ -1,2 +0,0 @@
+-// روتر هش‌محور است تا برنامه روی میزبان‌های ایستا (مثل GitHub Pages) بدون تنظیم سرور کار کند.
+-export { HashRouter as Router } from 'react-router-dom'
+diff --git a/src/router.tsx b/src/router.tsx
+new file mode 100644
+index 0000000..705728b
+--- /dev/null
++++ b/src/router.tsx
+@@ -0,0 +1,6 @@
++import { BrowserRouter, type BrowserRouterProps } from 'react-router-dom'
++
++// Prefix-aware router: hosting also serves the builder directly on refresh.
++export function Router(props: BrowserRouterProps) {
++  return <BrowserRouter {...props} basename={import.meta.env.BASE_URL.replace(/\/$/, '')} />
++}
+diff --git a/vite.config.ts b/vite.config.ts
+index b1717eb..b6ba0a0 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
+ 
+ // base نسبی است تا خروجی روی GitHub Pages و هر زیرمسیر دیگری هم کار کند.
+ export default defineConfig({
+-  base: './',
++  base: '/apps/barg/',
+   plugins: [react(), tailwindcss()],
+   resolve: {
+     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },

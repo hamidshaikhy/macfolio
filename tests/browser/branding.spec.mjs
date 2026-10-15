@@ -13,8 +13,9 @@ test('macfolio restores preferences, notes, events and chess from the previous r
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await expect(page.locator('.wallpaper-dark')).toHaveAttribute('style', /aurora.jpg/);
   const dock = page.getByRole('navigation', { name: 'Dock', exact: true });
-  await dock.getByRole('button', { name: 'Notes', exact: true }).click();
-  await expect(page.getByRole('textbox', { name: 'Note content' })).toHaveValue('A note kept from the previous release.');
+  await dock.getByRole('button', { name: 'Code', exact: true }).click();
+  await page.getByRole('button', { name: 'saved-note.md', exact: true }).first().click();
+  await expect(page.getByRole('textbox', { name: 'Code editor' })).toContainText('A note kept from the previous release.');
   await dock.getByRole('button', { name: 'Calendar', exact: true }).click();
   await expect(page.locator('.calendar-event')).toContainText('A plan kept from the previous release');
   await dock.getByRole('button', { name: 'Chess', exact: true }).click();

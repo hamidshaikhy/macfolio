@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
-const names = ['Flow Studio', 'Barg', 'Tanpoosh', 'Dika Asia', 'Financial Panel', 'To Do List', 'Hamnava', 'Macfolio'];
+const names = ['Flow Studio', 'Barg', 'Tanpoosh', 'Dika Asia', 'Financial Panel', 'To Do List', 'Hamnava', 'Personal Finance', 'Macfolio'];
 const problems = new WeakMap();
 test.beforeEach(async ({ page }) => {
   await page.context().route('**/_vercel/insights/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
@@ -136,7 +136,8 @@ test('scroll scenes, every case study, bounded focus and screenshot gallery', as
   await page.locator('.pf-scroll').evaluate(el => {
     const work=el.querySelector('#work');
     const start=work.getBoundingClientRect().top-el.getBoundingClientRect().top+el.scrollTop;
-    el.scrollTop=start-90+(work.offsetHeight-el.clientHeight+90)*.37;
+    const count=el.querySelectorAll('[aria-label="Select a project"] button').length;
+    el.scrollTop=start-96+(work.offsetHeight-el.clientHeight+96)*(2.3/count);
   });
   await expect(page.locator('.pf-project-copy h3')).toHaveText('Tanpoosh');
   await page.locator('.pf-project-scene').focus();
@@ -262,7 +263,7 @@ test('profile assembles on scroll, counters count up and journey changes with sc
   const before=await page.locator('.pf-bio-card').evaluate(el=>getComputedStyle(el).transform);
   await navigate(page,'Profile');
   await expect.poll(()=>page.locator('.pf-bio-card').evaluate(el=>getComputedStyle(el).transform)).not.toBe(before);
-  for(const target of [8,12,2,99])await expect(page.locator(`[data-counter-target="${target}"]`)).toHaveText(String(target));
+  for(const target of [9,12,2,99])await expect(page.locator(`[data-counter-target="${target}"]`)).toHaveText(String(target));
   await screenshot(page,info,'assembled-profile');
   await navigate(page,'Journey');
   await expect(page.locator('.pf-journey-card.is-active h3')).toHaveText('App Developer');

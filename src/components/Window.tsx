@@ -1,3 +1,5 @@
+import { integratedApp } from "../lib/integrated-apps";
+import { useLayoutEffect } from "react";
 ﻿import { memo, useEffect, useRef, type PointerEvent, type ReactNode } from "react";
 import { X, Minus, Maximize2 } from "lucide-react";
 import { useOS } from "../state/os";
@@ -14,7 +16,14 @@ export const Window = memo(function Window({
   children: ReactNode;
 }) {
   const os = useOS.getState();
+  const external = integratedApp(win.app);
   const active = useOS(s => s.windows.filter(w => !w.minimized).at(-1)?.app === win.app);
+  const section = useRef<HTMLElement>(null);
+  useLayoutEffect(()=>{
+    const focused=document.activeElement as HTMLElement | null;
+    const previousWindow=focused?.closest('.os-window');
+    if(active&&previousWindow&&previousWindow!==section.current)section.current?.focus({preventScroll:true});
+  },[active]);
   const endGesture = useRef<(() => void) | null>(null);
   useEffect(() => () => endGesture.current?.(), []);
   function gesture(e: PointerEvent<HTMLElement>, resize = false) {
@@ -53,6 +62,8 @@ export const Window = memo(function Window({
   }
   return (
     <section
+      ref={section}
+      tabIndex={-1}
       role="dialog"
       aria-label={appById(win.app).name}
       className={`os-window ${active ? "active" : ""} ${win.maximized ? "maximized" : ""} app-${win.app}`}
@@ -63,7 +74,7 @@ export const Window = memo(function Window({
               top: 0,
               width: "100%",
               height: "100%",
-              zIndex: 205,
+              zIndex: active ? 206 : 205,
             }
           : {
               left: win.rect.x,
@@ -108,7 +119,7 @@ export const Window = memo(function Window({
           </button>
         </div>
         {win.app !== "calculator" && <span>{appById(win.app).name}</span>}
-        {win.app==='about'?<a className="window-portfolio-link" href={asset('portfolio')} target="_blank" rel="noopener noreferrer">OPEN FULL PORTFOLIO</a>:<span className="window-title-spacer"/>}
+        {win.app==='about'?<a className="window-portfolio-link" href={asset('portfolio')} target="_blank" rel="noopener noreferrer">OPEN FULL PORTFOLIO</a>:external?<a className="window-portfolio-link" href={external.path} target="_blank" rel="noopener noreferrer">OPEN FULL</a>:<span className="window-title-spacer"/>}
       </header>
       <div className="window-content">{children}</div>
       {!win.maximized && (

@@ -1,0 +1,33 @@
+{
+  "id": "/apps/todo/",
+  "name": "to do list",
+  "short_name": "to do list",
+  "description": "کارهای روزانه، تایمر تمرکز و تقویم؛ بدون حساب کاربری",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/apps/todo/",
+  "scope": "/apps/todo/",
+  "display": "standalone",
+  "background_color": "#fbf8f4",
+  "theme_color": "#fbf8f4",
+  "icons": [
+    {
+      "src": "/apps/todo/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/todo/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/todo/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

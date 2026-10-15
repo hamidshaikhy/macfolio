@@ -1,0 +1,11 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {api,ConnectionError,PROVIDERS} from '../src/api';
+Object.defineProperty(globalThis,'navigator',{configurable:true,value:{onLine:true}});
+Object.defineProperty(globalThis,'window',{configurable:true,value:globalThis});
+test('read API includes app name and returns real response data',async()=>{let url='';globalThis.fetch=async(input)=>{url=String(input);return new Response(JSON.stringify({data:[{id:'real'}]}),{status:200});};assert.deepEqual(await api('/tracks/trending'),[{id:'real'}]);assert.equal(new URL(url).searchParams.get('app_name'),'hamnava');});
+test('a failed provider falls back to the next official provider',async()=>{let count=0;const hosts:string[]=[];globalThis.fetch=async(input)=>{count++;hosts.push(new URL(String(input)).hostname);if(count===1)throw new TypeError('Network failure');return new Response(JSON.stringify({data:[]}),{status:200});};await api('/tracks/trending');assert.equal(count,2);assert.notEqual(hosts[0],hosts[1]);});
+test('offline is distinguished from blocked or failed network',async()=>{Object.defineProperty(globalThis,'navigator',{configurable:true,value:{onLine:false}});let count=0;globalThis.fetch=async()=>{count++;return new Response('{}');};await assert.rejects(()=>api('/tracks/trending'),(e:unknown)=>e instanceof ConnectionError&&e.kind==='offline');assert.equal(count,0);Object.defineProperty(globalThis,'navigator',{configurable:true,value:{onLine:true}});});
+test('rate limit is not falsely labelled as VPN issue',async()=>{globalThis.fetch=async()=>new Response('{}',{status:429});await assert.rejects(()=>api('/tracks/trending'),(e:unknown)=>e instanceof ConnectionError&&e.kind==='rate'&&!e.message.includes('VPN'));});
+test('network failure has cautious connection/VPN guidance',async()=>{globalThis.fetch=async()=>{throw new TypeError('Failed to fetch');};await assert.rejects(()=>api('/tracks/trending'),(e:unknown)=>e instanceof ConnectionError&&e.kind==='network'&&e.message.includes('اگر'));});
+test('caller cancellation exits without sending provider requests',async()=>{const c=new AbortController();c.abort();let count=0;globalThis.fetch=async()=>{count++;return new Response('{}');};await assert.rejects(()=>api('/tracks/trending',c.signal),(e:any)=>e.name==='AbortError');assert.equal(count,0);});

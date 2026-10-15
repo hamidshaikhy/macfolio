@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.sites-runtime/
+.env.local
+*.zip
+*.tar.gz
+.test-build/
+.qa/
+test-results/
+playwright-report/

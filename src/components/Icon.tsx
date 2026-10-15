@@ -1,3 +1,4 @@
+import { integratedApp } from "../lib/integrated-apps";
 import { appById, type AppId } from "../lib/apps";
 import { asset } from "../lib/assets";
 export function AppIcon({
@@ -17,6 +18,8 @@ export function AppIcon({
         <img src={asset("assets/chess/wN.svg")} alt="" draggable={false} />
       </span>
     );
+  const integrated = integratedApp(id);
+  if (integrated) return <img className="app-icon" src={asset(integrated.icon)} style={{width:size,height:size}} alt="" draggable={false}/>;
   const icon =
     id === "music"
       ? "apple-music"
@@ -26,7 +29,7 @@ export function AppIcon({
   return (
     <img
       className="app-icon"
-      src={asset(`assets/icons/${icon}.${["calculator", "linkedin", "about", "calendar", "contacts"].includes(icon) ? "svg" : "png"}`)}
+      src={asset(`assets/icons/${icon}.${["calculator", "about", "calendar", "contacts"].includes(icon) ? "svg" : "png"}`)}
       style={{ width: size, height: size }}
       alt=""
       draggable={false}

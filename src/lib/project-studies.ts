@@ -5,6 +5,14 @@ export type ProjectStudy = {
   highlights: string[]; shots: ProjectShot[];
 };
 export const projectStudies: Record<string, ProjectStudy> = {
+  'personal-finance': {
+    headline: "یک تصویر روشن از دخل‌وخرج", intro: "دفتر مالی فارسی با حساب‌های محلی مستقل، تقویم شمسی و اطلاعات رمزگذاری‌شده؛ تصاویر با حساب نمایشی گرفته شده‌اند.", status: "LIVE PERSONAL FINANCE PWA",
+    role: "طراحی و توسعهٔ کامل رابط و منطق دفتر مالی با React، TypeScript، IndexedDB و Web Crypto.",
+    challenge: "خوانایی تراکنش‌ها و نمودارها در موبایل، جداسازی کاربران و محافظت از ذخیره در چند تب هم‌زمان.",
+    result: "حساب‌ها، تراکنش‌ها، بودجه، گزارش‌های ماهانه، سررسیدها و هدف‌های پس‌انداز؛ همراه CSV و پشتیبان رمزگذاری‌شده.",
+    highlights: ["دفتر رمزگذاری‌شدهٔ محلی", "تقویم شمسی و RTL", "بودجه و نمودار مسیر پول", "CSV و پشتیبان"],
+    shots: [{file:"overview-desktop.png",title:"نمای کلی دفتر مالی",description:"موجودی حساب‌ها، مسیر پول و بودجه با داده‌های نمایشی."},{file:"reports-desktop.png",title:"گزارش مالی",description:"مقایسهٔ ماه‌ها، سهم دسته‌ها و خروجی CSV."},{file:"transaction-editor-mobile.png",title:"ثبت تراکنش روی گوشی",description:"فرم درآمد و هزینه با مبلغ تومان و تاریخ شمسی."}],
+  },
   'todo-list': {
     headline: "یک روز، یک قدم جلوتر؛ در وب و اندروید",
     intro: "برنامه‌ریز روزانهٔ فارسی برای کارها، تقویم شمسی و تایمر تمرکز. نسخهٔ وب یک PWA نصب‌شدنی است و نسخهٔ اندروید با رابط بومی React Native و Expo ساخته شده؛ بدون حساب کاربری و سرور، با ذخیره روی همان دستگاه.",

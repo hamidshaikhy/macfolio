@@ -24,7 +24,7 @@ it("protects bundled files, rejects colliding names and normalizes writes", () =
   expect(fs.rename(`${HOME}/Code/new.ts`, "renamed.ts")).toBe(`${HOME}/Code/renamed.ts`);
 });
 it("opens the correct file, project and music surfaces", () => {
-  openFile(`${HOME}/Notes/welcome.md`); expect(useOS.getState().mobileApp).toBe("notes");
+  openFile(`${HOME}/Notes/welcome.md`); expect(useOS.getState().mobileApp).toBe("editor");
   expect(useOS.getState().selectedFile).toBe(`${HOME}/Notes/welcome.md`);
   openFile(`${HOME}/Projects/Flow Studio.project`); expect(useOS.getState().selectedProject).toBe("flow");
   openFile(bundledFiles[0].path); expect(useOS.getState().mobileApp).toBe("resume");

@@ -1,13 +1,12 @@
-export type AppId =
+import { integratedApps, type IntegratedAppId } from "./integrated-apps";
+export type AppId = IntegratedAppId
   | "github"
   | "calendar"
   | "contacts"
   | "finder"
   | "calculator"
-  | "linkedin"
   | "about"
   | "projects"
-  | "notes"
   | "safari"
   | "editor"
   | "terminal"
@@ -21,6 +20,7 @@ export const apps: {
   icon: string;
   keywords: string;
 }[] = [
+  ...integratedApps.map(app=>({id:app.id,name:app.title,icon:app.icon,keywords:app.id+" apps application Persian PWA برنامه"})),
   { id: "github", name: "GitHub", icon: "github", keywords: "git repositories code گیت هاب گیتهاب" },
   { id: "calendar", name: "Calendar", icon: "calendar", keywords: "events dates تقویم رویداد" },
   { id: "contacts", name: "Contacts", icon: "contacts", keywords: "contact email phone مخاطبین تماس" },
@@ -37,7 +37,6 @@ export const apps: {
     icon: "folder",
     keywords: "dika asia finance flow studio barg resume builder tanpoosh menswear store to do list todo task planner android apk pwa hamnava music هم‌نوا همنوا هم نوا برنامه‌ریز کارها موسیقی اندروید تن‌پوش تن پوش فروشگاه استایل رزومه پروژه",
   },
-  { id: "notes", name: "Notes", icon: "notes", keywords: "write یادداشت" },
   {
     id: "safari",
     name: "Safari",
@@ -66,10 +65,9 @@ export const apps: {
   },
   { id: "trash", name: "Trash", icon: "trash", keywords: "deleted files" },
   { id: "calculator", name: "Calculator", icon: "calculator", keywords: "math calculate ماشین حساب" },
-  { id: "linkedin", name: "LinkedIn", icon: "linkedin", keywords: "professional profile contact حمید" },
 ];
 export const appById = (id: AppId) => apps.find((a) => a.id === id)!;
-export const dockApps = ["finder", "terminal", "editor", "notes", "calendar", "safari", "github", "linkedin", "contacts", "chess", "calculator", "settings"].map(id => apps.find(a => a.id === id)!);
+export const dockApps = ["finder", "terminal", "editor", "calendar", "safari", "github", "barg", "hamnava", "personal-finance", "todo", "contacts", "chess", "calculator", "settings"].map(id => apps.find(a => a.id === id)!);
 
-const appOrder = ["finder", "terminal", "editor", "projects", "notes", "calendar", "safari", "github", "linkedin", "contacts", "about", "resume", "chess", "calculator", "settings", "trash"];
+const appOrder = ["finder", "terminal", "editor", "projects", "calendar", "safari", "github", "barg", "hamnava", "personal-finance", "todo", "contacts", "about", "resume", "chess", "calculator", "settings", "trash"];
 apps.sort((a,b) => appOrder.indexOf(a.id) - appOrder.indexOf(b.id));

@@ -1,0 +1,33 @@
+{
+  "id": "/apps/hamnava/",
+  "name": "hamnava · هم‌نوا",
+  "short_name": "hamnava",
+  "lang": "fa",
+  "dir": "rtl",
+  "description": "پخش موسیقی، جست‌وجوی آهنگ و مجموعه‌های شخصی",
+  "start_url": "/apps/hamnava/",
+  "scope": "/apps/hamnava/",
+  "display": "standalone",
+  "background_color": "#141613",
+  "theme_color": "#141613",
+  "icons": [
+    {
+      "src": "/apps/hamnava/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/hamnava/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/hamnava/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

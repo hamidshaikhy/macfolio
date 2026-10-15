@@ -22,7 +22,7 @@ export const initialFiles: LocalFile[] = [
     path: "/Users/hamid/Notes/welcome.md",
     modified: "2026-10-04",
     content:
-      "سلام!\n\nاینجا می‌توانید یک یادداشت بنویسید. تغییرات فقط در مرورگر همین دستگاه ذخیره می‌شوند.\n\nفایل‌ها بین Notes، Code و Terminal مشترک‌اند. برای دیدن فرمان‌ها در ترمینال help را بنویسید.",
+      "سلام!\n\nاینجا می‌توانید یک یادداشت بنویسید. تغییرات فقط در مرورگر همین دستگاه ذخیره می‌شوند.\n\nفایل‌ها بین Finder، Code و Terminal مشترک‌اند. برای دیدن فرمان‌ها در ترمینال help را بنویسید.",
   },
   {
     path: "/Users/hamid/Code/profile.ts",

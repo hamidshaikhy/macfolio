@@ -8,5 +8,5 @@ export function openFile(path: string) {
     if (bundled.project) os.setSelectedProject(bundled.project);
     os.openApp(bundled.app); return;
   }
-  os.setSelectedFile(path); os.openApp(path.includes("/Notes/") ? "notes" : "editor");
+  os.setSelectedFile(path); os.openApp("editor");
 }

@@ -1,3 +1,4 @@
+import { projectDemo } from "../lib/integrated-apps";
 ﻿import { useRef, useState, type CSSProperties } from "react";
 import { Github, MapPin, Mail, BookOpen, ArrowUpRight, ArrowDown, FileText, Code2, Braces, Network, GitBranch, Layers } from "lucide-react";
 import { profile, projects } from "../lib/content";
@@ -60,7 +61,7 @@ export default function GitHub() {
 
         <section className="gh-work" ref={work}>
           <div className="gh-section-heading"><div><span className="gh-label">SELECTED PROJECTS</span><h3>Things I’ve built<span>.</span></h3></div><button onClick={() => os.openApp("projects")}>All projects <ArrowUpRight size={15} /></button></div>
-          <div className="gh-project-grid">{projects.map(p => <button className="gh-project" key={p.id} onClick={() => { os.setSelectedProject(p.id); os.openApp("projects"); }}><ProjectPreview project={p} /><div className="gh-project-body"><small>{p.category}</small><h4>{p.title}<ArrowUpRight size={17} /></h4><p dir="rtl">{p.summary}</p><footer>{p.tags.slice(0, 3).map(t => <span key={t}>{t}</span>)}</footer></div></button>)}</div>
+          <div className="gh-project-grid">{projects.map(p => <div className="gh-project-entry" key={p.id}><button className="gh-project" onClick={() => { os.setSelectedProject(p.id); os.openApp("projects"); }}><ProjectPreview project={p} /><div className="gh-project-body"><small>{p.category}</small><h4>{p.title}<ArrowUpRight size={17} /></h4><p dir="rtl">{p.summary}</p><footer>{p.tags.slice(0, 3).map(t => <span key={t}>{t}</span>)}</footer></div></button>{projectDemo(p.id)&&<a className="gh-project-demo" href={projectDemo(p.id)} target="_blank" rel="noopener noreferrer">Open live app</a>}</div>)}</div>
         </section>
         <footer className="gh-footer"><span><Code2 size={14} /> Made with care, in Tehran.</span><button onClick={() => os.openApp("contacts")}>Let’s build something together <ArrowUpRight size={14} /></button></footer>
       </main>
