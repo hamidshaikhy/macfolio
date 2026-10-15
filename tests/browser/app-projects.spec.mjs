@@ -11,14 +11,15 @@ test('new apps share real galleries across GitHub, Projects, Safari and Spotligh
   await page.goto('/?view=desktop');
   const dock=page.getByRole('navigation',{name:'Dock',exact:true});
   await dock.getByRole('button',{name:'GitHub',exact:true}).click();
-  await expect(page.locator('.gh-project')).toHaveCount(7);
+  await expect(page.locator('.gh-project')).toHaveCount(8);
   for(const app of apps){
     const card=page.locator('.gh-project').filter({has:page.getByRole('heading',{name:app.title,exact:true})});
     await expect.poll(()=>card.locator('img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
     await card.click();
     const project=page.getByRole('dialog',{name:'Projects',exact:true});
     await expect(project.locator('.project-hero h2')).toHaveText(app.title);
-    await expect(project.locator('.project-links a')).toHaveAttribute('href',`https://github.com/hamidshaikhy/${app.repo}`);
+    await expect(project.getByRole('link',{name:/Explore source/})).toHaveAttribute('href',`https://github.com/hamidshaikhy/${app.repo}`);
+    await expect(project.getByRole('link',{name:/Open live app/})).toHaveAttribute('href',`/apps/${app.id==='todo-list'?'todo':app.id}/`);
     const thumbnails=project.locator('.project-gallery-thumbnails button');
     await expect(thumbnails).toHaveCount(app.shots);
     for(let i=0;i<app.shots;i++){
@@ -39,7 +40,7 @@ test('new apps share real galleries across GitHub, Projects, Safari and Spotligh
   await page.getByRole('button',{name:'Close Safari',exact:true}).click();
   await page.getByRole('button',{name:'Spotlight',exact:true}).click();
   await page.getByRole('textbox',{name:'Search apps',exact:true}).fill('Hamnava');
-  await page.locator('.spotlight-results').getByRole('button',{name:/Hamnava/}).click();
+  await page.locator('.spotlight-results').getByRole('button',{name:/Hamnava/}).last().click();
   await expect(page.locator('.project-hero h2')).toHaveText('Hamnava');
   await fs.mkdir('artifacts/app-projects',{recursive:true});
   await page.screenshot({path:`artifacts/app-projects/${info.project.name}-macfolio-hamnava.png`});

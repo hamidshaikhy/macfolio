@@ -4,7 +4,7 @@
 
 `App.tsx` selects the desktop or `Mobile.tsx` through a live media query. Phones use the phone shell below 768px; coarse-pointer devices also retain it in short landscape viewports up to 1024px. Apps are lazy-loaded with per-app error boundaries. PDF.js and CodeMirror are isolated from the initial shell.
 
-The desktop has one window per app. Array order is focus order. Opening a minimized app restores it; maximize keeps the original rectangle. Creation, drag, resize and viewport changes clamp bounds. Gesture listeners are removed on completion and unmount. Windows are memoized independently; app content does not rerender for every coordinate change. Dock magnification batches pointer updates through animation frames, budgets growth against the viewport and subscribes to app presence rather than changing window coordinates.
+The desktop has one window per app. Store array order is focus order; rendered DOM order is stable and z-index tracks focus. Moving an iframe ancestor in the DOM would reload it even with a stable React key. Opening a minimized app restores it; maximize keeps the original rectangle. Creation, drag, resize and viewport changes clamp bounds. Gesture listeners are removed on completion and unmount. Windows are memoized independently; app content does not rerender for every coordinate change. Dock magnification batches pointer updates through animation frames, budgets growth against the viewport and subscribes to app presence rather than changing window coordinates.
 
 Phone apps share files, preferences and music with the desktop, using one foreground app, a four-slot Dock, home grid, Control Center and lock/home gestures. Landscape compacts the home screen and gives Calculator a horizontal keypad layout.
 
@@ -25,9 +25,9 @@ Storage adapters catch access failures and avoid repeated writes of unchanged pr
 
 Files have path, content, optional title and timestamps. Deleted records receive a unique Trash identity. Saving another live file at the same path never overwrites a deleted record. Restoration preserves content and resolves name conflicts; permanently emptying Trash requires in-app confirmation. Bundled assets cannot be modified or removed.
 
-Notes applies Markdown transformations to the actual selected text and renders a safe Markdown preview. CodeMirror owns caret, highlighting, scroll-synchronized gutters, tabs and indentation. Neither executes authored code. Both immediately save to the same store. Terminal reads current state only when executing or completing, avoiding background rerenders during note editing. Its interpreter tokenizes quotes/escapes/redirection, normalizes paths and injects supported local actions; it does not execute processes, substitutions, JavaScript or a host shell.
+CodeMirror owns caret, highlighting, scroll-synchronized gutters, tabs and indentation. It edits Markdown and code without executing it, saving to the same store. Legacy Notes files remain intact and open in Code. Terminal reads current state only when executing or completing; its interpreter tokenizes quotes/escapes/redirection, normalizes paths and injects supported local actions. It does not execute host processes, substitutions or arbitrary JavaScript.
 
-Safari has its own internal history. Portfolio pages render inside the app, while external destinations present an explicit normal-tab link. The curated LinkedIn profile uses supplied identity and résumé evidence, with links to the real external profile; it is not an authenticated session.
+Safari retains its internal history and favorites. External LinkedIn contact links open in a browser tab; the internal Notes and LinkedIn apps have been removed. Barg, Hamnava, Personal Finance and To Do List run in lazy same-origin iframes, with isolated documents and dependency builds. See [INTEGRATIONS.md](INTEGRATIONS.md).
 
 Calculator uses a pure reducer, finite-value checks and rounded display precision. Standard operations run left to right. Add/subtract percentages use the accumulator as their base; multiply/divide percentages use a fraction. Repeated equals keeps the previous operation. Division by zero produces a recoverable error. Focus and panel state gate keyboard input.
 
@@ -89,7 +89,7 @@ Cleanup removed unused imports, test-only app wrappers, the obsolete static Cale
 
 Calculator opens at 320×510 with a 36px titlebar, no visible title, and a compact four-column keypad. `clampRect` accepts an optional app id so its 280px minimum width does not weaken other applications' 420px limit. Drag, resize, minimize and full-viewport maximize remain available. `src/shell-refinements.css` replaces the previous 56 conflicting Calculator rules and owns its portrait/landscape layouts.
 
-Mobile derives its home icons from the desktop `dockApps` list, reserving Finder, Safari, Calculator and LinkedIn for the phone Dock and adding Trash to the grid. About opens from the profile widget; Projects and Preview open from the Selected work/My résumé links. The complete grid fits the tested 320×568 through 390×844 portrait screens and 667×375 landscape screen without page navigation. Spotlight keeps About available when landscape hides the widgets.
+Mobile uses an explicit home list independent of the desktop Dock, reserving Finder, Safari, Calculator and Contacts for its four Dock slots. All four integrated apps appear in the home grid. About retains its profile widget; Projects and Preview retain their quick links. Opened child iframe instances stay mounted when returning home or opening another app; their visibility bridge pauses visual work.
 
 The menu-bar date now toggles the `notifications` panel. `NotificationCenter.tsx` renders four static sample cards without click actions; it does not use the Calendar widget or receive live mail. Its glass material follows the theme. The shared battery SVG contains a green fill and white charging bolt in both desktop and phone chrome.
 

@@ -1,3 +1,4 @@
+import { integratedApp } from "../lib/integrated-apps";
 import {
   Wifi,
   Signal,
@@ -11,14 +12,15 @@ import {
 import { useRef } from "react";
 import { useClock, tehranDate } from "../lib/hooks";
 import { useOS } from "../state/os";
-import { dockApps, appById, type AppId } from "../lib/apps";
+import { apps, appById, type AppId } from "../lib/apps";
 import { AppIcon } from "./Icon";
 import { AppView } from "../apps/AppView";
 import { LockScreen } from "./LockScreen";
 import { asset } from "../lib/assets";
 import { SystemIcon } from "./SystemIcon";
-const mobileDock: AppId[] = ["finder", "safari", "calculator", "linkedin"];
-const homeApps = [...dockApps.filter(app => !mobileDock.includes(app.id)), appById("trash")];
+const mobileDock: AppId[] = ["finder", "safari", "calculator", "contacts"];
+// About, Projects and Preview retain their existing widget/quick-link entry points.
+const homeApps: ReturnType<typeof appById>[] = (["terminal", "editor", "calendar", "github", "barg", "hamnava", "personal-finance", "todo", "chess", "settings", "trash"] as AppId[]).map(appById);
 export function Mobile() {
   const os = useOS();
   const now = useClock();
@@ -61,7 +63,7 @@ export function Mobile() {
               <ChevronLeft size={21} /> Home
             </button>
             <strong>{appById(os.mobileApp).name}</strong>
-            {os.mobileApp==='about'?<a className="window-portfolio-link" aria-label="OPEN FULL PORTFOLIO" href={asset('portfolio')} target="_blank" rel="noopener noreferrer">FULL PORTFOLIO</a>:<button
+            {os.mobileApp==='about'?<a className="window-portfolio-link" aria-label="OPEN FULL PORTFOLIO" href={asset('portfolio')} target="_blank" rel="noopener noreferrer">FULL PORTFOLIO</a>:integratedApp(os.mobileApp)?<a className="window-portfolio-link" href={integratedApp(os.mobileApp)!.path} target="_blank" rel="noopener noreferrer">OPEN FULL</a>:<button
               aria-label="Open Control Center"
               onClick={() => os.setPanel("control")}
             >
@@ -69,7 +71,7 @@ export function Mobile() {
             </button>}
           </header>
           <div className="ios-app-content">
-            <AppView id={os.mobileApp} />
+            {!integratedApp(os.mobileApp) && <AppView key={os.mobileApp} id={os.mobileApp} />}
           </div>
         </section>
       ) : (
@@ -141,6 +143,7 @@ export function Mobile() {
           </div>
         </main>
       )}
+      {os.windows.filter(win=>integratedApp(win.app)).sort((a,b)=>apps.findIndex(app=>app.id===a.app)-apps.findIndex(app=>app.id===b.app)).map(win=><div key={win.app} className="ios-embedded-runtime" hidden={os.mobileApp!==win.app || os.locked}><AppView id={win.app}/></div>)}
       <button
         className="home-indicator"
         aria-label={os.locked ? "Unlock" : "Return to home"}

@@ -13,8 +13,8 @@ import './experience.css';
 const CaseStudy = lazy(() => import('./CaseStudy'));
 const number = (n:number) => String(n).padStart(2,'0');
 const clamp = (n:number) => Math.max(0,Math.min(1,n));
-const sceneColors = ['#dff9ee','#f3e8cb','#20204c','#eadbf4','#172e31','#f5ece3','#172016','#e1f4ed'];
-const darkScenes = [false,false,true,false,true,false,true,false];
+const sceneColors = ['#dff9ee','#f3e8cb','#20204c','#eadbf4','#172e31','#f5ece3','#172016','#172629','#e1f4ed'];
+const darkScenes = [false,false,true,false,true,false,true,true,false];
 const journeyCount=journeyEntries.length;
 type Props = { mode:'standalone'|'embedded'; section?:string; onNavigate?:(section:SectionId)=>void };
 
@@ -58,6 +58,9 @@ export default function PortfolioExperience({mode,section='',onNavigate}:Props) 
     const target=port.querySelector<HTMLElement>(`[data-section="${id}"]`);
     if(target){
       let top=target.getBoundingClientRect().top-port.getBoundingClientRect().top+port.scrollTop;
+      // Match the pinned work timeline's 96px header offset so its first project
+      // remains the entry point as the collection grows.
+      if(id==='work'&&cinematic.current)top-=96;
       if(id==='profile'&&cinematic.current&&port.clientWidth>1100&&port.clientHeight>=520)top+=(target.offsetHeight-port.clientHeight)*.42;
       port.scrollTo({top,behavior});
     }
@@ -186,8 +189,15 @@ export default function PortfolioExperience({mode,section='',onNavigate}:Props) 
     studyTrigger.current=event.currentTarget;studyPosition.current=scroll.current?.scrollTop||0;
     scroll.current?.scrollTo({top:studyPosition.current,behavior:'instant'});setStudy(activeProject);
   }
-  function closeStudy(){setStudy(null);focusFrame.current=requestAnimationFrame(()=>{scroll.current?.scrollTo({top:studyPosition.current,behavior:'instant'});studyTrigger.current?.focus({preventScroll:true});});}
+  function closeStudy(){
+    // A dialog can stay open longer than the manual-choice timeout. Keep its
+    // project selected on return; actual wheel/touch scrolling releases it.
+    projectOverride.current=Date.now()+10000;
+    if(study!==null)setActiveProject(study);
+    setStudy(null);focusFrame.current=requestAnimationFrame(()=>{scroll.current?.scrollTo({top:studyPosition.current,behavior:'instant'});studyTrigger.current?.focus({preventScroll:true});});
+  }
   function chooseProject(index:number){
+    cancelAnimationFrame(focusFrame.current);
     const next=Math.max(0,Math.min(selectedWork.length-1,index));projectOverride.current=Date.now()+10000;setActiveProject(next);work.current?.style.setProperty('--project-arrival','1');
     if(pinned&&work.current&&scroll.current){const port=scroll.current,start=work.current.getBoundingClientRect().top-port.getBoundingClientRect().top+port.scrollTop-96,range=work.current.offsetHeight-port.clientHeight+96;port.scrollTo({top:start+(next+.3)/selectedWork.length*range,behavior:'instant'});}
   }

@@ -1,4 +1,5 @@
 import { Component, lazy, Suspense, memo, type ReactNode } from "react";
+import { integratedApp } from "../lib/integrated-apps";
 import type { AppId } from "../lib/apps";
 const About = lazy(() => import("./About"));
 const Projects = lazy(() => import("./Projects"));
@@ -9,8 +10,6 @@ const Preview = lazy(() => import("./Preview"));
 const Chess = lazy(() => import("./Chess"));
 const Finder = lazy(() => import("./Finder"));
 const Calculator = lazy(() => import("./Calculator"));
-const LinkedIn = lazy(() => import("./LinkedIn"));
-const Notes = lazy(() => import("./Notes"));
 const Editor = lazy(() =>
   import("./Editor"),
 );
@@ -18,11 +17,11 @@ const Trash = lazy(() => import("./Files").then((m) => ({ default: m.Trash })));
 const GitHub = lazy(() => import("./GitHub"));
 const Calendar = lazy(() => import("./Calendar"));
 const Contacts = lazy(() => import("./Contacts"));
+const EmbeddedApp = lazy(() => import("./EmbeddedApp"));
 const views = {
   github: GitHub, calendar: Calendar, contacts: Contacts,
   finder: Finder,
   calculator: Calculator,
-  linkedin: LinkedIn,
   about: About,
   projects: Projects,
   safari: Safari,
@@ -30,7 +29,6 @@ const views = {
   terminal: Terminal,
   resume: Preview,
   chess: Chess,
-  notes: Notes,
   editor: Editor,
   trash: Trash,
 };
@@ -59,7 +57,8 @@ class AppErrorBoundary extends Component<
   }
 }
 export const AppView = memo(function AppView({ id }: { id: AppId }) {
-  const View = views[id];
+  const app = integratedApp(id);
+  const View = app ? null : views[id as keyof typeof views];
   return (
     <AppErrorBoundary key={id}>
       <Suspense
@@ -70,7 +69,7 @@ export const AppView = memo(function AppView({ id }: { id: AppId }) {
           </div>
         }
       >
-        <View />
+        {app ? <EmbeddedApp id={app.id} /> : View && <View />}
       </Suspense>
     </AppErrorBoundary>
   );

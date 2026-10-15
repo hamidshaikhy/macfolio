@@ -1,0 +1,209 @@
+diff --git a/index.html b/index.html
+index 5c67683..38f7b0e 100644
+--- a/index.html
++++ b/index.html
+@@ -1 +1 @@
+-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#fbf8f4"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="to do list"><meta name="description" content="to do list؛ برنامه‌ریز سادهٔ روزانه با تقویم، تایمر تمرکز و ذخیرهٔ آفلاین."><link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><title>to do list</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
++<!doctype html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#fbf8f4"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="to do list"><meta name="description" content="to do list؛ برنامه‌ریز سادهٔ روزانه با تقویم، تایمر تمرکز و ذخیرهٔ آفلاین."><link rel="manifest" href="%BASE_URL%manifest.webmanifest"><link rel="icon" href="%BASE_URL%icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png"><title>to do list</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+diff --git a/package.json b/package.json
+index eca4bc3..36add77 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,24 @@
+ {
+-  "name": "to-do-list-planner", "version": "1.0.0", "private": true, "type": "module",
+-  "scripts": {"dev": "vite --host 0.0.0.0", "build": "tsc --noEmit && vite build && node scripts/build-sw.mjs", "test": "node --experimental-strip-types --test tests/*.test.ts", "preview": "vite preview --host 0.0.0.0"},
+-  "dependencies": {"react": "^19.1.0", "react-dom": "^19.1.0", "lucide-react": "^0.468.0", "@fontsource/vazirmatn": "^5.2.5"},
+-  "devDependencies": {"@types/react": "^19.1.0", "@types/react-dom": "^19.1.0", "typescript": "~5.8.3", "vite": "^6.3.5"}
++  "name": "to-do-list-planner",
++  "version": "1.0.0",
++  "private": true,
++  "type": "module",
++  "scripts": {
++    "dev": "vite --host 0.0.0.0",
++    "build": "tsc --noEmit && vite build",
++    "test": "node --experimental-strip-types --test tests/*.test.ts",
++    "preview": "vite preview --host 0.0.0.0"
++  },
++  "dependencies": {
++    "react": "^19.1.0",
++    "react-dom": "^19.1.0",
++    "lucide-react": "^0.468.0",
++    "@fontsource/vazirmatn": "^5.2.5"
++  },
++  "devDependencies": {
++    "@types/react": "^19.1.0",
++    "@types/react-dom": "^19.1.0",
++    "typescript": "~5.8.3",
++    "vite": "^6.3.5"
++  }
+ }
+diff --git a/public/downloads/android.json b/public/downloads/android.json
+index 3944135..3d8d3ce 100644
+--- a/public/downloads/android.json
++++ b/public/downloads/android.json
+@@ -4,7 +4,7 @@
+   "bytes": 33524703,
+   "sha256": "deb8194155ff2785de4625fe92fe0c8e68f00777fe60b4e1957b00ed0499f8b1",
+   "parts": [
+-    "/downloads/to-do-list.part0",
+-    "/downloads/to-do-list.part1"
++    "/apps/todo/downloads/to-do-list.part0",
++    "/apps/todo/downloads/to-do-list.part1"
+   ]
+ }
+diff --git a/public/manifest.webmanifest b/public/manifest.webmanifest
+index a5e9487..02ed5e6 100644
+--- a/public/manifest.webmanifest
++++ b/public/manifest.webmanifest
+@@ -1 +1,33 @@
+-{"id":"/","name":"to do list","short_name":"to do list","description":"کارهای روزانه، تایمر تمرکز و تقویم؛ بدون حساب کاربری","lang":"fa","dir":"rtl","start_url":"/","scope":"/","display":"standalone","background_color":"#fbf8f4","theme_color":"#fbf8f4","icons":[{"src":"/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},{"src":"/icon-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]}
++{
++  "id": "/apps/todo/",
++  "name": "to do list",
++  "short_name": "to do list",
++  "description": "کارهای روزانه، تایمر تمرکز و تقویم؛ بدون حساب کاربری",
++  "lang": "fa",
++  "dir": "rtl",
++  "start_url": "/apps/todo/",
++  "scope": "/apps/todo/",
++  "display": "standalone",
++  "background_color": "#fbf8f4",
++  "theme_color": "#fbf8f4",
++  "icons": [
++    {
++      "src": "/apps/todo/icon-192.png",
++      "sizes": "192x192",
++      "type": "image/png",
++      "purpose": "any"
++    },
++    {
++      "src": "/apps/todo/icon-512.png",
++      "sizes": "512x512",
++      "type": "image/png",
++      "purpose": "any"
++    },
++    {
++      "src": "/apps/todo/icon-maskable.png",
++      "sizes": "512x512",
++      "type": "image/png",
++      "purpose": "maskable"
++    }
++  ]
++}
+diff --git a/src/AndroidDownload.tsx b/src/AndroidDownload.tsx
+index 9a7c6e2..d1f6ef8 100644
+--- a/src/AndroidDownload.tsx
++++ b/src/AndroidDownload.tsx
+@@ -3,7 +3,7 @@ import {ArrowDownToLine,Smartphone} from 'lucide-react';
+ type Release={available:boolean;parts:string[];bytes:number;sha256:string;version:string};
+ export default function AndroidDownload(){
+  const [release,setRelease]=useState<Release|null>(null),[progress,setProgress]=useState<number|null>(null),[error,setError]=useState('');
+- useEffect(()=>{let live=true;fetch('/downloads/android.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(live&&d?.available&&Array.isArray(d.parts)&&d.parts.every((p:unknown)=>typeof p==='string'&&p.startsWith('/downloads/'))&&Number.isFinite(d.bytes)&&typeof d.sha256==='string')setRelease(d);}).catch(()=>{});return()=>{live=false;};},[]);
++ useEffect(()=>{let live=true;fetch(import.meta.env.BASE_URL+'downloads/android.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(live&&d?.available&&Array.isArray(d.parts)&&d.parts.every((p:unknown)=>typeof p==='string'&&p.startsWith(import.meta.env.BASE_URL+'downloads/'))&&Number.isFinite(d.bytes)&&typeof d.sha256==='string')setRelease(d);}).catch(()=>{});return()=>{live=false;};},[]);
+  const download=async()=>{if(!release||progress!==null)return;setError('');setProgress(0);try{const chunks:ArrayBuffer[]=[];let loaded=0;for(const part of release.parts){const res=await fetch(part);if(!res.ok)throw new Error('دریافت فایل کامل نشد؛ دوباره تلاش کن.');const chunk=await res.arrayBuffer();chunks.push(chunk);loaded+=chunk.byteLength;setProgress(Math.round(loaded/release.bytes*100));}const joined=new Uint8Array(loaded);let offset=0;for(const chunk of chunks){joined.set(new Uint8Array(chunk),offset);offset+=chunk.byteLength;}if(loaded!==release.bytes)throw new Error('فایل دانلود ناقص است.');const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',joined))).map(b=>b.toString(16).padStart(2,'0')).join('');if(digest!==release.sha256)throw new Error('فایل دانلود سالم نیست؛ دوباره تلاش کن.');const url=URL.createObjectURL(new Blob([joined],{type:'application/vnd.android.package-archive'}));const a=document.createElement('a');a.href=url;a.download='to-do-list.apk';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}catch(e){setError(e instanceof Error?e.message:'دانلود انجام نشد.');}finally{setProgress(null);}};
+  return <div className="android-download"><div className="android-label"><Smartphone size={19}/><div><strong>اپ مستقل اندروید</strong><span>React Native · ذخیره روی گوشی</span></div></div>{release?<button className="primary" disabled={progress!==null} onClick={()=>void download()}><ArrowDownToLine size={16}/>{progress!==null?`دریافت فایل… ${progress}٪`:'دانلود APK اندروید'}</button>:<p className="small-note">فایل نصب اندروید هنوز آمادهٔ دانلود نیست.</p>}{release&&<small>نسخهٔ آزمایشی {release.version} · {Math.ceil(release.bytes/1048576)} مگابایت</small>}{error&&<p className="error" role="alert">{error}</p>}</div>;
+ }
+diff --git a/src/App.tsx b/src/App.tsx
+index 04a6b29..8e903c4 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -1,3 +1,4 @@
++import { embedded } from './macfolio-bridge';
+ import {useEffect,useRef,useState, type ReactNode} from 'react';
+ import {ArrowDownToLine,ArrowUpFromLine,CalendarDays,Check,CheckCheck,ChevronLeft,ChevronRight,Clock3,Ellipsis,Leaf,Pause,Play,Plus,RotateCcw,Settings2,ShieldCheck,Square,Trash2,X,Pencil,Smartphone,Sun,Moon,ArrowUpRight} from 'lucide-react';
+ import {complete,dayDate,isOverdue,localDay,reconcile,remaining,sampleTasks,shiftDay,timerAction,validateTasks,type Task,type Timer} from './domain';
+@@ -25,10 +26,10 @@ export default function App(){
+  const today=localDay(new Date(now)),storageQueue=useRef(Promise.resolve()),skipSave=useRef(false),fileRef=useRef<HTMLInputElement>(null),quickRef=useRef<HTMLInputElement>(null),previousToday=useRef(today);
+  useEffect(()=>{let live=true;loadTasks().then(saved=>{if(live){setTasks(reconcile(saved??sampleTasks(),Date.now()));setReady(true);}}).catch(()=>{if(live)setFatal('دسترسی به حافظهٔ دستگاه ممکن نشد. برای محافظت از اطلاعاتت، چیزی را بازنویسی نکردیم. برنامه را در یک تب عادی باز کن و دوباره تلاش کن.');});return()=>{live=false;};},[]);
+  useEffect(()=>{if(!ready||skipSave.current)return;setSaveState('در حال ذخیره…');let live=true;storageQueue.current=storageQueue.current.catch(()=>{}).then(()=>saveTasks(tasks)).then(()=>{if(live)setSaveState('ذخیره شد');}).catch(()=>{if(live)setSaveState('ذخیره نشد — حافظه را بررسی کن');});return()=>{live=false;};},[tasks,ready]);
+- useEffect(()=>{const tick=()=>{const time=Date.now();setNow(time);setTasks(t=>reconcile(t,time));};const id=window.setInterval(tick,1000);window.addEventListener('focus',tick);document.addEventListener('visibilitychange',tick);return()=>{clearInterval(id);window.removeEventListener('focus',tick);document.removeEventListener('visibilitychange',tick);};},[]);
++ useEffect(()=>{const tick=()=>{const time=Date.now();setNow(time);setTasks(t=>reconcile(t,time));};let id:number|undefined;const visible=()=>{clearInterval(id);if(!document.hidden&&document.documentElement.dataset.macfolioHidden!=='true'){tick();id=window.setInterval(tick,1000);}};visible();window.addEventListener('focus',visible);document.addEventListener('visibilitychange',visible);document.addEventListener('macfolio-visibility',visible);return()=>{clearInterval(id);window.removeEventListener('focus',visible);document.removeEventListener('visibilitychange',visible);document.removeEventListener('macfolio-visibility',visible);};},[]);
+  useEffect(()=>{if(previousToday.current!==today){if(selected===previousToday.current){setSelected(today);setAnchor(today);}previousToday.current=today;}},[today,selected]);
+  useEffect(()=>{document.documentElement.dataset.theme=theme;document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#24201e':'#fbf8f4');try{localStorage.setItem('rooz-theme',theme);}catch{}},[theme]);
+- useEffect(()=>{const sync=()=>setOnline(navigator.onLine),install=(e:Event)=>{e.preventDefault();setInstallPrompt(e);};window.addEventListener('online',sync);window.addEventListener('offline',sync);window.addEventListener('beforeinstallprompt',install);return()=>{window.removeEventListener('online',sync);window.removeEventListener('offline',sync);window.removeEventListener('beforeinstallprompt',install);};},[]);
++ useEffect(()=>{const sync=()=>setOnline(navigator.onLine),install=(e:Event)=>{e.preventDefault();if(!embedded)setInstallPrompt(e);};window.addEventListener('online',sync);window.addEventListener('offline',sync);window.addEventListener('beforeinstallprompt',install);return()=>{window.removeEventListener('online',sync);window.removeEventListener('offline',sync);window.removeEventListener('beforeinstallprompt',install);};},[]);
+  useEffect(()=>{if(!toast)return;const t=setTimeout(()=>setToast(''),4000);return()=>clearTimeout(t);},[toast]);
+  const update=(task:Task)=>setTasks(ts=>ts.map(t=>t.id===task.id?task:t));
+  const active=tasks.filter(t=>!t.completedAt&&t.day===selected),completedDay=tasks.filter(t=>t.completedAt&&t.day===selected),overdue=tasks.filter(t=>isOverdue(t,today)),completed=tasks.filter(t=>t.completedAt).sort((a,b)=>b.completedAt!-a.completedAt!);
+diff --git a/src/macfolio-bridge.tsx b/src/macfolio-bridge.tsx
+new file mode 100644
+index 0000000..c441cb3
+--- /dev/null
++++ b/src/macfolio-bridge.tsx
+@@ -0,0 +1,39 @@
++import { useEffect, type ReactNode } from 'react';
++
++const query = new URLSearchParams(location.search);
++export const embedded = window.parent !== window && query.get('embed') === 'macfolio';
++const appId = import.meta.env.BASE_URL.split('/').filter(Boolean).slice(-1)[0];
++const instance = query.get('instance');
++type BridgeMessage = { channel: 'macfolio-app-v1'; appId: string; instance: string; type: 'ready' | 'focus' | 'visibility'; visible?: boolean };
++
++export function EmbeddedBridge({ children }: { children: ReactNode }) {
++  useEffect(() => {
++    if (!embedded || !appId || !instance) return;
++    const send = (type: 'ready' | 'focus') => {
++      const message: BridgeMessage = { channel: 'macfolio-app-v1', appId, instance, type };
++      window.parent.postMessage(message, location.origin);
++    };
++    const focus = () => send('focus');
++    const message = (event: MessageEvent) => {
++      const data = event.data as Partial<BridgeMessage> | null;
++      if (event.origin !== location.origin || event.source !== window.parent || !data || data.channel !== 'macfolio-app-v1' || data.appId !== appId || data.instance !== instance || data.type !== 'visibility' || typeof data.visible !== 'boolean') return;
++      document.documentElement.dataset.macfolioHidden = String(!data.visible);
++      document.dispatchEvent(new Event('macfolio-visibility'));
++    };
++    // Ready comes from a committed React UI, never the HTML load event.
++    send('ready');
++    document.addEventListener('pointerdown', focus, true);
++    document.addEventListener('focusin', focus, true);
++    window.addEventListener('message', message);
++    const install = (event: Event) => event.preventDefault();
++    window.addEventListener('beforeinstallprompt', install, true);
++    return () => {
++      document.removeEventListener('pointerdown', focus, true);
++      document.removeEventListener('focusin', focus, true);
++      window.removeEventListener('message', message);
++      window.removeEventListener('beforeinstallprompt', install, true);
++      delete document.documentElement.dataset.macfolioHidden;
++    };
++  }, []);
++  return children;
++}
+diff --git a/src/main.tsx b/src/main.tsx
+index f7b74b5..f6e11ea 100644
+--- a/src/main.tsx
++++ b/src/main.tsx
+@@ -1,3 +1,4 @@
++import { EmbeddedBridge, embedded } from './macfolio-bridge';
+ import React from 'react';
+ import {createRoot} from 'react-dom/client';
+ import '@fontsource/vazirmatn/400.css';
+@@ -6,5 +7,5 @@ import '@fontsource/vazirmatn/600.css';
+ import '@fontsource/vazirmatn/700.css';
+ import App from './App';
+ import './style.css';
+-createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
+-if('serviceWorker' in navigator && import.meta.env.PROD) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
++createRoot(document.getElementById('root')!).render(<React.StrictMode><EmbeddedBridge><App/></EmbeddedBridge></React.StrictMode>);
++if(!embedded && 'serviceWorker' in navigator && import.meta.env.PROD) window.addEventListener('load',()=>navigator.serviceWorker.register(import.meta.env.BASE_URL+'sw.js', {scope:import.meta.env.BASE_URL}).catch(()=>{}));
+diff --git a/src/style.css b/src/style.css
+index 0a35e0e..ebec8a1 100644
+--- a/src/style.css
++++ b/src/style.css
+@@ -12,3 +12,6 @@
+ .android-download{padding:15px 0;display:flex;flex-direction:column;gap:12px}.android-label{display:flex;gap:9px;align-items:center;color:var(--accent)}.android-label strong{display:block;color:var(--ink);font-size:11px;font-weight:500}.android-label span{display:block;font-size:8px;color:var(--muted);margin-top:5px}.android-download .primary{width:100%;font-size:10px;min-height:44px}.android-download>small{font-size:8px;color:var(--muted)}.android-download .small-note{font-size:10px;color:var(--muted)}
+ 
+ .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
++
++/* A minimized Mac window keeps its data and playback but pauses visual animation. */
++html[data-macfolio-hidden="true"] *, html[data-macfolio-hidden="true"] *::before, html[data-macfolio-hidden="true"] *::after { animation-play-state: paused !important; }
+diff --git a/vite.config.ts b/vite.config.ts
+index c301f0c..8aaf1cb 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -1,2 +1,2 @@
+ import { defineConfig } from 'vite';
+-export default defineConfig({build:{target:['es2020','safari14'],outDir:'dist'},server:{host:'0.0.0.0'}});
++export default defineConfig({base:'/apps/todo/',build:{target:['es2020','safari14'],outDir:'dist'},server:{host:'0.0.0.0'}});

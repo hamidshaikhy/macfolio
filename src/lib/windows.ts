@@ -1,3 +1,4 @@
+import { integratedApp } from "./integrated-apps";
 import type { AppId } from "./apps";
 export interface Rect {
   x: number;
@@ -24,6 +25,7 @@ export function clampRect(rect: Rect, size: { w: number; h: number }, app?: AppI
 }
 export function initialRect(app: AppId, index = 0): Rect {
   const v = viewport();
+  if (integratedApp(app)) { const w=Math.min(1140,v.w-80),h=Math.min(800,v.h-150); return clampRect({x:(v.w-w)/2+index*16,y:48+index*16,w,h},v,app); }
   const w = app === "safari" || app === "about" ? Math.min(1180, v.w - 100) : app === "github" ? 1080 : app === "calculator" ? 320 : app === "chess" ? 840 : app === "terminal" ? 740 : 860;
   return clampRect(
     {

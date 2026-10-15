@@ -1,0 +1,11 @@
+import { EmbeddedBridge, embedded } from './macfolio-bridge';
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import '@fontsource/estedad/400.css';
+import '@fontsource/estedad/500.css';
+import '@fontsource/estedad/600.css';
+import '@fontsource/estedad/700.css';
+import App from './App';
+import './style.css';
+createRoot(document.getElementById('root')!).render(<StrictMode><EmbeddedBridge><App/></EmbeddedBridge></StrictMode>);
+if(!embedded&&import.meta.env.PROD&&'serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register(import.meta.env.BASE_URL+'sw.js', {scope:import.meta.env.BASE_URL}).catch(()=>{}));

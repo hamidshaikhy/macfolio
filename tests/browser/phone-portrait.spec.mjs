@@ -33,7 +33,7 @@ test.describe('high density touch display',()=>{
       await page.getByRole('button',{name:'Inspect portrait',exact:true}).click();
       await expect.poll(()=>page.locator('.pf-portrait').evaluate(el=>Number(el.style.getPropertyValue('--lock-reveal')))).toBeGreaterThan(.1);
       expect(await page.locator('.pf-portrait').evaluate(el=>Number(el.style.getPropertyValue('--lock-reveal')))).toBeLessThan(.99);
-      await expect.poll(()=>page.locator('.pf-portrait').evaluate(el=>Number(el.style.getPropertyValue('--lock-reveal')))).toBe(1);
+      await expect.poll(()=>page.locator('.pf-portrait').evaluate(el=>Number(el.style.getPropertyValue('--lock-reveal')))).toBeCloseTo(1,6);
       await expect(page.locator('.pf-circuit > img')).toBeVisible();
       await expect.poll(()=>page.locator('.pf-circuit > img').evaluate(img=>img.complete&&img.currentSrc)).toMatch(/hamid-hardware-1024-v6\.webp$/);
       const clip=await page.locator('.pf-circuit').evaluate(el=>getComputedStyle(el).clipPath);

@@ -7,12 +7,10 @@ import {
   Monitor,
   Sun,
   Moon,
-  Plus,
   FileText,
 } from "lucide-react";
 import { Analytics } from "@vercel/analytics/react";
 import { useOS } from "./state/os";
-import { useFiles } from "./state/files";
 import { useMobile, useReducedMotion } from "./lib/hooks";
 import { asset } from "./lib/assets";
 import { apps, type AppId } from "./lib/apps";
@@ -70,11 +68,6 @@ export default function App() {
         e.preventDefault();
         s.setPanel(s.panel === "spotlight" ? null : "spotlight");
       }
-      if ((e.metaKey || e.ctrlKey) && e.key === "n" && !s.locked) {
-        e.preventDefault();
-        s.setSelectedFile(useFiles.getState().createNote());
-        s.openApp("notes");
-      }
       if ((e.metaKey || e.ctrlKey) && ["w", "m"].includes(e.key) && !s.locked) {
         const active = s.windows.filter((w) => !w.minimized).at(-1);
         if (active) {
@@ -131,8 +124,8 @@ export default function App() {
               }}
             >
               <Widgets />
-              {os.windows.map((win, i) => (
-                <Window key={win.app} win={win} z={10 + i}>
+              {os.windows.slice().sort((a,b)=>apps.findIndex(app=>app.id===a.app)-apps.findIndex(app=>app.id===b.app)).map((win) => (
+                <Window key={win.app} win={win} z={10 + os.windows.findIndex(window=>window.app===win.app)}>
                   <AppView id={win.app} />
                 </Window>
               ))}
@@ -219,15 +212,6 @@ export default function App() {
             className="context-menu menu-popover"
             style={{ left: context.x, top: context.y }}
           >
-            <button
-              onClick={() => {
-                os.setSelectedFile(useFiles.getState().createNote());
-                open("notes");
-              }}
-            >
-              <Plus size={16} />
-              New Note
-            </button>
             <button onClick={() => open("resume")}>
               <FileText size={16} />
               Open Résumé

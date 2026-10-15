@@ -1,0 +1,10 @@
+{
+  "available": true,
+  "version": "1.0.0",
+  "bytes": 33524703,
+  "sha256": "deb8194155ff2785de4625fe92fe0c8e68f00777fe60b4e1957b00ed0499f8b1",
+  "parts": [
+    "/apps/todo/downloads/to-do-list.part0",
+    "/apps/todo/downloads/to-do-list.part1"
+  ]
+}

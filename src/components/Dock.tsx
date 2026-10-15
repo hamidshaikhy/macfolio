@@ -1,4 +1,4 @@
-﻿import { useRef, useState, useEffect } from "react";
+﻿import { useRef, useState, useLayoutEffect } from "react";
 import { AppIcon } from "./Icon";
 import { memo } from "react";
 import { dockApps } from "../lib/apps";
@@ -16,7 +16,7 @@ export const Dock = memo(function Dock() {
   const [scales, setScales] = useState<number[]>([]);
   const raf = useRef(0);
   const [hover, setHover] = useState<string | null>(null);
-  useEffect(() => { const resize = () => { setWidth(window.innerWidth); setScales([]); }; window.addEventListener("resize", resize); return () => { window.removeEventListener("resize", resize); cancelAnimationFrame(raf.current); }; }, []);
+  useLayoutEffect(() => { const resize = () => { cancelAnimationFrame(raf.current); setWidth(window.innerWidth); setScales([]); }; window.addEventListener("resize", resize); resize(); return () => { window.removeEventListener("resize", resize); cancelAnimationFrame(raf.current); }; }, []);
   const size = Math.max(30, Math.min(dockSize, Math.floor((width - 155) / items.length) - 6));
   const base = size + 6;
   return <nav className="dock" aria-label="Dock" style={{ height: size + 25 }} onPointerMove={event => {

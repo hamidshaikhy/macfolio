@@ -136,5 +136,14 @@ export const projects = [
     tags: ["React", "TypeScript", "PWA", "Audius API", "IndexedDB", "Media Session"],
     repo: "https://github.com/hamidshaikhy/hamnava",
   },
+  {
+    id: "personal-finance", title: "Personal Finance", category: "Personal finance PWA", monogram: "PF", color: "#172629",
+    summary: "دفتر مالی شخصی؛ حساب‌ها، بودجه و گزارش فارسی",
+    description: "وب‌اپ فارسی برای دخل‌وخرج، حساب‌ها، بودجه و هدف‌های پس‌انداز؛ با تقویم شمسی، نمودار مسیر پول و دفتر رمزگذاری‌شده روی همان مرورگر.",
+    role: "طراحی و توسعه با React و TypeScript؛ رابط RTL، گزارش‌ها و ذخیره‌سازی رمزگذاری‌شدهٔ IndexedDB.",
+    challenge: "حفظ جداسازی حساب‌های محلی و جلوگیری از بازنویسی دفتر توسط تب قدیمی، همراه نمودار و فرم‌های خوانا روی گوشی.",
+    result: "ثبت تراکنش، بودجه‌بندی، گزارش CSV و پشتیبان رمزگذاری‌شده در یک PWA مستقل؛ حساب دمو برای بررسی محصول در دسترس است.",
+    tags: ["React", "TypeScript", "PWA", "IndexedDB", "Web Crypto", "RTL"], repo: "https://github.com/hamidshaikhy/personal-finance",
+  },
 ];
 export type Project = (typeof projects)[number];

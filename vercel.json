@@ -1,6 +1,48 @@
 {
   "rewrites": [
-    { "source": "/portfolio", "destination": "/portfolio/index.html" },
-    { "source": "/portfolio/", "destination": "/portfolio/index.html" }
+    {
+      "source": "/apps/barg",
+      "destination": "/apps/barg/index.html"
+    },
+    {
+      "source": "/apps/barg/",
+      "destination": "/apps/barg/index.html"
+    },
+    {
+      "source": "/apps/hamnava",
+      "destination": "/apps/hamnava/index.html"
+    },
+    {
+      "source": "/apps/hamnava/",
+      "destination": "/apps/hamnava/index.html"
+    },
+    {
+      "source": "/apps/personal-finance",
+      "destination": "/apps/personal-finance/index.html"
+    },
+    {
+      "source": "/apps/personal-finance/",
+      "destination": "/apps/personal-finance/index.html"
+    },
+    {
+      "source": "/apps/todo",
+      "destination": "/apps/todo/index.html"
+    },
+    {
+      "source": "/apps/todo/",
+      "destination": "/apps/todo/index.html"
+    },
+    {
+      "source": "/apps/barg/builder",
+      "destination": "/apps/barg/index.html"
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/portfolio/index.html"
+    },
+    {
+      "source": "/portfolio/",
+      "destination": "/portfolio/index.html"
+    }
   ]
 }

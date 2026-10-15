@@ -94,7 +94,7 @@ export function command(
     if (bundled || localFile) {
       if (ctx.openFile) ctx.openFile(path);
       else if (bundled && bundled.app !== "music") ctx.open(bundled.app);
-      else if (localFile) ctx.open(path.includes("/Notes/") ? "notes" : "editor");
+      else if (localFile) ctx.open("editor");
       return { output: `Opening ${rest.join(" ")}…` };
     }
     if (directories.has(path)) { if (ctx.openDirectory) ctx.openDirectory(path); else ctx.open("finder"); return { output: `Opening ${path} in Finder…` }; }

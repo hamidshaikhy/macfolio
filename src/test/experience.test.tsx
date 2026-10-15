@@ -14,7 +14,6 @@ import { useFiles, initialFiles } from "../state/files";
 import { useMusic } from "../state/music";
 import ChessApp from "../apps/Chess";
 import { Trash } from "../apps/Files";
-import Notes from "../apps/Notes";
 import Editor from "../apps/Editor";
 beforeEach(() => {
   Object.defineProperty(window, "innerWidth", { writable: true, value: 1440 });
@@ -37,13 +36,13 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 describe("desktop shell", () => {
-  it("creates and selects a fresh note from the File menu", async () => {
+  it("creates and selects a fresh text file in Code from the File menu", async () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(screen.getByRole("button", { name: "File" }));
-    await user.click(screen.getByRole("menuitem", { name: /New Note/ }));
-    const note = await screen.findByRole("textbox", { name: "Note content" });
-    expect(note).toHaveValue("");
+    await user.click(screen.getByRole("menuitem", { name: /New File/ }));
+    const note = await screen.findByRole("textbox", { name: "Code editor" });
+    expect(note).toHaveTextContent("");
     await user.type(note, "new note content");
     const selected = useOS.getState().selectedFile;
     expect(
@@ -116,11 +115,11 @@ describe("desktop shell", () => {
   it("prioritizes an exact app name in Spotlight and keeps it closed after Enter", async () => {
     const user = userEvent.setup(); render(<App />);
     await user.click(screen.getByRole("button", { name: "Spotlight" }));
-    await user.type(screen.getByRole("textbox", { name: "Search apps" }), "LinkedIn");
+    await user.type(screen.getByRole("textbox", { name: "Search apps" }), "Contacts");
     await user.keyboard("{Enter}");
-    await screen.findByRole("dialog", { name: "LinkedIn" });
+    await screen.findByRole("dialog", { name: "Contacts" });
     expect(screen.queryByRole("dialog", { name: "Spotlight search" })).toBeNull();
-    expect(useOS.getState().windows.at(-1)?.app).toBe("linkedin");
+    expect(useOS.getState().windows.at(-1)?.app).toBe("contacts");
   });
 });
 describe("iPhone shell", () => {
@@ -165,15 +164,12 @@ describe("iPhone shell", () => {
 });
 it("edits a note, reads it in Code and recovers it from Trash", async () => {
   const user = userEvent.setup();
-  const notes = render(<Notes />);
-  const field = screen.getByRole("textbox", { name: "Note content" });
-  await user.clear(field);
-  await user.type(field, "متن تست");
+  const oldPath = useFiles.getState().createNote();
+  act(() => useFiles.getState().save(oldPath, "متن تست"));
   const path = useFiles
     .getState()
     .files.find((f) => f.content === "متن تست")!.path;
   act(() => useOS.getState().setSelectedFile(path));
-  notes.unmount();
   const editor = render(<Editor />);
   expect(await screen.findByRole("textbox", { name: "Code editor" })).toHaveTextContent(
     "متن تست",

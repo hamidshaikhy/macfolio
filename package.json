@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/build-integrations.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "test": "vitest run",
     "predev": "node scripts/prepare-assets.mjs",
@@ -13,7 +13,10 @@
     "test:browser": "playwright test",
     "test:browser:install": "playwright install chromium webkit",
     "screenshots": "node scripts/capture-screenshots.mjs",
-    "screenshots:portfolio": "node scripts/capture-portfolio-screenshots.mjs"
+    "screenshots:portfolio": "node scripts/capture-portfolio-screenshots.mjs",
+    "apps:install": "node scripts/build-integrations.mjs --install",
+    "postinstall": "npm run apps:install",
+    "test:apps:ui": "npm --prefix integrations/hamnava run test:macfolio"
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.5",
@@ -34,6 +37,7 @@
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.19.2",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.2",

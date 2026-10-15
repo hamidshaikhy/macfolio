@@ -1,0 +1,228 @@
+diff --git a/index.html b/index.html
+index 995f045..bf4f6b3 100644
+--- a/index.html
++++ b/index.html
+@@ -1 +1 @@
+-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#141613"><meta name="color-scheme" content="dark"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="hamnava"><meta name="description" content="hamnava — پخش موسیقی، پلی‌لیست‌های اصلی Audius و مجموعه‌های شخصی با رابط فارسی."><link rel="manifest" href="/manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="/icon.svg"><link rel="apple-touch-icon" href="/icon-192.png"><title>hamnava · خانه</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
++<!doctype html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#141613"><meta name="color-scheme" content="dark"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="hamnava"><meta name="description" content="hamnava — پخش موسیقی، پلی‌لیست‌های اصلی Audius و مجموعه‌های شخصی با رابط فارسی."><link rel="manifest" href="%BASE_URL%manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="%BASE_URL%icon.svg"><link rel="apple-touch-icon" href="%BASE_URL%icon-192.png"><title>hamnava · خانه</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+diff --git a/macfolio.playwright.config.ts b/macfolio.playwright.config.ts
+new file mode 100644
+index 0000000..4bc4308
+--- /dev/null
++++ b/macfolio.playwright.config.ts
+@@ -0,0 +1,10 @@
++import {defineConfig} from '@playwright/test';
++import {existsSync} from 'node:fs';
++const chrome=process.env.PLAYWRIGHT_CHROME_EXECUTABLE || (process.platform==='win32' && existsSync('C:/Program Files/Google/Chrome/Application/chrome.exe')?'C:/Program Files/Google/Chrome/Application/chrome.exe':undefined);
++export default defineConfig({
++ testDir:'tests/ui',workers:1,fullyParallel:false,timeout:90000,expect:{timeout:20000},reporter:'list',
++ outputDir:'../../artifacts/hamnava-browser-results',
++ use:{baseURL:process.env.MACFOLIO_TEST_URL||'http://127.0.0.1:5180/',viewport:{width:1440,height:900},serviceWorkers:'block',trace:'retain-on-failure'},
++ projects:[{name:'chrome',use:{browserName:'chromium',launchOptions:chrome?{executablePath:chrome}:{}}},{name:'webkit',use:{browserName:'webkit'}}],
++ webServer:process.env.MACFOLIO_TEST_URL?undefined:{command:'npm --prefix ../.. run preview -- --port 5180',url:'http://127.0.0.1:5180/',reuseExistingServer:true},
++});
+diff --git a/package.json b/package.json
+index db6ccf9..1df9176 100644
+--- a/package.json
++++ b/package.json
+@@ -5,11 +5,12 @@
+   "type": "module",
+   "scripts": {
+     "dev": "vite --host 0.0.0.0",
+-    "build": "tsc --noEmit && vite build && node scripts/build-sw.mjs",
++    "build": "tsc --noEmit && vite build",
+     "preview": "vite preview --host 0.0.0.0",
+     "test": "node scripts/test.mjs",
+     "test:ui": "playwright test",
+-    "icons": "node scripts/generate-icons.mjs"
++    "icons": "node scripts/generate-icons.mjs",
++    "test:macfolio": "playwright test --config macfolio.playwright.config.ts"
+   },
+   "dependencies": {
+     "@fontsource/estedad": "^5.2.5",
+diff --git a/public/manifest.webmanifest b/public/manifest.webmanifest
+index 2229ddb..ca08497 100644
+--- a/public/manifest.webmanifest
++++ b/public/manifest.webmanifest
+@@ -1,30 +1,30 @@
+ {
+-  "id": "/",
++  "id": "/apps/hamnava/",
+   "name": "hamnava · هم‌نوا",
+   "short_name": "hamnava",
+   "lang": "fa",
+   "dir": "rtl",
+   "description": "پخش موسیقی، جست‌وجوی آهنگ و مجموعه‌های شخصی",
+-  "start_url": "/",
+-  "scope": "/",
++  "start_url": "/apps/hamnava/",
++  "scope": "/apps/hamnava/",
+   "display": "standalone",
+   "background_color": "#141613",
+   "theme_color": "#141613",
+   "icons": [
+     {
+-      "src": "/icon-192.png",
++      "src": "/apps/hamnava/icon-192.png",
+       "sizes": "192x192",
+       "type": "image/png",
+       "purpose": "any"
+     },
+     {
+-      "src": "/icon-512.png",
++      "src": "/apps/hamnava/icon-512.png",
+       "sizes": "512x512",
+       "type": "image/png",
+       "purpose": "any"
+     },
+     {
+-      "src": "/icon-maskable.png",
++      "src": "/apps/hamnava/icon-maskable.png",
+       "sizes": "512x512",
+       "type": "image/png",
+       "purpose": "maskable"
+diff --git a/src/App.tsx b/src/App.tsx
+index 3add059..3214c9a 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -1,3 +1,4 @@
++import { embedded } from './macfolio-bridge';
+ import {useEffect,useRef,useState,type FormEvent} from 'react';
+ import {ArrowDownToLine,ArrowLeft,ArrowRight,Check,ChevronLeft,Compass,ExternalLink,Headphones,Heart,History,Library as LibraryIcon,ListMusic,LoaderCircle,LogIn,LogOut,MoreHorizontal,Music2,Pause,Pencil,Play,Plus,RefreshCw,Search,ShieldCheck,Signal,Smartphone,Trash2,UserRound,WifiOff,X} from 'lucide-react';
+ import {ConnectionError,playlistInfo,playlistTracks,searchTracks,trending,trendingPlaylists} from './api';
+@@ -25,7 +26,7 @@ export default function App(){
+  useEffect(()=>{let live=true;restoreSession().then(s=>{if(live){setSession(s);setSessionReady(true);}}).catch(()=>{if(live)setSessionReady(true);});return()=>{live=false;};},[]);
+  useEffect(()=>{if(!sessionReady)return;let live=true;setStorageError('');loadLibrary(owner).then(data=>{if(live)setLibState({owner,data,loaded:true});}).catch(()=>{if(live)setStorageError('حافظهٔ مرورگر در دسترس نیست؛ کتابخانه ذخیره نمی‌شود. پخش موسیقی همچنان در دسترس است.');});return()=>{live=false;};},[owner,sessionReady]);
+  useEffect(()=>{if(!libraryReady)return;let live=true;setSaveStatus('در حال ذخیره…');const snapshot=libState.data;saveQueue.current=saveQueue.current.catch(()=>{}).then(()=>write('library',owner,snapshot)).then(()=>{if(live)setSaveStatus('ذخیره شد');}).catch(()=>{if(live){setSaveStatus('ذخیره نشد');setStorageError('ذخیرهٔ کتابخانه انجام نشد. فضای مرورگر یا دسترسی حافظه را بررسی کنید.');}});return()=>{live=false;};},[libState,owner,libraryReady]);
+- useEffect(()=>{const changed=()=>{setOnline(navigator.onLine);if(navigator.onLine)setCatalogVersion(v=>v+1);};const install=(e:Event)=>{e.preventDefault();setInstallEvent(e);};window.addEventListener('online',changed);window.addEventListener('offline',changed);window.addEventListener('beforeinstallprompt',install);return()=>{window.removeEventListener('online',changed);window.removeEventListener('offline',changed);window.removeEventListener('beforeinstallprompt',install);};},[]);
++ useEffect(()=>{const changed=()=>{setOnline(navigator.onLine);if(navigator.onLine)setCatalogVersion(v=>v+1);};const install=(e:Event)=>{e.preventDefault();if(!embedded)setInstallEvent(e);};window.addEventListener('online',changed);window.addEventListener('offline',changed);window.addEventListener('beforeinstallprompt',install);return()=>{window.removeEventListener('online',changed);window.removeEventListener('offline',changed);window.removeEventListener('beforeinstallprompt',install);};},[]);
+  useEffect(()=>{const c=new AbortController();let live=true;let hasCache=false;setNetworkError('');setLoading(catalog.tracks.length===0);async function load(){try{const cached=await read<Catalog>('cache','catalog');if(live&&cached?.tracks?.length){hasCache=true;setCatalog(cached);setLoading(false);}}catch{}const outcomes=await Promise.allSettled([trending(c.signal),trendingPlaylists(c.signal)]);if(!live)return;const tracks=outcomes[0].status==='fulfilled'?outcomes[0].value:null,playlists=outcomes[1].status==='fulfilled'?outcomes[1].value:null;if(tracks){const next={tracks,playlists:playlists||[],savedAt:Date.now()};setCatalog(next);void write('cache','catalog',next).catch(()=>{});if(tracks[0])player.prime(tracks[0],tracks);}if(!tracks){const e=outcomes[0].status==='rejected'?outcomes[0].reason:null;setNetworkError(e instanceof Error?e.message:'اتصال به سرویس موسیقی برقرار نشد. اگر دسترسی مسدود است، VPN را روشن کنید.');}else if(playlists===null)setNetworkError('بعضی پلی‌لیست‌ها دریافت نشدند؛ اتصال سرویس را بررسی کنید.');setLoading(false);}void load();return()=>{live=false;c.abort();};},[catalogVersion]);
+  useEffect(()=>{if(route.screen!=='search'||!query.trim()){setResults([]);setSearchError('');setSearchLoading(false);return;}const c=new AbortController();let live=true;setSearchLoading(true);setSearchError('');const t=setTimeout(()=>{searchTracks(query.trim(),c.signal).then(data=>{if(live)setResults(data);}).catch(e=>{if(live&&e.name!=='AbortError')setSearchError(e.message);}).finally(()=>{if(live)setSearchLoading(false);});},380);return()=>{live=false;c.abort();clearTimeout(t);};},[query,route.screen,catalogVersion]);
+  useEffect(()=>{if(route.screen!=='playlist'||!route.id)return;const id=route.id,c=new AbortController();let live=true;const known=allPlaylists.find(p=>p.id===id)||null;if(known?.kind==='local'||known?.kind==='curated'){setDetail({id,playlist:known,tracks:known.tracks||[],loading:false,error:''});return;}if(id.startsWith('local-')||id.startsWith('curated-')){setDetail({id,playlist:known,tracks:known?.tracks||[],loading:!libraryReady||loading,error:libraryReady&&!loading&&!known?'این پلی‌لیست پیدا نشد.':''});return;}setDetail({id,playlist:known,tracks:known?.tracks||[],loading:!known?.tracks?.length,error:''});void Promise.all([known?Promise.resolve(known):playlistInfo(id,c.signal),playlistTracks(id,c.signal)]).then(([p,tracks])=>{if(live)setDetail({id,playlist:p,tracks,loading:false,error:p?'':'پلی‌لیست پیدا نشد.'});}).catch(e=>{if(live&&e.name!=='AbortError')setDetail(prev=>({...prev,loading:false,error:e.message}));});return()=>{live=false;c.abort();};},[route.screen,route.id,catalog.tracks,libState.data.playlists,libraryReady,catalogVersion]);
+@@ -44,7 +45,7 @@ export default function App(){
+  const banner=!online?'اینترنت قطع است. کتابخانهٔ ذخیره‌شده در دسترس است؛ برای پخش دوباره متصل شوید.':networkError||player.error||storageError;
+  const retry=()=>{setCatalogVersion(v=>v+1);if(player.error)player.retry();};
+  return <div className="app-shell"><header className="topbar"><a className="brand" href="#/discover" aria-label="hamnava · صفحهٔ اصلی" dir="ltr"><svg className="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 23V9m7 14v-8c0-6 7-6 7 0v8m6-4V9" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/></svg><span className="brand-name">ham<span>nava</span></span></a><nav className="desktop-nav" aria-label="بخش‌های برنامه">{nav.map(n=><a href={'#/'+n.screen} key={n.screen} className={route.screen===n.screen?'selected':''}>{n.label}</a>)}</nav><span className="mobile-title">{pageTitle}</span><div className="header-left"><form className="header-search" onSubmit={submitSearch}><Search size={16}/><input value={headerQuery} onChange={e=>setHeaderQuery(e.target.value)} aria-label="جست‌وجوی سریع موسیقی" placeholder="آهنگ یا هنرمند"/></form><button className="icon-button mobile-search" onClick={()=>go('search')} aria-label="جست‌وجو"><Search size={21}/></button><button className={`account-button ${session?'signed-in':''}`} onClick={()=>setAccountOpen(true)} aria-label={session?'حساب '+session.email:'ورود یا ثبت‌نام'}><UserRound size={19}/><bdi>{session?session.email.split('@')[0]:'حساب کاربری'}</bdi>{session&&<i/>}</button></div></header>{banner&&<div className={`connection-banner ${!online?'offline':''}`} role="status"><span className="banner-icon">{!online?<WifiOff size={17}/>:<Signal size={17}/>}</span><p>{banner}</p><button onClick={retry} disabled={!online} aria-label="تلاش دوباره"><RefreshCw size={15}/><span>تلاش دوباره</span></button>{player.error&&!networkError&&<button className="icon-button" onClick={player.clearError} aria-label="بستن خطای پخش"><X size={15}/></button>}</div>}<main className="main-content">{route.screen==='discover'&&<>
+-  <section className={`hero ${loading?'hero-loading':''}`} style={{backgroundImage:"url(/hero-night.webp)"}}>
++  <section className={`hero ${loading?'hero-loading':''}`} style={{backgroundImage:`url(${import.meta.env.BASE_URL}hero-night.webp)`}}>
+    {loading?<div className="hero-skeleton"><span className="skeleton text short"/><span className="skeleton title"/><span className="skeleton text"/><span className="skeleton button"/></div>:hero?<div className="hero-copy">
+     <span className="eyebrow">پلی‌لیست منتخب hamnava</span>
+     <h1><bdi dir="auto">{hero.name}</bdi></h1>
+diff --git a/src/macfolio-bridge.tsx b/src/macfolio-bridge.tsx
+new file mode 100644
+index 0000000..c441cb3
+--- /dev/null
++++ b/src/macfolio-bridge.tsx
+@@ -0,0 +1,39 @@
++import { useEffect, type ReactNode } from 'react';
++
++const query = new URLSearchParams(location.search);
++export const embedded = window.parent !== window && query.get('embed') === 'macfolio';
++const appId = import.meta.env.BASE_URL.split('/').filter(Boolean).slice(-1)[0];
++const instance = query.get('instance');
++type BridgeMessage = { channel: 'macfolio-app-v1'; appId: string; instance: string; type: 'ready' | 'focus' | 'visibility'; visible?: boolean };
++
++export function EmbeddedBridge({ children }: { children: ReactNode }) {
++  useEffect(() => {
++    if (!embedded || !appId || !instance) return;
++    const send = (type: 'ready' | 'focus') => {
++      const message: BridgeMessage = { channel: 'macfolio-app-v1', appId, instance, type };
++      window.parent.postMessage(message, location.origin);
++    };
++    const focus = () => send('focus');
++    const message = (event: MessageEvent) => {
++      const data = event.data as Partial<BridgeMessage> | null;
++      if (event.origin !== location.origin || event.source !== window.parent || !data || data.channel !== 'macfolio-app-v1' || data.appId !== appId || data.instance !== instance || data.type !== 'visibility' || typeof data.visible !== 'boolean') return;
++      document.documentElement.dataset.macfolioHidden = String(!data.visible);
++      document.dispatchEvent(new Event('macfolio-visibility'));
++    };
++    // Ready comes from a committed React UI, never the HTML load event.
++    send('ready');
++    document.addEventListener('pointerdown', focus, true);
++    document.addEventListener('focusin', focus, true);
++    window.addEventListener('message', message);
++    const install = (event: Event) => event.preventDefault();
++    window.addEventListener('beforeinstallprompt', install, true);
++    return () => {
++      document.removeEventListener('pointerdown', focus, true);
++      document.removeEventListener('focusin', focus, true);
++      window.removeEventListener('message', message);
++      window.removeEventListener('beforeinstallprompt', install, true);
++      delete document.documentElement.dataset.macfolioHidden;
++    };
++  }, []);
++  return children;
++}
+diff --git a/src/main.tsx b/src/main.tsx
+index 8475fd1..b7e572e 100644
+--- a/src/main.tsx
++++ b/src/main.tsx
+@@ -1,3 +1,4 @@
++import { EmbeddedBridge, embedded } from './macfolio-bridge';
+ import {StrictMode} from 'react';
+ import {createRoot} from 'react-dom/client';
+ import '@fontsource/estedad/400.css';
+@@ -6,5 +7,5 @@ import '@fontsource/estedad/600.css';
+ import '@fontsource/estedad/700.css';
+ import App from './App';
+ import './style.css';
+-createRoot(document.getElementById('root')!).render(<StrictMode><App/></StrictMode>);
+-if(import.meta.env.PROD&&'serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
++createRoot(document.getElementById('root')!).render(<StrictMode><EmbeddedBridge><App/></EmbeddedBridge></StrictMode>);
++if(!embedded&&import.meta.env.PROD&&'serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register(import.meta.env.BASE_URL+'sw.js', {scope:import.meta.env.BASE_URL}).catch(()=>{}));
+diff --git a/src/model.ts b/src/model.ts
+index cb72fc7..38a0d1c 100644
+--- a/src/model.ts
++++ b/src/model.ts
+@@ -17,5 +17,5 @@ export function curatedPlaylists(tracks:Track[]):Playlist[]{const pick=(genres:s
+  {id:'curated-morning',name:'صبح آرام',description:'یک شروع آرام، برای روزی روشن‌تر',genres:['ambient','folk','acoustic','chill'],offset:4},
+  {id:'curated-fresh',name:'کشف تازه',description:'صداهای مستقل، بیرون از مسیر تکرار',genres:['alternative','pop','hip-hop'],offset:8},
+  {id:'curated-focus',name:'وقت تمرکز',description:'کمی فاصله از شلوغی، کمی نزدیک‌تر به موسیقی',genres:['ambient','classical','jazz','lo-fi'],offset:12}
+- ].map(p=>{const selected=pick(p.genres,p.offset);return {id:p.id,name:p.name,description:p.description,artwork:p.id==='curated-night'?'/hero-night.webp':selected[0]?.artwork||'',owner:'hamnava',count:selected.length,kind:'curated',tracks:selected};});}
++ ].map(p=>{const selected=pick(p.genres,p.offset);return {id:p.id,name:p.name,description:p.description,artwork:p.id==='curated-night'?import.meta.env.BASE_URL+'hero-night.webp':selected[0]?.artwork||'',owner:'hamnava',count:selected.length,kind:'curated',tracks:selected};});}
+ export function validateLibrary(value:unknown):Library{if(!value||typeof value!=='object')throw new Error('کتابخانه قابل خواندن نیست.');const x=value as Library;for(const key of ['liked','saved','playlists','history','searches'] as const)if(!Array.isArray(x[key]))throw new Error('ساختار کتابخانه معتبر نیست.');return x;}
+diff --git a/src/style.css b/src/style.css
+index 84e5618..700ccb6 100644
+--- a/src/style.css
++++ b/src/style.css
+@@ -39,3 +39,6 @@
+ @media(max-width:860px){.header-search{display:none}.mobile-search{display:inline-flex!important}.desktop-nav{gap:17px}.brand-name{font-size:26px}}
+ @media(max-width:700px){.brand{gap:7px}.brand-mark{width:28px;height:28px}.brand-name{font-size:28px}.hero h1{font-size:28px;line-height:1.8}.hero-copy{padding-bottom:32px}.hero-pagination{left:16px;bottom:13px}.account-button bdi{display:none}.liked-collection h2{color:var(--ink)}}
+ @media(max-width:360px){.brand-name{font-size:25px}.brand-mark{width:25px;height:25px}.hero h1{font-size:25px}}
++
++/* A minimized Mac window keeps its data and playback but pauses visual animation. */
++html[data-macfolio-hidden="true"] *, html[data-macfolio-hidden="true"] *::before, html[data-macfolio-hidden="true"] *::after { animation-play-state: paused !important; }
+diff --git a/src/usePlayer.ts b/src/usePlayer.ts
+index be78a97..eac6bde 100644
+--- a/src/usePlayer.ts
++++ b/src/usePlayer.ts
+@@ -16,7 +16,7 @@ export function usePlayer(onPlayed:(t:Track)=>void){
+  function prime(track:Track,list:Track[]){if(state.current.current)return;setCurrent(track);setQueue(list);state.current={...state.current,current:track,queue:list};setLength(track.duration);}
+  const functions=useRef({toggle,next,previous,seek});functions.current={toggle,next,previous,seek};
+  useEffect(()=>{audio.volume=volume;},[volume,audio]);
+- useEffect(()=>{const time=()=>{setPosition(audio.currentTime);if('mediaSession' in navigator&&Number.isFinite(audio.duration)&&audio.duration>0){try{navigator.mediaSession.setPositionState({duration:audio.duration,playbackRate:1,position:Math.min(audio.currentTime,audio.duration)});}catch{}}};const ready=()=>{if(Number.isFinite(audio.duration))setLength(audio.duration);};const started=()=>{clearStall();setPlaying(true);setLoading(false);const t=state.current.current;if(t&&recorded.current!==t.id){recorded.current=t.id;historyRef.current(t);}if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing';};const paused=()=>{setPlaying(false);if('mediaSession' in navigator)navigator.mediaSession.playbackState='paused';};const waiting=()=>{if(intent.current){setLoading(true);armTimeout();}};const ended=()=>functions.current.next(true);const error=()=>failSource();audio.addEventListener('timeupdate',time);audio.addEventListener('loadedmetadata',ready);audio.addEventListener('durationchange',ready);audio.addEventListener('playing',started);audio.addEventListener('pause',paused);audio.addEventListener('waiting',waiting);audio.addEventListener('ended',ended);audio.addEventListener('error',error);return()=>{intent.current=false;++token.current;clearStall();audio.pause();audio.removeAttribute('src');audio.load();audio.removeEventListener('timeupdate',time);audio.removeEventListener('loadedmetadata',ready);audio.removeEventListener('durationchange',ready);audio.removeEventListener('playing',started);audio.removeEventListener('pause',paused);audio.removeEventListener('waiting',waiting);audio.removeEventListener('ended',ended);audio.removeEventListener('error',error);};},[audio]);
++ useEffect(()=>{const time=()=>{if(!document.hidden&&document.documentElement.dataset.macfolioHidden!=='true')setPosition(audio.currentTime);if('mediaSession' in navigator&&Number.isFinite(audio.duration)&&audio.duration>0){try{navigator.mediaSession.setPositionState({duration:audio.duration,playbackRate:1,position:Math.min(audio.currentTime,audio.duration)});}catch{}}};const ready=()=>{if(Number.isFinite(audio.duration))setLength(audio.duration);};const started=()=>{clearStall();setPlaying(true);setLoading(false);const t=state.current.current;if(t&&recorded.current!==t.id){recorded.current=t.id;historyRef.current(t);}if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing';};const paused=()=>{setPlaying(false);if('mediaSession' in navigator)navigator.mediaSession.playbackState='paused';};const waiting=()=>{if(intent.current){setLoading(true);armTimeout();}};const ended=()=>functions.current.next(true);const error=()=>failSource();document.addEventListener('macfolio-visibility',time);document.addEventListener('visibilitychange',time);audio.addEventListener('timeupdate',time);audio.addEventListener('loadedmetadata',ready);audio.addEventListener('durationchange',ready);audio.addEventListener('playing',started);audio.addEventListener('pause',paused);audio.addEventListener('waiting',waiting);audio.addEventListener('ended',ended);audio.addEventListener('error',error);return()=>{intent.current=false;++token.current;clearStall();audio.pause();audio.removeAttribute('src');audio.load();document.removeEventListener('macfolio-visibility',time);document.removeEventListener('visibilitychange',time);audio.removeEventListener('timeupdate',time);audio.removeEventListener('loadedmetadata',ready);audio.removeEventListener('durationchange',ready);audio.removeEventListener('playing',started);audio.removeEventListener('pause',paused);audio.removeEventListener('waiting',waiting);audio.removeEventListener('ended',ended);audio.removeEventListener('error',error);};},[audio]);
+  useEffect(()=>{if(!current||!('mediaSession' in navigator))return;try{navigator.mediaSession.metadata=new MediaMetadata({title:current.title,artist:current.artist,artwork:current.artwork?[{src:current.artwork,sizes:'480x480',type:'image/jpeg'}]:[]});const handlers:Partial<Record<MediaSessionAction,MediaSessionActionHandler>>={play:()=>{if(audio.paused)functions.current.toggle();},pause:()=>{if(!audio.paused)functions.current.toggle();},nexttrack:()=>functions.current.next(),previoustrack:()=>functions.current.previous(),seekto:d=>functions.current.seek(d.seekTime||0),seekforward:d=>functions.current.seek(audio.currentTime+(d.seekOffset||10)),seekbackward:d=>functions.current.seek(audio.currentTime-(d.seekOffset||10))};for(const [action,handler]of Object.entries(handlers)){try{navigator.mediaSession.setActionHandler(action as MediaSessionAction,handler);}catch{}}}catch{}},[current,audio]);
+  useEffect(()=>{const key=(e:KeyboardEvent)=>{if(e.code!=='Space'||e.altKey||e.ctrlKey||e.metaKey)return;const tag=(e.target as HTMLElement).tagName;if(['INPUT','TEXTAREA','BUTTON','A','SELECT'].includes(tag)||(e.target as HTMLElement).isContentEditable||document.querySelector('[role="dialog"]'))return;if(state.current.current){e.preventDefault();functions.current.toggle();}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key);},[]);
+  return {current,queue,playing,loading,position,length,volume,shuffle,repeat,error,playTrack,toggle,next,previous,seek,prime,setVolume,setShuffle,setRepeat,clearError:()=>setError(''),retry:()=>{if(state.current.current)playTrack(state.current.current);},append:(t:Track)=>setQueue(q=>{const v=[...q,t];state.current.queue=v;return v;}),remove:(i:number)=>setQueue(q=>{const v=q.filter((_,n)=>n!==i);state.current.queue=v;return v;})};
+diff --git a/tests/ui/app.spec.ts b/tests/ui/app.spec.ts
+index cd11c9b..c0aba35 100644
+--- a/tests/ui/app.spec.ts
++++ b/tests/ui/app.spec.ts
+@@ -10,7 +10,7 @@ async function mockCatalog(page:Page){
+   const path=new URL(route.request().url()).pathname;
+   return route.fulfill({json:{data:path.includes('/playlists/')&&!path.endsWith('/tracks')?playlists:tracks}});
+  });
+- await page.goto('/');
++ await page.goto('/apps/hamnava/');
+  await expect(page.locator('.playlist-card').first().locator('bdi').first()).toHaveText(playlists[0].playlist_name);
+  await expect(page.locator('.hero h1')).toHaveText('رانندگی شبانه');
+  await expect(page.locator('.hero')).toHaveCSS('background-image',/hero-night\.webp/);
+diff --git a/vite.config.ts b/vite.config.ts
+index 26b7423..daaabe4 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -1,2 +1,2 @@
+ import {defineConfig} from 'vite';
+-export default defineConfig({build:{target:['es2020','safari14']},server:{host:'0.0.0.0'}});
++export default defineConfig({base:'/apps/hamnava/',build:{target:['es2020','safari14']},server:{host:'0.0.0.0'}});

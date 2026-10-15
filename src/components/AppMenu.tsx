@@ -1,5 +1,5 @@
-import { useOS } from "../state/os";
 import { useFiles } from "../state/files";
+import { useOS } from "../state/os";
 import { appById } from "../lib/apps";
 import { profile } from "../lib/content";
 import { usePanelFocus } from "./usePanelFocus";
@@ -20,14 +20,7 @@ export function AppMenu({ menu }: { menu: Menu }) {
   }[] =
     menu === "file"
       ? [
-          {
-            label: "New Note",
-            shortcut: "⌘N",
-            action: () => {
-              os.setSelectedFile(useFiles.getState().createNote());
-              os.openApp("notes");
-            },
-          },
+          { label: "New File", action: () => { os.setSelectedFile(useFiles.getState().createFile()); os.openApp("editor"); } },
           { label: "Open Projects…", action: () => os.openApp("projects") },
           { label: "Browse Files…", action: () => os.openApp("finder") },
           { label: "Open Résumé…", action: () => os.openApp("resume") },
@@ -40,7 +33,7 @@ export function AppMenu({ menu }: { menu: Menu }) {
         ]
       : menu === "edit"
         ? [
-            { label: "Open Notes", action: () => os.openApp("notes") },
+          { label: "New File", action: () => { os.setSelectedFile(useFiles.getState().createFile()); os.openApp("editor"); } },
             { label: "Edit Files in Code", action: () => os.openApp("editor") },
             {
               label: "Copy Contact Email",
@@ -56,6 +49,7 @@ export function AppMenu({ menu }: { menu: Menu }) {
           ]
         : menu === "view"
           ? [
+          { label: "New File", action: () => { os.setSelectedFile(useFiles.getState().createFile()); os.openApp("editor"); } },
               {
                 label: `Use ${os.theme === "light" ? "Dark" : "Light"} Appearance`,
                 action: () =>
@@ -80,6 +74,7 @@ export function AppMenu({ menu }: { menu: Menu }) {
             ]
           : menu === "window"
             ? [
+          { label: "New File", action: () => { os.setSelectedFile(useFiles.getState().createFile()); os.openApp("editor"); } },
                 {
                   label: active?.maximized ? "Restore Window" : "Zoom Window",
                   disabled: !active,

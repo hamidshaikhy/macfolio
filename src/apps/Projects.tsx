@@ -1,3 +1,4 @@
+import { projectDemo } from "../lib/integrated-apps";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Globe, Github, Layers, ChevronLeft, ChevronRight, ArrowUpRight, Code2, Target, CheckCircle2, Maximize2, X, Camera } from "lucide-react";
 import { projects } from "../lib/content";
@@ -65,6 +66,7 @@ export default function Projects() {
         <p className="project-intro persian" dir="rtl">{study.intro}</p>
         <div className="project-hero-actions"><div className="project-tech-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
         <div className="project-links">
+          {projectDemo(project.id) && <a className="project-live" href={projectDemo(project.id)} target="_blank" rel="noopener noreferrer"><Globe size={15}/> Open live app <ArrowUpRight size={14}/></a>}
           {"website" in project && <a className="project-live" href={project.website} target="_blank" rel="noreferrer"><Globe size={15} /> Explore live website <ArrowUpRight size={14} /></a>}
           {project.id !== "dika" && <a className="project-live" href={project.repo} target="_blank" rel="noreferrer"><Github size={15} /> Explore source & README <ArrowUpRight size={14} /></a>}
         </div></div>

@@ -15,18 +15,18 @@ describe("window lifecycle", () => {
   it("restores one existing window and maintains focus order", () => {
     const s = useOS.getState();
     s.openApp("about");
-    s.openApp("notes");
+    s.openApp("barg");
     s.minimize("about");
     s.openApp("about");
     expect(useOS.getState().windows.map((w) => w.app)).toEqual([
-      "notes",
+      "barg",
       "about",
     ]);
     expect(useOS.getState().windows.at(-1)?.minimized).toBe(false);
     s.maximize("about");
     s.maximize("about");
     expect(useOS.getState().windows.at(-1)?.maximized).toBe(false);
-    s.closeApp("notes");
+    s.closeApp("barg");
     expect(useOS.getState().windows).toHaveLength(1);
   });
   it("keeps titlebars, content and resize limits inside the viewport", () => {
