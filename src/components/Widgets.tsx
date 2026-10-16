@@ -54,7 +54,7 @@ export function Widgets() {
         className="widget profile-widget"
         onClick={() => openApp("about")}
       >
-        <img src={asset("assets/avatar.png")} alt="Hamid Shaikhy avatar" />
+        <img src={asset("assets/avatar.webp")} alt="Hamid Shaikhy avatar" />
         <div>
           <strong>Hamid Shaikhy</strong>
           <span>Front-End Developer</span>

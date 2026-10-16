@@ -23,7 +23,7 @@ export default function GitHub() {
   return (
     <div ref={root} className="github-app gh-redesign">
       <aside className="gh-sidebar">
-        <div className="gh-avatar-wrap"><img src={asset("assets/avatar.png")} alt={profile.name} /><span><Code2 size={17} /></span></div>
+        <div className="gh-avatar-wrap"><img src={asset("assets/avatar.webp")} alt={profile.name} /><span><Code2 size={17} /></span></div>
         <h1>{profile.name}</h1>
         <p className="gh-handle">@hamidshaikhy</p>
         <p className="gh-role">{profile.title}</p>

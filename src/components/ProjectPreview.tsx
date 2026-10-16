@@ -5,7 +5,7 @@ import { asset } from "../lib/assets";
 export function ProjectPreview({ project }: { project: Project }) {
   return (
     <div className={"gh-project-preview gh-project-preview-" + project.id}>
-      <img src={asset(`assets/projects/${project.id}/${projectStudies[project.id].shots[0].file}`)} alt={`${project.title} — actual project screenshot`} decoding="async" />
+      <img src={asset(`assets/portfolio/work/${project.id}/${projectStudies[project.id].shots[0].file.replace('.png','.webp')}`)} alt={`${project.title} — actual project screenshot`} loading="lazy" decoding="async" />
     </div>
   );
 }

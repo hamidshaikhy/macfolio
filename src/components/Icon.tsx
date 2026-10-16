@@ -29,7 +29,7 @@ export function AppIcon({
   return (
     <img
       className="app-icon"
-      src={asset(`assets/icons/${icon}.${["calculator", "about", "calendar", "contacts"].includes(icon) ? "svg" : "png"}`)}
+      src={asset(`assets/icons/${icon}.${["calculator", "about", "calendar", "contacts"].includes(icon) ? "svg" : "webp"}`)}
       style={{ width: size, height: size }}
       alt=""
       draggable={false}

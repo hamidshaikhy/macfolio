@@ -14,6 +14,7 @@
     "test:browser:install": "playwright install chromium webkit",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "screenshots:portfolio": "node scripts/capture-portfolio-screenshots.mjs",
+    "screenshots:readme": "node scripts/capture-readme-screenshots.mjs",
     "apps:install": "node scripts/build-integrations.mjs --install",
     "postinstall": "npm run apps:install",
     "test:apps:ui": "npm --prefix integrations/hamnava run test:macfolio"

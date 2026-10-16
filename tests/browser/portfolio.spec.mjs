@@ -372,7 +372,7 @@ test('footer preserves signature, correct logo shapes, rolling links and an unbr
   await expect(page.locator('.pf-contact h2')).toHaveText('YOU IMAGINE,I DELIVER.');
   await expect(page.locator('.pf-contact h2 > span')).toHaveCSS('color','rgb(174, 203, 37)');
   await expect(page.getByRole('link',{name:'Telegram',exact:true})).toHaveAttribute('href','https://t.me/hamid_2_sh');
-  await expect(page.getByRole('link',{name:'WhatsApp',exact:true})).toHaveAttribute('href','https://wa.me/hamid_2_sh');
+  await expect(page.getByRole('link',{name:'WhatsApp',exact:true})).toHaveAttribute('href','https://wa.me/989373891553');
   await expect(page.locator('.pf-contact-shape-wide path')).toHaveAttribute('d',/H450C475 42 477 0 500 0H700/);
   const signature=await page.locator('.pf-signature').boundingBox(),title=await page.locator('.pf-contact h2').boundingBox();
   expect(signature.y+signature.height).toBeLessThan(title.y+12);

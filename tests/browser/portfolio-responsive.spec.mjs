@@ -58,7 +58,7 @@ for(const [width,height] of sizes)test.describe(`${width} × ${height}`,()=>{
   await page.locator('.pf-scroll').evaluate(el=>el.scrollTop=el.querySelector('#contact').offsetTop);await expect(page.locator('.pf-experience')).toHaveAttribute('data-scene','contact');
   await expect(page.getByRole('link',{name:"Let's talk"})).toHaveCount(0);
   await expect(page.getByRole('link',{name:'Telegram',exact:true})).toHaveAttribute('href','https://t.me/hamid_2_sh');
-  await expect(page.getByRole('link',{name:'WhatsApp',exact:true})).toHaveAttribute('href','https://wa.me/hamid_2_sh');
+  await expect(page.getByRole('link',{name:'WhatsApp',exact:true})).toHaveAttribute('href','https://wa.me/989373891553');
   const cta=page.locator('.pf-contact-action .pf-macfolio-link');await expect(cta).toHaveAttribute('target','_blank');
   const popupPromise=page.waitForEvent('popup');await cta.click();const popup=await popupPromise;await expect(popup).toHaveURL(/\?view=desktop$/);await expect(popup.locator('.os-root')).toBeVisible();await expect(popup.locator('.app-safari')).toHaveCount(0);await popup.close();
   if(compact){
