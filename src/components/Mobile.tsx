@@ -82,7 +82,7 @@ export function Mobile() {
               aria-label="About Hamid"
               onClick={() => os.openApp("about")}
             >
-              <img src={asset("assets/avatar.png")} alt="Hamid Shaikhy" />
+              <img src={asset("assets/avatar.webp")} alt="Hamid Shaikhy" />
               <strong>Hamid Shaikhy</strong>
               <span>Front-End Developer</span>
             </button>

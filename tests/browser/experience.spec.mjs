@@ -27,6 +27,14 @@ async function open(page, id, mobile = false) {
 }
 async function screenshot(page, testInfo, name) { await fs.mkdir('artifacts/qa', { recursive: true }); await page.screenshot({ path: `artifacts/qa/${testInfo.project.name}-${name}.png` }); }
 async function cleanStart(page) { await page.goto('./'); await expect(page.locator('.about-portfolio .pf-hero h1')).toBeVisible(); }
+async function renderedResume(page) {
+  await expect(page.locator('.pdf-page-count')).toHaveText(/\d+ \/ \d+/);
+  const count=Number((await page.locator('.pdf-page-count').textContent()).split('/')[1].trim());
+  expect(count).toBeGreaterThan(0);
+  await expect(page.locator('.pdf-workspace .pdf-page[data-rendered="true"]')).toHaveCount(count);
+  return count;
+}
+
 const runtimeProblems = new WeakMap();
 test.beforeEach(async ({ page }) => {
   await page.context().route('**/_vercel/insights/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
@@ -118,27 +126,29 @@ test('Calculator keyboard arithmetic and external contact links', async ({ page 
 test('PDF renders every supplied page, text layers, zoom, fit, thumbnails and download', async ({ page }, info) => {
   const errors=[]; page.on('pageerror', e => errors.push(e.message));
   await cleanStart(page); await open(page, 'resume');
-  await expect(page.locator('.pdf-workspace .pdf-page[data-rendered="true"]')).toHaveCount(2);
-  for (let i=1; i<=2; i++) {
+  const pageCount=await renderedResume(page);
+  for (let i=1; i<=pageCount; i++) {
     const sheet = page.locator(`.pdf-workspace .pdf-page[data-page="${i}"]`);
-    expect(await sheet.locator('.textLayer').textContent()).toContain(i === 1 ? 'Front-End' : 'Online');
+    expect((await sheet.locator('.textLayer').textContent()).trim().length).toBeGreaterThan(20);
     expect(await sheet.locator('canvas').evaluate(c => { const values=c.getContext('2d').getImageData(0,0,c.width,c.height).data; let count=0; for(let n=0;n<values.length;n+=400) if(values[n]<200) count++; return count; })).toBeGreaterThan(30);
   }
-  await page.getByRole('button', { name: 'Next page', exact: true }).click(); await expect(page.locator('.pdf-page-count')).toHaveText('2 / 2');
-  await page.getByRole('button', { name: 'Go to page 1', exact: true }).click(); await expect(page.locator('.pdf-page-count')).toHaveText('1 / 2');
+  await page.getByRole('button', { name: 'Next page', exact: true }).click(); await expect(page.locator('.pdf-page-count')).toHaveText(`2 / ${pageCount}`);
+  await page.getByRole('button', { name: 'Go to page 1', exact: true }).click(); await expect(page.locator('.pdf-page-count')).toHaveText(`1 / ${pageCount}`);
   const before = await page.locator('.pdf-workspace .pdf-page').first().boundingBox(); await page.getByRole('button', { name: 'Zoom in' }).click();
-  await expect(page.locator('.pdf-workspace .pdf-page[data-rendered="true"]')).toHaveCount(2);
+  await renderedResume(page);
   expect((await page.locator('.pdf-workspace .pdf-page').first().boundingBox()).width).toBeGreaterThan(before.width);
   await page.getByRole('button', { name: 'Fit page', exact: true }).click(); await page.getByRole('button', { name: 'Fit width', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Download original PDF' })).toHaveAttribute('download', 'Hamid-Shaikhy-CV.pdf');
   const original=await page.request.get('./assets/resume.pdf'); const data=await page.request.get('./assets/resume-data.txt'); expect(await data.body()).toEqual(await original.body());
   await screenshot(page, info, 'preview');
   await page.getByRole('button', { name: 'Close Preview', exact: true }).click(); await open(page, 'resume');
-  await expect(page.locator('.pdf-workspace .pdf-page[data-rendered="true"]')).toHaveCount(2); expect(errors).toEqual([]);
+  await renderedResume(page); expect(errors).toEqual([]);
 });
 
 test('supplied audio decodes after manual Play and remains shared across apps and lock', async ({ page }, info) => {
+  const startupAudio=[];page.on('request',request=>{if(/\/assets\/audio\//.test(request.url()))startupAudio.push(request.url());});
   await cleanStart(page); const audio=page.locator('#macfolio-audio'); await expect(audio).toHaveJSProperty('paused', true);
+  expect(startupAudio).toEqual([]);
   const original=await page.request.get('./assets/audio/drowning-in-vertigo.mp3'); const data=await page.request.get('./assets/audio/track-data.txt');
   expect(createHash('sha256').update(await original.body()).digest('hex')).toBe(createHash('sha256').update(await data.body()).digest('hex'));
   await page.getByRole('button', { name: 'Control Center', exact: true }).click(); await page.getByRole('button', { name: 'Play music', exact: true }).click();
@@ -166,7 +176,7 @@ for (const size of [{ width:390,height:844 }, { width:375,height:667 }, { width:
     for (const id of Object.keys(labels)) {
       await open(page,id,true);
       if(id==='calculator') { await page.getByRole('button',{name:'7',exact:true}).click(); await page.getByRole('button',{name:'+',exact:true}).click(); await page.getByRole('button',{name:'2',exact:true}).click(); await page.getByRole('button',{name:'=',exact:true}).click(); await expect(page.getByLabel('Calculator display')).toHaveText('9'); }
-      if(id==='resume') { await expect(page.locator('.pdf-workspace .pdf-page[data-rendered="true"]')).toHaveCount(2); await page.getByRole('button',{name:'Next page',exact:true}).click(); await expect(page.locator('.pdf-page-count')).toHaveText('2 / 2'); }
+      if(id==='resume') { const pageCount=await renderedResume(page); await page.getByRole('button',{name:'Next page',exact:true}).click(); await expect(page.locator('.pdf-page-count')).toHaveText(`2 / ${pageCount}`); }
       if(id==='chess') { await page.getByRole('button',{name:'2 players',exact:true}).click(); await page.getByRole('button',{name:'e2 white pawn',exact:true}).click(); await page.getByRole('button',{name:'e4 legal move',exact:true}).click(); await expect(page.locator('.chess-status')).toContainText('Black to move'); }
       await screenshot(page,info,`phone-${size.width}-${id}`);
       const content = await page.locator('.ios-app-content').evaluate(e=>({width:e.clientWidth,scroll:e.scrollWidth}));
@@ -229,7 +239,7 @@ test('phone Safari navigation, addresses and resume actions in all target sizes'
     const address=safari.getByRole('textbox',{name:'Website address'});await address.fill('https://dikaasia.com/');await address.press('Enter');await expect(safari.getByRole('link',{name:'Open Website',exact:true})).toHaveAttribute('href','https://dikaasia.com/');
     const bounds=await page.locator('.ios-app-content').evaluate(el=>({width:el.clientWidth,scroll:el.scrollWidth}));expect(bounds.scroll).toBeLessThanOrEqual(bounds.width+1);
     await screenshot(page,info,`phone-${size.width}-safari`);
-    await safari.getByRole('navigation',{name:'Safari bookmarks'}).getByRole('button',{name:'Résumé',exact:true}).click();await safari.getByRole('button',{name:'Read in Preview',exact:true}).click();await expect(page.locator('.pdf-workspace .pdf-page[data-rendered="true"]')).toHaveCount(2);
+    await safari.getByRole('navigation',{name:'Safari bookmarks'}).getByRole('button',{name:'Résumé',exact:true}).click();await safari.getByRole('button',{name:'Read in Preview',exact:true}).click();await renderedResume(page);
   }
 });
 

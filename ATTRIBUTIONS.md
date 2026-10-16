@@ -25,6 +25,8 @@ The interactive About Hamid and standalone portfolio reconstructs the compositio
 
 The code license does not grant rights to third-party brands, Apple artwork, the full music track or personal media. The supplied assets remain included for the requested local experience.
 
+The supplied avatar and raster app icons are served as smaller WebP derivatives for the interface; their source credits and rights are unchanged. The original raster files remain available in Git history.
+
 PDF rendering uses [Mozilla PDF.js](https://github.com/mozilla/pdf.js), Apache-2.0; `licenses/PDFjs-Apache-2.0.txt` preserves its license. The local text-layer CSS is extracted from PDF.js and retains its Apache header. Its worker is bundled from the same installed version.
 
 Code editing uses [CodeMirror](https://codemirror.net/) and [@uiw/react-codemirror](https://github.com/uiwjs/react-codemirror), MIT. Markdown preview uses [react-markdown](https://github.com/remarkjs/react-markdown), MIT. Copies of the CodeMirror and react-markdown licenses are included in `licenses/`; dependency packages retain their own notices.

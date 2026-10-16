@@ -1,4 +1,4 @@
-﻿import { Mail, Phone, Github, Linkedin, MapPin, Copy, Check, MessageCircle } from "lucide-react";
+import { Mail, Phone, Github, Linkedin, MapPin, Copy, Check, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { profile } from "../lib/content";
 import { asset } from "../lib/assets";
@@ -27,7 +27,7 @@ export default function Contacts() {
   return (
     <div className="contacts-app">
       <div className="contact-hero">
-        <img src={asset("assets/avatar.png")} alt={profile.name} />
+        <img src={asset("assets/avatar.webp")} alt={profile.name} />
         <span className="eyebrow">LET’S BUILD SOMETHING GREAT</span>
         <h1>{profile.name}</h1>
         <p>{profile.title} / {profile.location}</p>

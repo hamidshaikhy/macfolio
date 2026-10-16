@@ -11,9 +11,8 @@ let context: AudioContext | null = null;
 let gain: GainNode | null = null;
 let trackRequest: Promise<void> | null = null;
 let trackUrl: string | null = null;
-let nativeFallback = false;
+let blobFallback = false;
 function loadNativeTrack() {
-  nativeFallback = true;
   const a = player(); a.pause(); a.src = asset("assets/audio/drowning-in-vertigo.mp3"); a.load();
   useMusic.setState({ assetLoading: true, ready: false, playing: false, loading: false, buffering: false, error: null });
 }
@@ -27,6 +26,7 @@ function player() {
   return audio;
 }
 function loadTrack() {
+  blobFallback = true;
   if (trackUrl) return Promise.resolve();
   if (!trackRequest) {
     useMusic.setState({ assetLoading: true, error: null });
@@ -39,7 +39,7 @@ function loadTrack() {
         if (bytes.byteLength < 1024) throw new Error("Empty audio response");
         trackUrl = URL.createObjectURL(new Blob([bytes], { type: "audio/mpeg" }));
         const a = player(); a.src = trackUrl; a.load();
-      }).catch(() => { trackRequest = null; loadNativeTrack(); });
+      }).catch(error => { trackRequest = null; throw error; });
   }
   return trackRequest;
 }
@@ -55,7 +55,7 @@ function audioOutput() {
   if (context?.state === "suspended") void context.resume().catch(() => {});
 }
 export const useMusic = create<MusicState>((set, get) => ({
-  playing: false, time: 0, duration: 0, error: null, buffering: false, loading: false, assetLoading: true, ready: false,
+  playing: false, time: 0, duration: 0, error: null, buffering: false, loading: false, assetLoading: false, ready: false,
   init: () => {
     const a = player();
     const progress = () => set({ time: a.currentTime, duration: Number.isFinite(a.duration) ? a.duration : 0 });
@@ -64,26 +64,38 @@ export const useMusic = create<MusicState>((set, get) => ({
     const waiting = () => set({ buffering: true });
     const ready = () => { progress(); set({ assetLoading: false, ready: true, loading: false, buffering: false }); };
     const fail = () => {
+      if (!blobFallback) {
+        // Stream through HTTP first, while Play still has a user gesture.
+        // Retain the original-byte fallback for hosts with broken media responses.
+        const resume = get().loading || get().playing;
+        const request = ++generation;
+        a.pause();set({playing:false,loading:resume});
+        void loadTrack().then(async()=>{
+          if(request!==generation||!resume)return;
+          await a.play();
+          if(request===generation)set({playing:true,loading:false,buffering:false,error:null});
+        }).catch(error=>{
+          if(request===generation)set({error:(error as DOMException).name==='NotAllowedError'?'Tap Play to allow music in this browser.':'The bundled track could not be loaded. Check your connection and retry.',assetLoading:false,ready:false,playing:false,loading:false,buffering:false});
+        });
+        return;
+      }
       generation++;
-      // Some native media pipelines cannot decode Blob URLs. Fall back to
-      // the same original MP3 through HTTP; neither path starts playback.
-      if (!nativeFallback) { loadNativeTrack(); return; }
       a.pause();
       set({ error: a.error?.code === 4 ? "This browser could not decode the supplied MP3. Retry playback." : "The bundled track could not be loaded. Check your connection and retry.", assetLoading: false, ready: false, playing: false, loading: false, buffering: false });
     };
     const events: [string, () => void][] = [["timeupdate", progress], ["loadedmetadata", ready], ["durationchange", progress], ["playing", playing], ["pause", pause], ["ended", pause], ["waiting", waiting], ["stalled", waiting], ["canplay", ready], ["error", fail]];
     events.forEach(([event, listener]) => a.addEventListener(event, listener)); progress();
-    void loadTrack().catch(() => {});
+    // Attach playback listeners now; fetch the track only after a Play request.
     return () => events.forEach(([event, listener]) => a.removeEventListener(event, listener));
   },
   toggle: async () => {
     const a = player();
     if (get().playing || get().loading || !a.paused) { generation++; a.pause(); set({ playing: false, loading: false, buffering: false }); return; }
     const request = ++generation;
-    if (a.error) a.load();
+    if (!a.getAttribute('src') || a.error) { blobFallback=false; loadNativeTrack(); }
     if (a.ended || (a.duration && a.currentTime >= a.duration)) a.currentTime = 0;
     audioOutput(); set({ loading: true, error: null });
-    try { if (!get().ready) await loadTrack(); if (request !== generation) return; await a.play(); if (request === generation) set({ playing: true, loading: false, buffering: false, error: null }); }
+    try { await a.play(); if (request === generation) set({ playing: true, loading: false, buffering: false, error: null }); }
     catch (error) { if (request === generation) set({ error: (error as DOMException).name === "NotAllowedError" ? "Tap Play to allow music in this browser." : "The track could not start. Tap Play to retry.", playing: false, loading: false, buffering: false }); }
   },
   seek: seconds => {
