@@ -20,7 +20,7 @@ export const apps: {
   icon: string;
   keywords: string;
 }[] = [
-  ...integratedApps.map(app=>({id:app.id,name:app.title,icon:app.icon,keywords:app.id+" apps application Persian PWA برنامه"})),
+  ...integratedApps.map(app=>({id:app.id,name:app.title,icon:app.icon,keywords:app.id+(app.id === "koja-berim" ? " کجا بریم نقشه مکان مترو گردش شهر map travel explore " : "")+" apps application Persian PWA برنامه"})),
   { id: "github", name: "GitHub", icon: "github", keywords: "git repositories code گیت هاب گیتهاب" },
   { id: "calendar", name: "Calendar", icon: "calendar", keywords: "events dates تقویم رویداد" },
   { id: "contacts", name: "Contacts", icon: "contacts", keywords: "contact email phone مخاطبین تماس" },
@@ -67,7 +67,7 @@ export const apps: {
   { id: "calculator", name: "Calculator", icon: "calculator", keywords: "math calculate ماشین حساب" },
 ];
 export const appById = (id: AppId) => apps.find((a) => a.id === id)!;
-export const dockApps = ["finder", "terminal", "editor", "calendar", "safari", "github", "barg", "hamnava", "personal-finance", "todo", "contacts", "chess", "calculator", "settings"].map(id => apps.find(a => a.id === id)!);
+export const dockApps = ["finder", "terminal", "editor", "calendar", "safari", "github", "barg", "hamnava", "personal-finance", "todo", "koja-berim", "contacts", "chess", "calculator", "settings"].map(id => apps.find(a => a.id === id)!);
 
-const appOrder = ["finder", "terminal", "editor", "projects", "calendar", "safari", "github", "barg", "hamnava", "personal-finance", "todo", "contacts", "about", "resume", "chess", "calculator", "settings", "trash"];
+const appOrder = ["finder", "terminal", "editor", "projects", "calendar", "safari", "github", "barg", "hamnava", "personal-finance", "todo", "koja-berim", "contacts", "about", "resume", "chess", "calculator", "settings", "trash"];
 apps.sort((a,b) => appOrder.indexOf(a.id) - appOrder.indexOf(b.id));

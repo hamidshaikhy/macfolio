@@ -13,8 +13,8 @@ import './experience.css';
 const CaseStudy = lazy(() => import('./CaseStudy'));
 const number = (n:number) => String(n).padStart(2,'0');
 const clamp = (n:number) => Math.max(0,Math.min(1,n));
-const sceneColors = ['#dff9ee','#f3e8cb','#20204c','#eadbf4','#172e31','#f5ece3','#172016','#172629','#e1f4ed'];
-const darkScenes = [false,false,true,false,true,false,true,true,false];
+const sceneColors = ['#dff9ee','#f3e8cb','#20204c','#eadbf4','#172e31','#f5ece3','#172016','#172629','#f8f6f0','#e1f4ed'];
+const darkScenes = [false,false,true,false,true,false,true,true,false,false];
 const journeyCount=journeyEntries.length;
 type Props = { mode:'standalone'|'embedded'; section?:string; onNavigate?:(section:SectionId)=>void };
 

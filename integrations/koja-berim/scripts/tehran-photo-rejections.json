@@ -1,0 +1,114 @@
+{
+  "reviewedAt": "2026-10-16",
+  "rejections": [
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:15_Khordad_Street_3.jpg",
+      "ids": [
+        "osm:node/4396461099"
+      ],
+      "reason": "Street photograph does not identify the metro station."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Defile_Pir_a_zan_by_Eug%C3%A8ne_Flandin.jpg",
+      "ids": [
+        "osm:node/4674411816"
+      ],
+      "reason": "Historical drawing of a mountain, not a place photograph."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Iran_location_map.svg",
+      "ids": [
+        "osm:node/5033020771",
+        "osm:node/5211274163",
+        "osm:relation/11501000"
+      ],
+      "reason": "Country locator map, not any of the assigned places."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:%D9%85%D8%B1%D8%B4%D8%AF_%D8%A7%D8%AD%D9%85%D8%AF_%D8%B9%D8%A7%D8%A8%D8%AF_%D9%86%D9%87%D8%A7%D9%88%D9%86%D8%AF%DB%8C_%DA%86%D9%84%D9%88%DB%8C%DB%8C.png",
+      "ids": [
+        "osm:node/6025200413"
+      ],
+      "reason": "Portrait of a person, not their tomb."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Sahab_map_of_Tehran_city_%26_suburbs_1967_cropped_Raay.png",
+      "ids": [
+        "osm:node/10214300300"
+      ],
+      "reason": "Map, not the assigned tomb."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Donald_Trump_official_portrait.jpg",
+      "ids": [
+        "osm:node/13416585667"
+      ],
+      "reason": "Unrelated portrait, not the assigned shrine."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Hasan_Abad_Square_6.jpg",
+      "ids": [
+        "osm:node/14058145515"
+      ],
+      "reason": "Square photograph does not identify its metro station."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Ferdowsi-Ave-1962.jpg",
+      "ids": [
+        "osm:way/211028553",
+        "wiki:44846"
+      ],
+      "reason": "Historical street photograph, not the assigned jewellery museum."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Tehran_Peace_Museum_table_in_the_Park-e_Shahr.jpg",
+      "ids": [
+        "osm:way/211028596"
+      ],
+      "reason": "Museum sign in an adjacent park, not the museum itself."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Map_of_the_Tehran%E2%80%93Shah_Abdol-Azim_Railway_in_the_year_1900.jpg",
+      "ids": [
+        "osm:way/451069418"
+      ],
+      "reason": "Railway map, not a photograph of the historic locomotive."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Golden_head_of_horse_rhyton_-_Sassanid_Empire_6-7_AD.JPG",
+      "ids": [
+        "osm:way/586509998",
+        "wiki:166977"
+      ],
+      "reason": "Isolated artefact does not show the museum itself."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Velayat_patk,_tehran.png",
+      "ids": [
+        "osm:way/1193089813"
+      ],
+      "reason": "Unverified satellite screenshot, not a source-confirmed park photograph."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:3412694_%D9%85%D8%B9%D8%A7%D8%A8%D8%B1_%D8%A7%D8%B5%D9%84%DB%8C_%D9%85%D8%B1%DA%A9%D8%B2_%D8%B4%D9%87%D8%B1_%D8%AA%D9%87%D8%B1%D8%A7%D9%86_%D8%AF%D8%B1_%D8%B1%D9%88%D8%B2_%DB%B5_%D9%81%D8%B1%D9%88%D8%B1%D8%AF%DB%8C%D9%86_%DB%B9%DB%B9.jpg",
+      "ids": [
+        "osm:node/13202066659"
+      ],
+      "reason": "Square photograph does not identify its metro station."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:All_Most_Summer_in_End_Week_of_2011_Spring_-_panoramio_(2).jpg",
+      "ids": [
+        "osm:way/153259285"
+      ],
+      "reason": "Roadside landscape does not clearly identify the assigned park."
+    },
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:Meli_Museum_2_-_panoramio.jpg",
+      "ids": [
+        "osm:way/322472991"
+      ],
+      "reason": "Different museum grounds, not the assigned park."
+    }
+  ]
+}

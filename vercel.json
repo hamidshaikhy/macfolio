@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/apps/koja-berim",
+      "destination": "/apps/koja-berim/index.html"
+    },
+    {
+      "source": "/apps/koja-berim/",
+      "destination": "/apps/koja-berim/index.html"
+    },
+    {
       "source": "/apps/barg",
       "destination": "/apps/barg/index.html"
     },

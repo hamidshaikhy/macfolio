@@ -4,6 +4,7 @@ export const integratedApps = [
   {id:'hamnava', title:'Hamnava', path:asset('apps/hamnava/'), icon:'assets/icons/hamnava.svg'},
   {id:'personal-finance', title:'Personal Finance', path:asset('apps/personal-finance/'), icon:'assets/icons/personal-finance.svg'},
   {id:'todo', title:'To Do List', path:asset('apps/todo/'), icon:'assets/icons/todo.svg'},
+  {id:'koja-berim', title:'Koja Berim', path:asset('apps/koja-berim/'), icon:'assets/icons/koja-berim.svg'},
 ] as const;
 export type IntegratedAppId = typeof integratedApps[number]['id'];
 export const integratedApp = (id: string) => integratedApps.find(app=>app.id===id);

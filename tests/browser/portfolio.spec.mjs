@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
-const names = ['Flow Studio', 'Barg', 'Tanpoosh', 'Dika Asia', 'Financial Panel', 'To Do List', 'Hamnava', 'Personal Finance', 'Macfolio'];
+const names = ['Flow Studio', 'Barg', 'Tanpoosh', 'Dika Asia', 'Financial Panel', 'To Do List', 'Hamnava', 'Personal Finance', 'Koja Berim', 'Macfolio'];
 const problems = new WeakMap();
 test.beforeEach(async ({ page }) => {
   await page.context().route('**/_vercel/insights/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
@@ -263,7 +263,7 @@ test('profile assembles on scroll, counters count up and journey changes with sc
   const before=await page.locator('.pf-bio-card').evaluate(el=>getComputedStyle(el).transform);
   await navigate(page,'Profile');
   await expect.poll(()=>page.locator('.pf-bio-card').evaluate(el=>getComputedStyle(el).transform)).not.toBe(before);
-  for(const target of [9,12,2,99])await expect(page.locator(`[data-counter-target="${target}"]`)).toHaveText(String(target));
+  for(const target of [10,12,2,99])await expect(page.locator(`[data-counter-target="${target}"]`)).toHaveText(String(target));
   await screenshot(page,info,'assembled-profile');
   await navigate(page,'Journey');
   await expect(page.locator('.pf-journey-card.is-active h3')).toHaveText('App Developer');

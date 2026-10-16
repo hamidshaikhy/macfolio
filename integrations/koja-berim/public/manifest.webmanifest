@@ -1,0 +1,27 @@
+{
+  "id": "/apps/koja-berim/",
+  "name": "کجا بریم؟ — راهنمای گشت‌وگذار",
+  "short_name": "کجا بریم؟",
+  "description": "کشف دیدنی‌ها، کافه‌ها و مترو روی نقشه",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/apps/koja-berim/",
+  "scope": "/apps/koja-berim/",
+  "display": "standalone",
+  "background_color": "#f8f6f0",
+  "theme_color": "#f8f6f0",
+  "icons": [
+    {
+      "src": "/apps/koja-berim/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/koja-berim/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

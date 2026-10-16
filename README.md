@@ -56,31 +56,31 @@ GitHub داخلی و گالری پروژه‌ها، تصاویر واقعی مح
 ## امکانات
 
 - **محیط دسکتاپ:** جابه‌جایی، تغییر اندازه و کوچک‌کردن پنجره‌ها؛ Dock، Spotlight، تم روشن و تیره و انتخاب والپیپر.
-- **پورتفولیو:** پرترهٔ تعاملی، معرفی، ابزارها، نه پروژه با مطالعهٔ موردی، سابقهٔ توسعهٔ وب و اپ و راه‌های تماس.
+- **پورتفولیو:** پرترهٔ تعاملی، معرفی، ابزارها، ده پروژه با مطالعهٔ موردی، سابقهٔ توسعهٔ وب و اپ و راه‌های تماس.
 - **رزومه:** نمایش PDF در Preview با بندانگشتی، زوم و دریافت اصل فایل.
 - **فضای کار:** Finder، فایل‌های متنی در ویرایشگر کد، Terminal و Trash.
 - **ابزارها:** تقویم با رویدادهای ذخیره‌شده، ماشین‌حساب با ورودی کیبورد، شطرنج و پخش موسیقی.
-- **اپ‌های مستقل:** رزومه‌ساز برگ، همنوا، مدیریت مالی و To Do List؛ از Dock و صفحهٔ خانهٔ گوشی باز می‌شوند و با **OPEN FULL** در تب مستقل هم در دسترس‌اند.
+- **اپ‌های مستقل:** رزومه‌ساز برگ، همنوا، مدیریت مالی، To Do List و کجا بریم؛ از Dock و صفحهٔ خانهٔ گوشی باز می‌شوند و با **OPEN FULL** در تب مستقل هم در دسترس‌اند.
 - **گوشی و تبلت:** برنامه‌های قابل لمس، منوی همبرگری پورتفولیو و صحنه‌های متحرک با اسکرول.
 
 ### اجرای مستقیم اپ‌ها
 
-[رزومه‌ساز برگ](https://hamidshaikhy.vercel.app/apps/barg/) · [همنوا](https://hamidshaikhy.vercel.app/apps/hamnava/) · [مدیریت مالی](https://hamidshaikhy.vercel.app/apps/personal-finance/) · [To Do List](https://hamidshaikhy.vercel.app/apps/todo/)
+[رزومه‌ساز برگ](https://hamidshaikhy.vercel.app/apps/barg/) · [همنوا](https://hamidshaikhy.vercel.app/apps/hamnava/) · [مدیریت مالی](https://hamidshaikhy.vercel.app/apps/personal-finance/) · [To Do List](https://hamidshaikhy.vercel.app/apps/todo/) · [کجا بریم؟](https://hamidshaikhy.vercel.app/apps/koja-berim/)
 
-سورس هر چهار اپ در `integrations/` نگهداری و جداگانه ساخته می‌شود؛ فقط هنگام بازکردن اپ بارگذاری می‌شود. لینک‌ها پس از انتشار این نسخه فعال می‌شوند.
+سورس هر پنج اپ در `integrations/` نگهداری و جداگانه ساخته می‌شود؛ فقط هنگام بازکردن اپ بارگذاری می‌شود. لینک‌ها پس از انتشار این نسخه فعال می‌شوند.
 
 <a id="start"></a>
 
 ## اجرای محلی
 
-Node.js نسخهٔ ۲۲٫۱۳ یا جدیدتر؛ `npm ci` وابستگی‌های چهار اپ را هم نصب می‌کند:
+Node.js نسخهٔ ۲۲٫۱۳ یا جدیدتر؛ `npm ci` وابستگی‌های پنج اپ را هم نصب می‌کند:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-برنامه در [localhost:4173](http://localhost:4173) باز می‌شود. بک‌اند یا کلید API لازم ندارد؛ پخش موسیقی همنوا به اینترنت و دسترسی به Audius نیاز دارد.
+برنامه در [localhost:4173](http://localhost:4173) باز می‌شود. بک‌اند یا کلید API لازم ندارد؛ پخش موسیقی همنوا و دریافت کاشی‌های تازهٔ نقشه و مسیر در کجا بریم به اینترنت نیاز دارند.
 
 ```bash
 npm run build    # خروجی در dist/
@@ -101,7 +101,7 @@ npm run test:browser
 ## ساختار پروژه
 
 ```text
-integrations/      سورس پین‌شدهٔ چهار اپ مستقل
+integrations/      سورس پین‌شدهٔ پنج اپ مستقل
 src/apps/          برنامه‌های محیط
 src/components/    پنجره‌ها، Dock و کنترل‌های پوسته
 src/portfolio/     پورتفولیو و صحنه‌های تعاملی
@@ -124,7 +124,7 @@ React و TypeScript رابط را می‌سازند؛ Vite بسته‌بندی،
 | متن و پروژه‌های پورتفولیو | [src/portfolio/content.ts](src/portfolio/content.ts) |
 | پورتفولیو و تنظیم انتشار | [docs/PORTFOLIO.md](docs/PORTFOLIO.md) |
 | معماری پروژه | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
-| سورس، ساخت و به‌روزرسانی چهار اپ | [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) |
+| سورس، ساخت و به‌روزرسانی پنج اپ | [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) |
 | نتایج تست و هزینهٔ بارگذاری اپ‌ها | [docs/INTEGRATION-QA.md](docs/INTEGRATION-QA.md) |
 | بررسی‌ها و محدودیت تست | [docs/QA.md](docs/QA.md) |
 

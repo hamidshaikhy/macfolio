@@ -1,0 +1,7 @@
+{
+  "tourism": ["museum", "attraction", "gallery", "viewpoint", "artwork", "zoo", "aquarium"],
+  "historic": ["monument", "castle", "ruins", "archaeological_site", "palace", "fort", "city_gate", "memorial", "house", "building", "bridge", "tomb", "tower", "manor", "mosque", "church", "baths", "caravanserai"],
+  "leisure": ["park", "garden", "nature_reserve"],
+  "natural": ["peak", "cave_entrance", "waterfall", "beach"],
+  "waterway": ["waterfall"]
+}

@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import fs from 'node:fs/promises';
 
-const apps=[{title:'To Do List',id:'todo-list',repo:'to-do-list',shots:3},{title:'Hamnava',id:'hamnava',repo:'hamnava',shots:5}];
+const apps=[{title:'To Do List',id:'todo-list',repo:'to-do-list',shots:3},{title:'Hamnava',id:'hamnava',repo:'hamnava',shots:5},{title:'Koja Berim',id:'koja-berim',repo:'koja-berim',shots:3}];
 test.beforeEach(async({context})=>{
   await context.route('**/_vercel/insights/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
 });
@@ -11,7 +11,7 @@ test('new apps share real galleries across GitHub, Projects, Safari and Spotligh
   await page.goto('/?view=desktop');
   const dock=page.getByRole('navigation',{name:'Dock',exact:true});
   await dock.getByRole('button',{name:'GitHub',exact:true}).click();
-  await expect(page.locator('.gh-project')).toHaveCount(8);
+  await expect(page.locator('.gh-project')).toHaveCount(9);
   for(const app of apps){
     const card=page.locator('.gh-project').filter({has:page.getByRole('heading',{name:app.title,exact:true})});
     await expect.poll(()=>card.locator('img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
