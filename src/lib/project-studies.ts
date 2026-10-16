@@ -5,6 +5,14 @@ export type ProjectStudy = {
   highlights: string[]; shots: ProjectShot[];
 };
 export const projectStudies: Record<string, ProjectStudy> = {
+  'koja-berim': {
+    headline: "شهر را جور دیگری ببین", intro: "کجا بریم؟ راهنمای فارسی کشف دیدنی‌ها، کافه‌ها و مترو؛ با نقشه، عکس مکان‌ها، پیشنهاد گشت و مجموعه‌های شخصی. تصاویر از اجرای واقعی پروژه‌اند.", status: "CITY EXPLORER PWA",
+    role: "طراحی و توسعهٔ رابط React و TypeScript، نقشهٔ Leaflet و کاشی‌های OpenStreetMap، داده‌های مکان و شبکهٔ مترو و ذخیره‌سازی IndexedDB.",
+    challenge: "خوانا نگه‌داشتن فهرست و جزئیات در کنار نقشه روی گوشی، هماهنگی فیلتر و محدوده و حفظ داده‌های شخصی هنگام رفت‌وبرگشت بین صفحه‌ها.",
+    result: "جست‌وجو و فیلتر مکان، شبکهٔ متروی تهران، مسیر پیاده و خودرو، ذخیره و یادداشت و ورود و خروج پشتیبان JSON؛ پوستهٔ نصب‌شدنی و داده‌های محلی در کنار نقشه و مسیر آنلاین.",
+    highlights: ["نقشه و فهرست فارسی", "شبکهٔ مترو و مسیریابی", "مجموعه و یادداشت محلی", "PWA و پشتیبان JSON"],
+    shots: [{file:"photos-desktop.png",title:"کشف مکان‌های عکس‌دار",description:"فهرست واقعی مکان‌ها، عکس‌ها و فیلترها در کنار نقشه."},{file:"metro-desktop.png",title:"شبکهٔ متروی تهران",description:"نمای خطوط، ایستگاه‌ها و تقاطع‌ها روی نقشه."},{file:"discover-mobile.png",title:"کشف شهر روی گوشی",description:"چیدمان موبایل برای جست‌وجو و مرور مکان‌ها."}],
+  },
   'personal-finance': {
     headline: "یک تصویر روشن از دخل‌وخرج", intro: "دفتر مالی فارسی با حساب‌های محلی مستقل، تقویم شمسی و اطلاعات رمزگذاری‌شده؛ تصاویر با حساب نمایشی گرفته شده‌اند.", status: "LIVE PERSONAL FINANCE PWA",
     role: "طراحی و توسعهٔ کامل رابط و منطق دفتر مالی با React، TypeScript، IndexedDB و Web Crypto.",

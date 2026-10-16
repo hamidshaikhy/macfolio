@@ -39,7 +39,7 @@ for (const app of sources) {
   }
   if (app.id !== 'barg') {
     // Only this child's small shell. APK, media and unrelated origins never enter this cache.
-    const candidates = (await walk(out)).filter(f => f !== 'sw.js' && !f.startsWith('downloads/') && !/\.(mp3|mp4|apk|part|map)$/i.test(f));
+    const candidates = (await walk(out)).filter(f => f !== 'sw.js' && !f.startsWith('downloads/') && !(app.id === 'koja-berim' && f.startsWith('photos/')) && !/\.(mp3|mp4|apk|part|map)$/i.test(f));
     const files = [];
     const hash = createHash('sha256');
     for (const file of candidates) {

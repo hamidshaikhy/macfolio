@@ -31,7 +31,7 @@ export default function EmbeddedApp({id}:{id:IntegratedAppId}) {
   useEffect(()=>{document.addEventListener('visibilitychange',sendVisibility);return()=>document.removeEventListener('visibilitychange',sendVisibility);},[instance]);
   const src = `${app.path}?embed=macfolio&instance=${encodeURIComponent(instance)}`;
   return <div className="embedded-app" data-app-id={id} data-status={status}>
-    <iframe ref={frame} key={instance} title={`${app.title} application`} src={src} allow="autoplay; fullscreen" onError={()=>setStatus('failed')} />
+    <iframe ref={frame} key={instance} title={`${app.title} application`} src={src} allow={id==='koja-berim'?'geolocation; fullscreen':'autoplay; fullscreen'} onError={()=>setStatus('failed')} />
     {status!=='ready' && <div className="embedded-app-status" role={status==='failed'?'alert':'status'}>
       <strong>{status==='failed'?`${app.title} could not open`:`Opening ${app.title}…`}</strong>
       {status==='failed' && <><p>Your saved data is still on this device.</p><button className="primary-button" onClick={()=>{setStatus('loading');setInstance(crypto.randomUUID());}}>Try again</button><a href={app.path} target="_blank" rel="noopener noreferrer">Open full app</a></>}

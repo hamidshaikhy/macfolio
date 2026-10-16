@@ -121,6 +121,18 @@ export const selectedWork: PortfolioProject[] = [
     shots:[shot('personal-finance',0,'Your financial picture','The actual overview with local demonstration data.'),shot('personal-finance',1,'Follow the money','Monthly reports, categories and CSV export.'),shot('personal-finance',2,'A ledger in your pocket','The responsive transaction form with Jalali dates.')],
   },
   {
+    id: 'koja-berim', title: 'Koja Berim', category: 'City explorer & map PWA', status: 'INSTALLABLE CITY EXPLORER', accent: '#b7c995',
+    headline: 'Find your next place in the city.',
+    summary: 'A Persian city explorer with interactive maps, cafés, attractions, metro lines and personal collections.',
+    role: 'Product design & PWA development',
+    problem: 'Discovering a city means coordinating places, photographs, map filters and routes on a small screen.',
+    contribution: 'I built the React interface, Leaflet map, place discovery, Tehran metro view, routing tools and local collections.',
+    decisions: ['Leaflet and OpenStreetMap provide the default map without an API key.', 'Local city catalogs support discovery; fresh map tiles and directions require internet access.', 'IndexedDB stores saved places, collections and notes on the device, with JSON backup and restore.'],
+    features: ['Place search, photographs and map filters', 'Tehran metro lines and stations', 'Walking and driving routes with optional live location', 'Personal collections, notes and JSON backups'],
+    stack: ['React', 'TypeScript', 'Leaflet', 'OpenStreetMap', 'PWA', 'IndexedDB'], repo: original('koja-berim').repo, live: projectDemo('koja-berim'),
+    shots: [shot('koja-berim', 0, 'Discover the city', 'Real place photographs and filters alongside the interactive map.'), shot('koja-berim', 1, 'Explore the metro network', 'Tehran metro lines, stations and interchanges.'), shot('koja-berim', 2, 'A city guide in your pocket', 'The responsive place-discovery view on mobile.')],
+  },
+  {
     id: 'macfolio' , title: 'Macfolio', category: 'Interactive desktop portfolio', status: 'PERSONAL PROJECT', accent: '#b9d4b9',
     headline: 'A portfolio you can work inside.',
     summary: 'A familiar desktop, reimagined for the web. Working apps, a shared file system and a separate mobile experience.',

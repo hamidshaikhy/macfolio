@@ -145,5 +145,14 @@ export const projects = [
     result: "ثبت تراکنش، بودجه‌بندی، گزارش CSV و پشتیبان رمزگذاری‌شده در یک PWA مستقل؛ حساب دمو برای بررسی محصول در دسترس است.",
     tags: ["React", "TypeScript", "PWA", "IndexedDB", "Web Crypto", "RTL"], repo: "https://github.com/hamidshaikhy/personal-finance",
   },
+  {
+    id: "koja-berim", title: "Koja Berim", category: "City explorer & map PWA", monogram: "KB", color: "#24533b",
+    summary: "کجا بریم؟ کشف شهر، دیدنی‌ها، کافه‌ها و مترو",
+    description: "وب‌اپ فارسی برای کشف مکان‌های شهر روی نقشه، مرور عکس دیدنی‌ها و کافه‌ها، نمایش شبکهٔ مترو، مسیریابی و ساخت مجموعه‌های شخصی؛ با رابط راست‌چین و نصب PWA.",
+    role: "طراحی و توسعه با React و TypeScript؛ نقشهٔ Leaflet، داده‌های OpenStreetMap، جست‌وجو و فیلتر مکان‌ها، مسیریابی و ذخیرهٔ مجموعه‌ها در IndexedDB.",
+    challenge: "هماهنگی نقشه و فهرست مکان‌ها در موبایل، نمایش خطوط و ایستگاه‌های مترو و مدیریت داده‌های محلی در کنار سرویس‌های آنلاین.",
+    result: "کشف مکان و عکس، پیشنهاد گشت، ذخیره و یادداشت، مجموعه‌های شخصی و پشتیبان JSON در یک وب‌اپ مستقل. کاشی‌های تازهٔ نقشه و مسیریابی به اینترنت نیاز دارند؛ موقعیت فقط با اجازهٔ کاربر فعال می‌شود.",
+    tags: ["React", "TypeScript", "Leaflet", "OpenStreetMap", "PWA", "IndexedDB"], repo: "https://github.com/hamidshaikhy/koja-berim",
+  },
 ];
 export type Project = (typeof projects)[number];

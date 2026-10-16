@@ -1,6 +1,6 @@
-# Four independent applications
+# Five independent applications
 
-Barg, Hamnava, Personal Finance and To Do List are real applications built from pinned source in `integrations/`. They share Macfolio's deployment and origin, but each keeps its own React version, lockfile, CSS, fonts, document, storage logic and build. Upstream repositories are unchanged. No APK was rebuilt; To Do List's existing downloadable release and checksum are preserved.
+Barg, Hamnava, Personal Finance, To Do List and Koja Berim are real applications built from pinned source in `integrations/`. They share Macfolio's deployment and origin, but each keeps its own React version, lockfile, CSS, fonts, document, storage logic and build. Upstream repositories are unchanged. No APK was rebuilt; To Do List's existing downloadable release and checksum are preserved.
 
 | App | Standalone URL | Source commit |
 | --- | --- | --- |
@@ -8,8 +8,9 @@ Barg, Hamnava, Personal Finance and To Do List are real applications built from 
 | Hamnava | `/apps/hamnava/` | `3226da9a2888c01057bb4c99cef436304ae4e222` |
 | Personal Finance | `/apps/personal-finance/` | `b565c84ae91867a15a85015683798751072f3e3e` |
 | To Do List | `/apps/todo/` | `4e057da6294191f54024b1e0d62e32bea3fb6b07` |
+| Koja Berim | `/apps/koja-berim/` | `879ebe9227742e2dddf2e05939bdcbae2d026570` |
 
-Repository URLs and exact pins are also in `integrations/sources.json`. These URLs are available locally and in the production build; the public domain receives them when this branch is deployed. Personal Finance is a separate project from the older Financial Panel; both remain in the project collection. The four app demos appear in Projects, GitHub cards, Safari's project list and the standalone portfolio.
+Repository URLs and exact pins are also in `integrations/sources.json`. These URLs are available locally and in the production build; the public domain receives them when this branch is deployed. Personal Finance is a separate project from the older Financial Panel; both remain in the project collection. The five app demos appear in Projects, GitHub cards, Safari's project list and the standalone portfolio.
 
 ## Install, run and build
 
@@ -37,7 +38,7 @@ The main build runs first; `scripts/build-integrations.mjs` then builds each chi
 
 The iframe occupies the content area and responds to its actual viewport. Document isolation protects Macfolio's layout from child global CSS and RTL changes. No sandbox is applied: these are trusted same-origin applications, and storage, Web Crypto, forms, printing, downloads and links remain available. Same-origin iframes are not a security boundary against hostile JavaScript.
 
-DOM ordering is stable; z-index follows the existing focus order. React keys alone do not prevent an iframe reloading when an ancestor is moved in the DOM. Opening another window, focus, drag, resize, minimize, restoring or Dock hover leave the running child intact. Minimize/home hides the instance and pauses visual animations; To Do List reconciles timestamp-based timers on return. Hamnava never starts playback automatically; user-started playback continues minimized. Closing removes the iframe and listeners and stops its runtime. Mobile home preserves opened children; the four apps appear in an explicit home list, with Finder, Safari, Calculator and Contacts in its Dock.
+DOM ordering is stable; z-index follows the existing focus order. React keys alone do not prevent an iframe reloading when an ancestor is moved in the DOM. Opening another window, focus, drag, resize, minimize, restoring or Dock hover leave the running child intact. Minimize/home hides the instance and pauses visual animations; To Do List reconciles timestamp-based timers on return. Hamnava never starts playback automatically; user-started playback continues minimized. Closing removes the iframe and listeners and stops its runtime. Mobile home preserves opened children; the five apps appear in an explicit home list, with Finder, Safari, Calculator and Contacts in its Dock.
 
 Each child sends ready after React commits, and sends focus from pointer/focus events. The small typed bridge accepts only ready, focus and visibility messages. Origin, exact frame source, app ID and instance UUID are checked; target origin is explicit. It has no arbitrary navigation, execution, settings or account-data commands. Loading, timeout/error and retry are displayed inside the app's window; an HTML load event alone never marks it ready.
 
@@ -87,3 +88,9 @@ npm run test:apps:ui
 Barg has no upstream test command; its typecheck/build and actual browser editing/Word/PDF/font checks are included. The root unit suite tests registry consistency and rejects forged bridge messages. Browser tests cover loading, focus/drag/resize/minimize/restore/close, standalone links/deep links/refresh, saved tasks and hidden timer reconciliation, financial user separation/stale writes, CSV/encrypted backup and actual Word/PDF downloads. Music tests use provider fixtures and decoded audio; `node scripts/check-hamnava-live.mjs` separately exercises real Audius catalog/search/playback in Chrome (preview on port 5180).
 
 Cold-load measurements and test results are recorded in [INTEGRATION-QA.md](INTEGRATION-QA.md). Tests are browser emulation, not a real phone/iPad run. Headless tests inspect print styling/fonts and download actual image PDFs; the native Save-as-PDF dialog still needs manual checking. Playwright WebKit offline navigation produced an internal engine error; worker scopes, caches and controller separation are tested there, while offline reloads are tested in Chrome. No push, merge or deployment is performed by this integration task.
+
+## Koja Berim
+
+Koja Berim uses the same lazy wrapper and bridge, with explicit geolocation permission delegation. Location is requested only through the app's user controls. IndexedDB `koja-berim-v1` keeps saved places, collections, notes and cached city data separate from the other apps. Shares remove embedded-window instance parameters. The source SVG location marker is used for the Dock without its decorative lower-right dot.
+
+Default maps use Leaflet/OpenStreetMap with no key. Fresh tiles, remote discovery and directions require internet. The optional upstream Neshan backend remains disabled; the vendored server source is retained but not deployed as a Macfolio API. The standalone service worker owns `/apps/koja-berim/` only; place photographs are excluded from its precache. Real upstream screenshots illustrate discovery, metro and mobile views in all project galleries.

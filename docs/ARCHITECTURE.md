@@ -89,7 +89,7 @@ Cleanup removed unused imports, test-only app wrappers, the obsolete static Cale
 
 Calculator opens at 320×510 with a 36px titlebar, no visible title, and a compact four-column keypad. `clampRect` accepts an optional app id so its 280px minimum width does not weaken other applications' 420px limit. Drag, resize, minimize and full-viewport maximize remain available. `src/shell-refinements.css` replaces the previous 56 conflicting Calculator rules and owns its portrait/landscape layouts.
 
-Mobile uses an explicit home list independent of the desktop Dock, reserving Finder, Safari, Calculator and Contacts for its four Dock slots. All four integrated apps appear in the home grid. About retains its profile widget; Projects and Preview retain their quick links. Opened child iframe instances stay mounted when returning home or opening another app; their visibility bridge pauses visual work.
+Mobile uses an explicit home list independent of the desktop Dock, reserving Finder, Safari, Calculator and Contacts for its four Dock slots. All five integrated apps appear in the home grid. About retains its profile widget; Projects and Preview retain their quick links. Opened child iframe instances stay mounted when returning home or opening another app; their visibility bridge pauses visual work.
 
 The menu-bar date now toggles the `notifications` panel. `NotificationCenter.tsx` renders four static sample cards without click actions; it does not use the Calendar widget or receive live mail. Its glass material follows the theme. The shared battery SVG contains a green fill and white charging bolt in both desktop and phone chrome.
 

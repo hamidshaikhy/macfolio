@@ -22,5 +22,11 @@
     "repository": "https://github.com/hamidshaikhy/to-do-list",
     "commit": "4e057da6294191f54024b1e0d62e32bea3fb6b07",
     "path": "/apps/todo/"
+  },
+  {
+    "id": "koja-berim",
+    "repository": "https://github.com/hamidshaikhy/koja-berim",
+    "commit": "879ebe9227742e2dddf2e05939bdcbae2d026570",
+    "path": "/apps/koja-berim/"
   }
 ]

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-const appNames = {barg:'Barg',hamnava:'Hamnava','personal-finance':'Personal Finance',todo:'To Do List'};
+const appNames = {barg:'Barg',hamnava:'Hamnava','personal-finance':'Personal Finance',todo:'To Do List','koja-berim':'Koja Berim'};
 test.beforeEach(async({page})=>{
   await page.route('**/_vercel/insights/**',route=>route.fulfill({status:204}));
 });
@@ -98,7 +98,7 @@ for(const width of [320,375,390,430,768,1024,1440]) test(`apps fit ${width}px st
       const full=page.locator('.ios-app-header').getByRole('link',{name:'OPEN FULL'});const box=await full.boundingBox();expect(box.x+box.width).toBeLessThanOrEqual(width);
       await page.getByRole('button',{name:'Back to home'}).click();
     }
-    await expect(page.locator('iframe')).toHaveCount(4); // Home preserves the opened instances.
+    await expect(page.locator('iframe')).toHaveCount(Object.keys(appNames).length); // Home preserves the opened instances.
   }else{
     for(const id of Object.keys(appNames)){await open(page,id);const iframe=await page.locator(`iframe[title="${appNames[id]} application"]`).elementHandle();const doc=await iframe.contentFrame();expect(await doc.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${id} embedded overflow`).toBe(true);}
     const dock=await page.getByRole('navigation',{name:'Dock',exact:true}).boundingBox();expect(dock.x).toBeGreaterThanOrEqual(0);expect(dock.x+dock.width).toBeLessThanOrEqual(width);

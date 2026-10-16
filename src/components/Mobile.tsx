@@ -20,7 +20,7 @@ import { asset } from "../lib/assets";
 import { SystemIcon } from "./SystemIcon";
 const mobileDock: AppId[] = ["finder", "safari", "calculator", "contacts"];
 // About, Projects and Preview retain their existing widget/quick-link entry points.
-const homeApps: ReturnType<typeof appById>[] = (["terminal", "editor", "calendar", "github", "barg", "hamnava", "personal-finance", "todo", "chess", "settings", "trash"] as AppId[]).map(appById);
+const homeApps: ReturnType<typeof appById>[] = (["terminal", "editor", "calendar", "github", "barg", "hamnava", "personal-finance", "todo", "koja-berim", "chess", "settings", "trash"] as AppId[]).map(appById);
 export function Mobile() {
   const os = useOS();
   const now = useClock();

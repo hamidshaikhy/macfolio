@@ -1,0 +1,231 @@
+{
+  "description": "Source-page photographs found through web search. Only visually reviewed images of the named place are imported. Original rights remain with their owners.",
+  "places": [
+    {
+      "name": "موزه پمپ بنزین دروازه دولت",
+      "ids": [
+        "osm:node/6681131585"
+      ],
+      "source": "https://amordadnews.com/37418/",
+      "publisher": "امرداد",
+      "image": "https://amordadnews.com/wp-content/uploads/2020/06/3-4.jpg",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "امرداد (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "موزه آرگو",
+      "ids": [
+        "osm:node/6113744186"
+      ],
+      "source": "https://deedstudio.com/projects/argo-contemporary-art-museum-cultural-centre/",
+      "publisher": "Deed Studio",
+      "image": "https://deedstudio.com/wp-content/uploads/2023/01/architectural-photograpy-argo-factory-museum-agakhan47-768x1075.jpg",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "Deed Studio (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "موزه برادران امیدوار",
+      "ids": [
+        "osm:way/375114120"
+      ],
+      "source": "https://www.karnaval.ir/things-to-do/omidvar-brothers-museum-tehran",
+      "publisher": "کارناوال",
+      "image": "https://media.karnaval.ir/uploads/2018/10/YYj1psLyhIErHaxK-1539689306544.jpg",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "کارناوال (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Abkar Miniatures Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Abkar-Miniatures-Museum/796",
+      "image": "https://files.toiran.com/photos/directories/796/700x400/3752.jpg",
+      "ids": [
+        "osm:way/516613634"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Behzad Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Behzad-Museum/793",
+      "image": "https://files.toiran.com/photos/directories/793/700x400/3440.jpg",
+      "ids": [
+        "osm:way/516613638"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "City Photo House",
+      "source": "https://www.toiran.com/en/city-tehran/museums/City-Photo-House/2033",
+      "image": "https://files.toiran.com/photos/directories/2033/700x400/3777.jpg",
+      "ids": [
+        "osm:node/4276483140"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Dr. Hessabi Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Dr.-Hessabi-Museum/764",
+      "image": "https://files.toiran.com/photos/directories/764/700x400/3771.jpg",
+      "ids": [
+        "osm:way/1543019924"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Electrical Industry Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Electrical-Industry-Museum/615",
+      "image": "https://files.toiran.com/photos/directories/615/700x400/3526.jpg",
+      "ids": [
+        "osm:way/477422692"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Farshchian Miniature Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Farshchian-Miniature-Museum/804",
+      "image": "https://files.toiran.com/photos/directories/804/700x400/3702.jpg",
+      "ids": [
+        "osm:way/516613642"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Haftchenar Nature and Wildlife Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Haftchenar-Nature-and-Wildlife-Museum/766",
+      "image": "https://files.toiran.com/photos/directories/766/700x400/3471.jpg",
+      "ids": [
+        "osm:way/199785796"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Mir-Emad Calligraphy Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Mir-Emad-Calligraphy-Museum/776",
+      "image": "https://files.toiran.com/photos/directories/776/700x400/3401.jpg",
+      "ids": [
+        "osm:way/460577717"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "National Museum of Water",
+      "source": "https://www.toiran.com/en/city-tehran/museums/National-Museum-of-Water/802",
+      "image": "https://files.toiran.com/photos/directories/802/700x400/3294.jpg",
+      "ids": [
+        "osm:way/375114160"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Natural History Museum of Iran",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Natural-History-Museum-of-Iran/611",
+      "image": "https://files.toiran.com/photos/directories/611/700x400/3224.jpg",
+      "ids": [
+        "osm:node/3424949605"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Saba Residence Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Saba-Residence-Museum/781",
+      "image": "https://files.toiran.com/photos/directories/781/700x400/3421.jpg",
+      "ids": [
+        "osm:node/6497813323"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    },
+    {
+      "name": "Sepah Bank Coin Museum",
+      "source": "https://www.toiran.com/en/city-tehran/museums/Sepah-Bank-Coin-Museum/789",
+      "image": "https://files.toiran.com/photos/directories/789/700x400/3391.jpg",
+      "ids": [
+        "osm:way/684650985"
+      ],
+      "publisher": "ToIran",
+      "reviewed": true,
+      "visualReview": true,
+      "credit": "ToIran (منبع تصویر)",
+      "rights": "حقوق تصویر متعلق به صاحب اثر است",
+      "reviewNotes": "Source page identifies the named museum; photograph visually checked as its facade, entrance, museum hall or grounds. Not a nearby street, portrait or isolated artwork.",
+      "reviewedAt": "2026-10-16"
+    }
+  ],
+  "rejectedCandidates": "Unreviewed search results, standalone objects, posters, generic placeholders and ambiguous buildings were not imported."
+}
