@@ -8,7 +8,8 @@ import {fileURLToPath} from 'node:url';
 const root=new URL('../',import.meta.url);
 const directory=fileURLToPath(new URL('docs/screenshots/',root));
 const readme=await readFile(new URL('README.md',root),'utf8');
-const expected=new Set([...readme.matchAll(/docs\/screenshots\/([\w-]+)\.png/g)].map(match=>match[1]));
+const mobileOnly=process.argv.includes('--mobile-only');
+const expected=new Set([...readme.matchAll(/docs\/screenshots\/([\w-]+)\.png/g)].map(match=>match[1]).filter(name=>!mobileOnly||name.includes('mobile')));
 const captured=new Set(),problems=[];
 const chrome=process.env.PLAYWRIGHT_CHROME_EXECUTABLE||(process.platform==='win32'&&existsSync('C:/Program Files/Google/Chrome/Application/chrome.exe')?'C:/Program Files/Google/Chrome/Application/chrome.exe':undefined);
 const server=process.env.MACFOLIO_SCREENSHOT_URL?null:await preview({preview:{host:'127.0.0.1',port:5186,strictPort:true,open:false}});
@@ -32,7 +33,7 @@ async function readyPortfolio(page){
 }
 async function setup(context){
   const page=await context.newPage();page.on('pageerror',error=>problems.push(error.message));
-  await page.clock.setFixedTime(new Date('2026-10-16T09:00:00Z'));
+  await page.clock.setFixedTime(new Date('2026-10-18T09:00:00Z'));
   await page.route('**/_vercel/insights/**',route=>route.fulfill({status:204}));
   return page;
 }
@@ -55,6 +56,7 @@ async function section(page,name){
 }
 try{
   await mkdir(directory,{recursive:true});browser=await chromium.launch({executablePath:chrome});
+  if(!mobileOnly){
   const desktop=await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:1});
   const page=await setup(desktop);await page.goto(base);await readyPortfolio(page);
   await theme(page,'light');await capture(page,'portfolio-about');
@@ -75,6 +77,7 @@ try{
   await page.getByRole('button',{name:'Inspect portrait',exact:true}).click();await page.waitForTimeout(1100);
   await capture(page,'portfolio-electronic');await page.getByRole('button',{name:'Close inspection',exact:true}).click();
   await section(page,'Work');await capture(page,'portfolio-work');
+  }
   const mobile=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true});
   const phone=await setup(mobile);await phone.goto(base);await readyPortfolio(phone);await capture(phone,'portfolio-about-mobile');
   await phone.getByRole('button',{name:'Back to home',exact:true}).click();await capture(phone,'mobile-home');
