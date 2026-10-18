@@ -44,8 +44,6 @@
 .ios-quick-links button { flex:1; min-width:0; display:flex; align-items:center; justify-content:center; gap:7px; padding:9px 5px; border-radius:12px; background:var(--glass); color:var(--text); font-size:11px; backdrop-filter:blur(25px); border:1px solid #ffffff28; }
 @media (max-width:767px), (pointer:coarse) and (max-width:1024px) and (max-height:500px) {
   .ios-home { padding:10px 20px calc(26px + env(safe-area-inset-bottom)); overflow:auto; }
-  .ios-widgets { margin-bottom:12px; gap:12px; }
-  .ios-widgets > button { height:144px; }
   .ios-app-grid { row-gap:20px; }
   .ios-search { margin:16px auto; }
   .ios-dock { margin-top:auto; min-height:82px; height:82px; }
@@ -54,17 +52,6 @@
 }
 @container mobile-viewport (max-height:700px) {
   .ios-home { padding:6px 16px 26px; }
-  .ios-widgets > button { height:85px; border-radius:19px; }
-  .ios-profile-widget { padding:5px; }
-  .ios-profile-widget img { width:36px; height:36px; margin-bottom:4px; }
-  .ios-profile-widget strong { font-size:10px; }
-  .ios-profile-widget > span { font-size:8px; margin-top:3px; }
-  .ios-clock-widget { padding:10px 12px; }
-  .ios-clock-widget > span { font-size:8px; }
-  .ios-clock-widget > strong { font-size:25px; margin:5px 0; }
-  .ios-clock-widget > small { font-size:9px; }
-  .ios-clock-widget > svg { top:12px; right:12px; width:12px; }
-  .ios-widgets { margin-bottom:9px; }
   .ios-quick-links { margin-bottom:13px; gap:8px; }
   .ios-quick-links button { padding:7px 3px; font-size:10px; }
   .ios-app-grid { row-gap:13px; column-gap:8px; }
