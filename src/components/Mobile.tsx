@@ -76,6 +76,7 @@ export function Mobile() {
         </section>
       ) : (
         <main className="ios-home">
+          <div className="ios-home-scroll">
           <div className="ios-widgets">
             <button
               className="ios-profile-widget"
@@ -128,6 +129,7 @@ export function Mobile() {
           >
             <Search size={13} /> Search
           </button>
+          </div>
           <div className="ios-dock">
             {mobileDock.map((a) => (
               <button

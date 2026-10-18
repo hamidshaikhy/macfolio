@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOS } from "../state/os";
-const mobileQuery = "(max-width: 767px), (pointer: coarse) and (max-width: 1024px) and (max-height: 500px)";
+import { mobileQuery } from "./mobile-viewport";
 export function useClock() {
   const [now, setNow] = useState(new Date());
   useEffect(() => {

@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import fs from 'node:fs/promises';
 const sizes=[[320,568],[375,667],[390,844],[430,932],[600,960],[768,1024],[820,1180],[1024,1366],[1024,768],[844,390],[1366,768],[1440,1000]];
-const titles=['Flow Studio','Barg','Tanpoosh','Dika Asia','Financial Panel','To Do List','Hamnava','Personal Finance','Macfolio'];
+const titles=['Flow Studio','Barg','Tanpoosh','Dika Asia','Financial Panel','To Do List','Hamnava','Personal Finance','Koja Berim','Macfolio'];
 const journeyTitles=['App Developer','Front-End Developer','B.Sc. in Computer Engineering','Building Personal Products'];
 async function scene(page,id,fraction=0){
  await page.locator('.pf-scroll').evaluate((el,{id,fraction})=>{const section=el.querySelector(`#${id}`),start=section.offsetTop-96;el.scrollTop=start+(section.offsetHeight-el.clientHeight+96)*fraction;},{id,fraction});
@@ -88,6 +88,7 @@ for(const [width,height] of [[390,844],[768,1024],[1024,768],[1440,1000]])test(`
  const menu=about.getByRole('button',{name:'Open navigation',exact:true});if(await menu.isVisible())await menu.click();
  await about.locator('.pf-nav > nav').getByRole('link',{name:'Work',exact:true}).click();await expect(about.locator('.pf-experience')).toHaveAttribute('data-scene','work');await expect(page).toHaveURL(/\/$/);
  const popupPromise=page.waitForEvent('popup');await about.getByRole('link',{name:'OPEN FULL PORTFOLIO',exact:true}).click();const popup=await popupPromise;await expect(popup).toHaveURL(/\/portfolio$/);await expect(popup.locator('.pf-standalone')).toBeVisible();await popup.close();
- await scene(page,'journey',.5);await expect(about.locator('.pf-journey-card.is-active h3')).toHaveText('B.Sc. in Computer Engineering');
+ // Aim inside the third entry, away from the subpixel boundary between entries.
+ await scene(page,'journey',2.25/journeyTitles.length);await expect(about.locator('.pf-journey-card.is-active h3')).toHaveText('B.Sc. in Computer Engineering');
  await page.screenshot({path:`artifacts/responsive-tests/${info.project.name}-about-${width}-${height}.png`});
 });
