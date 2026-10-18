@@ -34,7 +34,7 @@ export function LockScreen({ mobile }: { mobile: boolean }) {
         </strong>
       </div>
       {mobile && (music.playing || music.time > 0 || music.duration > 0) && <MusicCard large />}
-      <button className="login-profile" onClick={() => os.setLocked(false)}>
+      <button className="login-profile" aria-label={mobile ? "Unlock" : undefined} onClick={() => os.setLocked(false)}>
         <img src={asset("assets/avatar.webp")} alt="Hamid Shaikhy" />
         <strong>Hamid Shaikhy</strong>
         <span>{mobile ? "Tap to unlock" : "Enter macfolio"}</span>

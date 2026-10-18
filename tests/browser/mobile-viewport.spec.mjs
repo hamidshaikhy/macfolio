@@ -20,14 +20,19 @@ test.beforeEach(async({page})=>{
   await page.route('**/_vercel/insights/**',r=>r.fulfill({status:204}));
 });
 
-test('browser bars resize the phone home while the Dock stays above the home gesture',async({page})=>{
+test('browser bars resize the phone home without a second simulated phone frame',async({page})=>{
   await page.setViewportSize({width:390,height:844});await visibleViewport(page);
   await page.goto('/?view=desktop');await expect(page.locator('.ios-home')).toBeVisible();
   for(const height of [650,744,844,568,450,650]){
     await resizeVisible(page,height);
     const root=await page.locator('#root').boundingBox(),dock=await page.locator('.ios-dock').boundingBox();
-    const gesture=await page.locator('.home-indicator').boundingBox();
-    expect(root.y).toBe(0);expect(dock.y+dock.height).toBeLessThanOrEqual(gesture.y);
+    expect(root.y).toBe(0);expect(dock.y+dock.height).toBeCloseTo(height-12,0);
+    await expect(page.locator('.dynamic-island, .home-indicator')).toHaveCount(0);
+    if(height>=568){
+      const search=await page.locator('.ios-search').boundingBox();
+      expect(dock.y-search.y-search.height).toBeGreaterThanOrEqual(0);
+      expect(dock.y-search.y-search.height).toBeLessThanOrEqual(20);
+    }
     await page.locator('.ios-home-scroll').evaluate(el=>el.scrollTop=el.scrollHeight);
     expect(await page.locator('.ios-dock').boundingBox()).toEqual(dock);
     await expect(page.locator('.ios-dock button')).toHaveCount(4);
@@ -41,9 +46,9 @@ test('safe areas and keyboard resize keep native and embedded app controls visib
     el.style.setProperty('--mobile-safe-top','47px');el.style.setProperty('--mobile-safe-bottom','34px');
     el.style.setProperty('--mobile-safe-left','7px');el.style.setProperty('--mobile-safe-right','7px');
   });
-  const dock=await page.locator('.ios-dock').boundingBox(),gesture=await page.locator('.home-indicator').boundingBox();
-  expect(dock.y+dock.height).toBeLessThanOrEqual(gesture.y);
-  const status=await page.locator('.ios-status').boundingBox();expect(status.height).toBe(105);
+  const dock=await page.locator('.ios-dock').boundingBox();
+  expect(dock.y+dock.height).toBeCloseTo(650-34,0);
+  const status=await page.locator('.ios-status').boundingBox();expect(status.y).toBe(47);expect(status.height).toBe(44);
   await page.locator('.ios-home-scroll').getByRole('button',{name:'To Do List',exact:true}).click();
   await expect(page.locator('.embedded-app[data-app-id="todo"]')).toHaveAttribute('data-status','ready');
   const input=page.frameLocator('iframe[title="To Do List application"]').getByRole('textbox',{name:'نام کار جدید'});
@@ -53,9 +58,10 @@ test('safe areas and keyboard resize keep native and embedded app controls visib
     const root=await page.locator('#root').boundingBox();expect(root.y).toBe(top);
     const header=await page.locator('.ios-app-header').boundingBox();
     const iframe=await page.locator('iframe[title="To Do List application"]').boundingBox();
-    const indicator=await page.locator('.home-indicator').boundingBox();
     expect(iframe.y).toBeCloseTo(header.y+header.height,0);
-    expect(iframe.y+iframe.height).toBeLessThanOrEqual(indicator.y);
+    expect(header.y).toBe(top+47);
+    expect(iframe.y+iframe.height).toBeCloseTo(top+height-34,0);
+    await expect(page.locator('.ios-status')).toBeHidden();
     expect(iframe.x).toBe(7);expect(iframe.x+iframe.width).toBe(383);
     await expect(input).toHaveValue('Keep this draft');
   }
@@ -87,13 +93,40 @@ test('phone rotations respect side insets and standalone portfolio fills the sam
     }
     const dock=await page.locator('.ios-dock').boundingBox();
     expect(dock.x).toBeGreaterThanOrEqual(24);expect(dock.x+dock.width).toBeLessThanOrEqual(width-24);
-    expect(dock.y+dock.height).toBeLessThanOrEqual(height-22);
+    expect(dock.y+dock.height).toBeLessThanOrEqual(height-12);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
   }
   await page.setViewportSize({width:390,height:844});await visibleViewport(page,650);
   await page.goto('/portfolio');await expect(page.locator('.pf-experience[data-measured="true"]')).toBeVisible();
   await resizeVisible(page,720);
   expect((await page.locator('.pf-experience').boundingBox()).height).toBe(720);
+});
+
+test('iPhone home-screen launch keeps the full layout height when visualViewport excludes safe areas',async({page})=>{
+  // iPhone 11 Pro CSS dimensions; iOS reports standalone through navigator.
+  await page.setViewportSize({width:375,height:812});
+  await page.addInitScript(()=>Object.defineProperty(navigator,'standalone',{configurable:true,value:true}));
+  await visibleViewport(page,734);
+  await page.goto('/?view=desktop');await expect(page.locator('.ios-home')).toBeVisible();
+  await expect(page.locator('#root')).toHaveAttribute('data-mobile-display','standalone');
+  await page.locator('#root').evaluate(el=>{
+    el.style.setProperty('--mobile-safe-top','44px');el.style.setProperty('--mobile-safe-bottom','34px');
+  });
+  await page.evaluate(()=>window.__resizeVisibleViewport(734,44));
+  await expect.poll(async()=>await page.locator('#root').boundingBox()).toMatchObject({x:0,y:0,width:375,height:812});
+  const dock=await page.locator('.ios-dock').boundingBox();expect(dock.y+dock.height).toBeCloseTo(812-34,0);
+  await expect(page.locator('.dynamic-island, .home-indicator')).toHaveCount(0);
+  await expect(page.locator('meta[name="apple-mobile-web-app-status-bar-style"]')).toHaveCount(0);
+  await page.getByRole('button',{name:'Search',exact:true}).click();
+  const input=page.getByRole('textbox',{name:'Search apps'});await input.fill('Contacts');
+  await resizeVisible(page,350,90);await expect(input).toHaveValue('Contacts');
+  await input.blur();await page.evaluate(()=>window.__resizeVisibleViewport(734));
+  await expect.poll(async()=>Math.round((await page.locator('#root').boundingBox()).height)).toBe(812);
+  await page.keyboard.press('Escape');
+  await page.getByRole('button',{name:'About Hamid',exact:true}).click();
+  await expect.poll(async()=>Math.round((await page.locator('.ios-app-header').boundingBox()).y)).toBe(44);
+  const content=await page.locator('.ios-app-content').boundingBox();expect(content.y+content.height).toBeCloseTo(812-34,0);
+  await page.getByRole('button',{name:'Open Control Center',exact:true}).click();await expect(page.getByRole('dialog',{name:'Control Center',exact:true})).toBeVisible();
 });
 
 test('desktop layout ignores the phone viewport override and user zoom does not reflow the page',async({page})=>{
